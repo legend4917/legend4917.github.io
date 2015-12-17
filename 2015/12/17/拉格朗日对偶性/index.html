@@ -1,0 +1,804 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="凸优化,拉格朗日对偶性," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;emsp;&amp;emsp;拉格朗日对偶性在数学优化中扮演着非常重要的角色，本章介绍从优化问题到构造拉格朗日函数，以及其对偶函数的定义，让后分析了其弱对偶性和强对偶性的&amp;nbsp;Slater&amp;nbsp;条件，最后着重介绍了&amp;nbsp;KKT&amp;nbsp;最优性条件。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="拉格朗日对偶性">
+<meta property="og:url" content="http://yoursite.com/2015/12/17/拉格朗日对偶性/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;拉格朗日对偶性在数学优化中扮演着非常重要的角色，本章介绍从优化问题到构造拉格朗日函数，以及其对偶函数的定义，让后分析了其弱对偶性和强对偶性的&amp;nbsp;Slater&amp;nbsp;条件，最后着重介绍了&amp;nbsp;KKT&amp;nbsp;最优性条件。">
+<meta property="og:updated_time" content="2015-12-15T12:00:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="拉格朗日对偶性">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;拉格朗日对偶性在数学优化中扮演着非常重要的角色，本章介绍从优化问题到构造拉格朗日函数，以及其对偶函数的定义，让后分析了其弱对偶性和强对偶性的&amp;nbsp;Slater&amp;nbsp;条件，最后着重介绍了&amp;nbsp;KKT&amp;nbsp;最优性条件。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> 拉格朗日对偶性 | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?3f3b6fd80e2e6dad4a9372c4b95e93ceba";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                拉格朗日对偶性
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-17T17:51:23+08:00" content="2015-12-17">
+              2015-12-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数学/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/17/拉格朗日对偶性/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/17/拉格朗日对偶性/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>&emsp;&emsp;拉格朗日对偶性在数学优化中扮演着非常重要的角色，本章介绍从优化问题到构造拉格朗日函数，以及其对偶函数的定义，让后分析了其弱对偶性和强对偶性的&nbsp;Slater&nbsp;条件，最后着重介绍了&nbsp;KKT&nbsp;最优性条件。<br><a id="more"></a></p>
+<h2 id="u62C9_u683C_u6717_u65E5_u5BF9_u5076_u51FD_u6570"><a href="#u62C9_u683C_u6717_u65E5_u5BF9_u5076_u51FD_u6570" class="headerlink" title="拉格朗日对偶函数"></a>拉格朗日对偶函数</h2><h3 id="u95EE_u9898_u5F15_u5165"><a href="#u95EE_u9898_u5F15_u5165" class="headerlink" title="问题引入"></a>问题引入</h3><p>&emsp;&emsp;首先，考虑标准形式的凸最优化问题：<br>$$ \begin{align}<br>minimize \quad &amp; f_0(x) \\<br>subject\ to \quad &amp; f_i(x)\le0, \quad i=1,\cdots,m \\<br>&amp; h_i(x)=0, \quad i=1,\cdots,p<br>\end{align} $$</p>
+<p>&emsp;&emsp;其变量$x\in\mathcal{R}^n$,并且其定义域$\mathcal{D}=\bigcap^m_{i=0}\mathrm{dom}\ f_i\cap\bigcap^p_{i=1}\mathrm{dom}\ h_i$是非空的。则其拉格朗日函数为：<br>$$<br>L(x,\lambda,\nu)=f_0(x)+\sum_{i=1}^m\lambda_i\ f_i(x)+\sum_{i=1}^p\nu_ih_i(x)<br>$$</p>
+<p>&emsp;&emsp;其中$\ \lambda_i\ $被称为与$\ f_i(x)\le 0\ $相关的<strong>拉格朗日乘子</strong>，$\nu_i\ $被称为与$\ h_i(x)=0\ $相关的<strong>拉格朗日乘子</strong>，向量$\lambda$和$\nu$被称为<strong>对偶变量</strong>或<strong>拉格朗日乘子向量</strong>。</p>
+<h3 id="u51FD_u6570_u5B9A_u4E49"><a href="#u51FD_u6570_u5B9A_u4E49" class="headerlink" title="函数定义"></a>函数定义</h3><p>&emsp;&emsp;有了拉格朗日函数，下面我们定义<strong>拉格朗日对偶函数</strong>：<br>$$<br>g(\lambda,\nu)=\inf_{x\in\mathcal{D}}L(x,\lambda,\nu)=\inf_{x\in\mathcal{D}}\Big(f_0(x)+\sum\limits_{i=1}^m\lambda_i\ f_i(x)+\sum\limits_{i=1}^p\nu_ih_i(x)\Big)<br>$$</p>
+<p>&emsp;&emsp;下面介绍拉格朗日对偶函数的一个重要性质：<br><strong>拉格朗日对偶函数构成了原凸最优化问题最优值$p^*$的下界</strong>，也即：对任意的$\lambda\ge0$和$\nu$，我们有：<br>$$ g(\lambda,\nu)\le p^* $$</p>
+<p>&emsp;&emsp;但是当$g(\lambda,\nu)=-\infty$是其意义不大。只有当$\lambda\ge0$且$(\lambda,\nu)\in \mathrm{dom}\ g$即$g(\lambda,\nu)&gt;-\infty$时，对偶函数才能给出$p^*$的一个非平凡下界，我们称满足$\lambda\ge0$以及$(\lambda,\nu)\in \mathrm{dom}\ g$的$(\lambda,\nu)$是<strong>对偶可行</strong>的。</p>
+<h2 id="u62C9_u683C_u6717_u65E5_u5BF9_u5076_u95EE_u9898"><a href="#u62C9_u683C_u6717_u65E5_u5BF9_u5076_u95EE_u9898" class="headerlink" title="拉格朗日对偶问题"></a>拉格朗日对偶问题</h2><p>接下来我们思考：从Lagrange函数能够得到的最好下界是什么？也即：<br>$$ \begin{align}<br>maximize\quad &amp; g(\lambda,\nu)\\<br>subject\ to\quad &amp; \lambda\ge0<br>\end{align}$$<br>&emsp;&emsp;上述问题被称为<strong>Lagrange对偶问题</strong>。前面描述的对偶可行的一组$(\lambda,\nu)$就是对偶问题的一个可行解。如果解$(\lambda^*,\nu^*)$是对偶问题的最优解，则称解$(\lambda^*,\nu^*)$是<strong>对偶最优解</strong>或者是<strong>最优Lagrange乘子</strong><br>&emsp;&emsp;Lagrange对偶问题是一个凸优化问题，因为极大化的目标函数是凹函数，且约束集合是凸集。因此，对偶问题的凸性和原问题是否是凸优化问题无关。</p>
+<h3 id="u5F31_u5BF9_u5076_u6027"><a href="#u5F31_u5BF9_u5076_u6027" class="headerlink" title="弱对偶性"></a>弱对偶性</h3><p>&emsp;&emsp;用$d^*$表示Lagrange对偶问题的最优值，由上面的性质可得下面的不等式：<br>$$ d^*\le p^* $$</p>
+<p>&emsp;&emsp;即使原问题不是凸问题上述不等式也成立，这个性质称为<strong>弱对偶性</strong>。<br>&emsp;&emsp;定义差值$p^*-d^*$是原问题的<strong>最优对偶间隙</strong>。它给出了原问题最优值以及通过Lagrange对偶函数所能得到的最好（最大）下界之间的差值。最优对偶间隙总是非负的。<br>&emsp;&emsp;但原问题很难求解时，弱对偶不等式可以给出原问题最优值的一个下界，这是因为对偶问题总是凸问题，而且在很多情况下都可以进行有效的求解得到$d^*$。</p>
+<h3 id="u5F3A_u5BF9_u5076_u6027_u548CSlater_u7EA6_u675F_u51C6_u5219"><a href="#u5F3A_u5BF9_u5076_u6027_u548CSlater_u7EA6_u675F_u51C6_u5219" class="headerlink" title="强对偶性和Slater约束准则"></a>强对偶性和Slater约束准则</h3><p>&emsp;&emsp;如果：$$d^*=p^*$$&emsp;&emsp;成立，即最优对偶间隙为零，那么<strong>强对偶性</strong>成立。<br>&emsp;&emsp;如果原问题是凸问题，可以表述为：<br>$$ \begin{align}<br>minimize\quad &amp; f_0(x) \\<br>subject\ to\quad &amp; f_i(x)\le0, \quad i=1,\cdots,m\\<br>&amp; Ax=b,<br>\end{align}$$</p>
+<p>&emsp;&emsp;使得强对偶性成立的一个简单的约束准则是<strong>Slater条件</strong>：存在一点$x\in \mathrm{relint}\  \mathcal{D}\ $ 使得下式成立：<br>$$ f_i(x) &lt; 0, \quad i=1,\cdots,m \quad Ax=b.$$ &emsp;&emsp;满足上述条件称为<strong>严格可行</strong>，这是因为不等式约束严格成立。<br>&emsp;&emsp;若不等式约束函数$\ f_i\ $中有一些是仿射函数时，Slater条件可以进一步改进。如果最前面的$\ k\ $个约束函数$\ f_1,\cdots,f_k\ $是仿射的，则若下列弱化条件成立，强对偶性成立。该条件为：存在一点$\ x\in\mathrm{relint}\ \mathcal{D}\ $使得：<br>$$f_i(x)\le0,\quad i=1,\cdots,k,\qquad f_i(x) &lt; 0 \quad i=k+1,\cdots,m,\qquad Ax=b$$</p>
+<p>&emsp;&emsp;也就是说，仿射不等式不需要严格成立。<br>&emsp;&emsp;若Slater条件满足，不但对于凸问题强对偶性成立，也意味着当$\ d^*&gt;-\infty\ $时对偶问题能够取得最优值，即存在一组对偶可行解$(\lambda^*,\nu^*)$，使得$\ g(\lambda^*,\nu^*)=d^*=p^*$。</p>
+<h2 id="u6700_u4F18_u6027_u6761_u4EF6"><a href="#u6700_u4F18_u6027_u6761_u4EF6" class="headerlink" title="最优性条件"></a>最优性条件</h2><h3 id="u7EC8_u6B62_u51C6_u5219"><a href="#u7EC8_u6B62_u51C6_u5219" class="headerlink" title="终止准则"></a>终止准则</h3><p>&emsp;&emsp;定义原问题和对偶问题目标函数的差值$$f_0(x)-g(\lambda,\nu)$$&emsp;&emsp;为原问题可行解$\ x\ $和对偶可行解$\ (\lambda,\nu)\ $之间的<strong>对偶间隙</strong>。一对原对偶问题的可行点$\ x,(\lambda,\nu)\ $将原问题（对偶问题）的最优值限制在一个区间上：$$p^*\in[g(\lambda,\nu),f_0(x)],\qquad d^*\in[g(\lambda,\nu),f_0(x)],$$&emsp;&emsp;区间的长度即为上面定义的对偶间隙。<br>&emsp;&emsp;上述现象可以用在优化算法中给出非启发式停止准则。某个算法给出一系列原问题可行解$\ x^{(k)}\ $以及对偶问题可行解$\ (\lambda,\nu),\ k=1,2,\cdots,\ $给定要求的绝对精度$\ \epsilon_{abs}&gt;0,\ $那么停止准则是：$$f_0(x^{(k)})-g(\lambda^{(k)},\nu^{(k)})\le\epsilon_{abs}$$&emsp;&emsp;保证当算法终止的时候，$x^ {(k)}\ $是$\ \epsilon_{abs}$-次优。（当然，只有在强对偶性成立的条件下，此方法对任意小的$\ \epsilon_{abs}$才都可行）</p>
+<h3 id="u4E92_u8865_u677E_u5F1B_u6027"><a href="#u4E92_u8865_u677E_u5F1B_u6027" class="headerlink" title="互补松弛性"></a>互补松弛性</h3><p>&emsp;&emsp;设原问题和对偶问题的最优值都可以达到且相等（即强对偶性成立）。令$\ x^*\ $是原问题的最优解，$(\lambda^*,\nu^*)\ $是对偶问题的最优解，这表明：<br>$$\begin{align}f_0(x^*) &amp;= g(\lambda^*,\nu^*) \\<br>&amp;=\inf_x\Big(f_0(x)+\sum_{i=1}^m\lambda_i^*\ f_i(x)+\sum_{i=1}^p\nu_i^*h_i(x)\Big)\\<br>&amp;\le f_0(x^*)+\sum_{i=1}^m\lambda_i^*\ f_i(x^*)+\sum_{i=1}^p\nu_i^*h_i(x^*)\\<br>&amp;\le f_0(x^*)\end{align}$$</p>
+<p>&emsp;&emsp;由上面的推导可以得出一个重要的结论：<br>$$ \sum_{i=1}^m\lambda_i^*\ f_i(x^*)=0 $$</p>
+<p>&emsp;&emsp;实际上，求和项的每一项都非正，因此有：<br>$$\lambda^*f_i(x^*)=0,\quad i=1,\cdots,m.$$</p>
+<p>&emsp;&emsp;上述条件称为<strong>互补松弛性</strong>，它对任意原问题最优解$\ x^*\ $都成立（当强对偶性成立时）。我们可以将互补松弛条件写成：<br>$$ \begin{align}<br>\lambda^* &gt; 0 &amp; \Longrightarrow f_i(x^*) = 0 \\<br>f_i(x^*) &lt; 0 &amp; \Longrightarrow \lambda_i^* = 0<br>\end{align} $$</p>
+<p>&emsp;&emsp;上式意味着在最优点处，除了第$\ i\ $个约束起了作用的情况，最优Lagrange乘子的第$\ i\ $项都为零。</p>
+<h3 id="KKT__u6700_u4F18_u6761_u4EF6"><a href="#KKT__u6700_u4F18_u6761_u4EF6" class="headerlink" title="KKT 最优条件"></a>KKT 最优条件</h3><p>&emsp;&emsp;现在假设函数$\ f_0,\cdots,f_m,h_1,\cdots,h_p\ $可微（定义域开集），但是并不假设这些函数是凸函数。<br><strong>非凸问题的&nbsp;KKT&nbsp;条</strong><br>&emsp;&emsp;和前面一样，令$\ x^*\ $是原问题的最优解，$(\lambda^*,\nu^*)\ $是对偶问题的最优解，对偶间隙为零。因为$\ L(x,\lambda^*,\nu^*)\ $关于$\ x\ $求极小在$\ x^*\ $处取得最小值，因此函数在$\ x\ $处的导数必须为零，即：<br>$$<br>\nabla f_0(x^*)+\sum_{i=1}^m\lambda_i^*\nabla f_i(x)+\sum_{i=1}^p\nu_i^*\nabla h_i(x)=0<br>$$</p>
+<p>&emsp;&emsp;因此我们有：<br>$$\begin{align}<br>f_i(x^*) &amp;\le0,\quad i=1,\cdots,m \\<br>h_i(x^*) &amp;= 0,\quad i=1,\cdots,p \\<br>\lambda_i^* &amp;\ge0,\quad i=0,\cdots,m \\<br>\lambda_i^*f_i(x^*) &amp;= 0,\quad i=0,\cdots,m \\<br>\nabla f_0(x^*)+\sum_{i=1}^m\lambda_i^*\nabla f_i(x)+\sum_{i=1}^p\nu_i^*\nabla h_i(x) &amp;= 0<br>\end{align}$$</p>
+<p>&emsp;&emsp;我们称上式为<strong>Karush-Kuhn-Tucker（KKT）条件</strong>。<br>&emsp;&emsp;总之，对于目标函数和约束函数可微的任意优化问题，如何强对偶性成立，那么任何一对原问题最优解和对偶问题最优解必须满足&nbsp;KKT&nbsp;条件。<br><strong>凸问题的&nbsp;KKT&nbsp;条件</strong><br>&emsp;&emsp;当原问题是凸问题时，满足&nbsp;KKT&nbsp;条件的点也是原、对偶最优解。也就是说，如何函数$\ f_i\ $是凸函数，$h_i\ $是仿射函数，$\widetilde{x},\widetilde{\lambda},\widetilde{\nu}\ $是任意满足&nbsp;KKT&nbsp;条件的点，也即：<br>$$\begin{align}<br>f_i(\widetilde{x}) &amp;\le 0,\quad i=1,\cdots,m \\<br>h_i(\widetilde{x}) &amp;= 0,\quad i=1,\cdots,p \\<br>\widetilde{\lambda_i} &amp;\ge 0,\quad i=1,\cdots,m \\<br>\widetilde{\lambda_i}f_i(\widetilde{x}) &amp;=0,\quad i=1,\cdots, m \\<br>\nabla f_0(\widetilde{x})+\sum_{i=1}^m\widetilde{\lambda_i}\nabla f_i(\widetilde{x})+\sum_{i=1}^p\widetilde{\nu_i}\nabla h_i(\widetilde{x}) &amp;= 0<br>\end{align} $$</p>
+<p>&emsp;&emsp;那么$\ \widetilde{x}\ $和$\ (\widetilde{\lambda},\widetilde{\nu})\ $分别是原问题和对偶问题的最优解，对偶间隙为零。<br>&emsp;&emsp;总之，对目标函数和约束函数可微的任意凸优化问题，任意满足&nbsp;KKT&nbsp;条件的点分别是原、对偶问题最优解，对偶间隙为零。<br>&emsp;&emsp;<strong>若某个凸优化问题具有可微的目标函数和约束函数，且满足&nbsp;Slater&nbsp;条件，那么KKT条件是最优性的充要条件：&nbsp;Slater&nbsp;条件意味着最优对偶间隙为零且对偶最优解可以达到，因此$\ x\ $是原问题的最优解，当且仅当存在$\ (\lambda,\nu)\ $，二者都满足&nbsp;KKT&nbsp;条件。</strong><br>&emsp;&emsp;KKT&nbsp;条件在优化领域有着重要的作用。在一些特殊的情形下，是可以解析求解&nbsp;KKT&nbsp;条件的。更一般的，很多求解凸优化问题的方法可以认为或者理解为求解&nbsp;KKT&nbsp;条件的方法。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/凸优化/" rel="tag">#凸优化</a>
+          
+            <a href="/tags/拉格朗日对偶性/" rel="tag">#拉格朗日对偶性</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/17/序列最小最优化(SMO)算法/" rel="next" title="序列最小最优化(SMO)算法">
+                <i class="fa fa-chevron-left"></i> 序列最小最优化(SMO)算法
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/17/支持向量分类机/" rel="prev" title="支持向量分类机">
+                支持向量分类机 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/12/17/拉格朗日对偶性/"
+           data-title="拉格朗日对偶性" data-url="http://yoursite.com/2015/12/17/拉格朗日对偶性/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/me.jpg" alt="Andrew Xl" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Andrew Xl</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/legend4917" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3510855382" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 微博
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/137901355" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 豆瓣
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/legend4917" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 知乎
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://facebook.com/100009482720069" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> facebook
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">Links</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://jetmuffin.github.io" target="_blank">Jetmuffin的博客</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.sunzequn.com" target="_blank">sloriac的博客</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://innerac.github.io" target="_blank">InnerAc的博客</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.mapengju.com" target="_blank">GMpj的博客</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blkstone.github.io" target="_blank">blkstone的博客</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u62C9_u683C_u6717_u65E5_u5BF9_u5076_u51FD_u6570"><span class="nav-number">1.</span> <span class="nav-text">拉格朗日对偶函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u95EE_u9898_u5F15_u5165"><span class="nav-number">1.1.</span> <span class="nav-text">问题引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u51FD_u6570_u5B9A_u4E49"><span class="nav-number">1.2.</span> <span class="nav-text">函数定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u62C9_u683C_u6717_u65E5_u5BF9_u5076_u95EE_u9898"><span class="nav-number">2.</span> <span class="nav-text">拉格朗日对偶问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u5F31_u5BF9_u5076_u6027"><span class="nav-number">2.1.</span> <span class="nav-text">弱对偶性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5F3A_u5BF9_u5076_u6027_u548CSlater_u7EA6_u675F_u51C6_u5219"><span class="nav-number">2.2.</span> <span class="nav-text">强对偶性和Slater约束准则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6700_u4F18_u6027_u6761_u4EF6"><span class="nav-number">3.</span> <span class="nav-text">最优性条件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u7EC8_u6B62_u51C6_u5219"><span class="nav-number">3.1.</span> <span class="nav-text">终止准则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u4E92_u8865_u677E_u5F1B_u6027"><span class="nav-number">3.2.</span> <span class="nav-text">互补松弛性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KKT__u6700_u4F18_u6761_u4EF6"><span class="nav-number">3.3.</span> <span class="nav-text">KKT 最优条件</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andrew Xl</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"legend4917"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+  
+
+</body>
+</html>

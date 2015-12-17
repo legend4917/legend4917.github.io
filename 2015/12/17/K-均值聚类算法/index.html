@@ -1,0 +1,784 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="K-均值,聚类," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;emsp;&amp;emsp;聚类是一种无监督分类，K-均值聚类可以在训练数据集中发现K个不同的簇，且每个簇的中心采用簇中所含训练数据的均值计算而成。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="K-均值聚类算法">
+<meta property="og:url" content="http://yoursite.com/2015/12/17/K-均值聚类算法/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;聚类是一种无监督分类，K-均值聚类可以在训练数据集中发现K个不同的簇，且每个簇的中心采用簇中所含训练数据的均值计算而成。">
+<meta property="og:image" content="http://yoursite.com/images/K-Means.png">
+<meta property="og:updated_time" content="2015-12-15T12:02:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="K-均值聚类算法">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;聚类是一种无监督分类，K-均值聚类可以在训练数据集中发现K个不同的簇，且每个簇的中心采用簇中所含训练数据的均值计算而成。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> K-均值聚类算法 | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?3f3b6fd80e2e6dad4a9372c4b95e93ceba";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                K-均值聚类算法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-17T17:51:23+08:00" content="2015-12-17">
+              2015-12-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/17/K-均值聚类算法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/17/K-均值聚类算法/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>&emsp;&emsp;聚类是一种无监督分类，K-均值聚类可以在训练数据集中发现K个不同的簇，且每个簇的中心采用簇中所含训练数据的均值计算而成。<br><a id="more"></a></p>
+<h2 id="K-_u5747_u503C_u805A_u7C7B_u7B97_u6CD5"><a href="#K-_u5747_u503C_u805A_u7C7B_u7B97_u6CD5" class="headerlink" title="K-均值聚类算法"></a>K-均值聚类算法</h2><p>&emsp;&emsp;优点：简单，容易实现。<br>&emsp;&emsp;缺点：可能收敛到局部最小值，在大规模数据集上收敛较慢。</p>
+<p>&emsp;&emsp;K-均值算法的工作流程为：首先，确定 $k$ 个初始点作为质心；然后将数据集中的每个点分配到相应的簇中，准确的说，就是在数据集中，为每个点计算其到各个质心的距离，并将数据点分配给距离最小的质心。完成后再更新质心为该簇的平均值。<br>&emsp;&emsp;上述过程伪代码描述如下：<br><strong>$\qquad$创建 $k$ 个点最为初始质心（通常随机选择）<br>$\qquad$当任意一个点的簇分配结果发生改变时：<br>$\qquad\qquad$遍历数据集，对每个点：<br>$\qquad\qquad\qquad$对每个质心：<br>$\qquad\qquad\qquad\qquad$计算数据点到质心的距离<br>$\qquad\qquad\qquad$将数据点分配给距离最近的质心<br>$\qquad\qquad$对每一个簇，计算该簇中所有数据点的均值作为质心</strong></p>
+<h2 id="u4F7F_u7528_u540E_u5904_u7406_u6765_u63D0_u9AD8_u805A_u7C7B_u6027_u80FD"><a href="#u4F7F_u7528_u540E_u5904_u7406_u6765_u63D0_u9AD8_u805A_u7C7B_u6027_u80FD" class="headerlink" title="使用后处理来提高聚类性能"></a>使用后处理来提高聚类性能</h2><p>&emsp;&emsp;K-均值算法收敛但聚类效果较差的原因就是收敛到局部最小值，而非全局最小值。一种用于度量聚能效果的指标是<strong>SSE(Sum of Squared Error,误差平方和)</strong>。聚类的目标是在保持簇数目不变的情况下提高簇的质量。<br>&emsp;&emsp;有两种可以量化的方法：合并最近的质心，或者合并两个使得SSE增幅最小的质心。第一种思路需要计算所有质心之间的距离，然后选择距离最小的两个质心合并来是实现；第二种思路需要合并两个簇然后计算总SSE值。这必须在所有可能的两个簇上重复该过程，找出最佳的两个簇。</p>
+<h2 id="u4E8C_u5206K-_u5747_u503C_u7B97_u6CD5"><a href="#u4E8C_u5206K-_u5747_u503C_u7B97_u6CD5" class="headerlink" title="二分K-均值算法"></a>二分K-均值算法</h2><p>&emsp;&emsp;为了克服K-均值算法收敛与局部最小值的问题，提出了一种称为<strong>二分K-均值算法</strong>。该算法首先将整个数据集作为一个簇，然后将该簇一分为二，之后选择其中的一个簇继续进行划分。选择哪一个簇进行划分取决于该划分是否最大程度降低SSE值。上述基于SSE的划分过程不断重复，直到满足指定的簇数。该过程伪代码描述如下：<br><strong>$\qquad$将整个数据集看成一个簇<br>$\qquad$当簇的数目小于 $k$ 时：<br>$\qquad\qquad$对于每一个簇：<br>$\qquad\qquad\qquad$计算总误差<br>$\qquad\qquad\qquad$将给定的簇进行K-均值聚类（k=2）<br>$\qquad\qquad\qquad$计算将簇一分为二后的总误差<br>$\qquad\qquad$选择使得误差最小的那个簇进行划分操作</strong></p>
+<h2 id="u5B9E_u9A8C_uFF08python_u5B9E_u73B0_uFF09"><a href="#u5B9E_u9A8C_uFF08python_u5B9E_u73B0_uFF09" class="headerlink" title="实验（python实现）"></a>实验（python实现）</h2><p>&emsp;&emsp;附：数据集下载链接：<a href="http://pan.baidu.com/s/1eRzQTAM" target="_blank" rel="external">http://pan.baidu.com/s/1eRzQTAM</a><br>&emsp;&emsp;<strong>效果图</strong>：<br><img src="/images/K-Means.png" width="512" height="512" title="K-Means聚类效果图"><br>&emsp;&emsp;<strong>代码</strong>：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取数据集</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_dataset</span><span class="params">(file_path)</span>:</span></span><br><span class="line">    dataset = []</span><br><span class="line">    fr = open(file_path)</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> fr.readlines():</span><br><span class="line">        line_arr = line.strip().split(<span class="string">'\t'</span>)</span><br><span class="line">        line_float = map(float, line_arr)</span><br><span class="line">        dataset.append(line_float)</span><br><span class="line">    fr.close()</span><br><span class="line">    <span class="keyword">return</span> dataset</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算距离</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_distEuclidean</span><span class="params">(vecA, vecB)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> math.sqrt(np.sum(np.power(vecA - vecB, <span class="number">2</span>)))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机生成簇的质心</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_randCenter</span><span class="params">(dataset, k)</span>:</span></span><br><span class="line">    n = dataset.shape[<span class="number">1</span>]</span><br><span class="line">    centroids = np.mat(np.zeros((k, n)))</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(n):</span><br><span class="line">        minJ = min(dataset[:, j])</span><br><span class="line">        rangeJ = float(max(dataset[:, j]) - minJ)</span><br><span class="line">        centroids[:, j] = minJ + rangeJ * np.random.rand(k, <span class="number">1</span>)</span><br><span class="line">    <span class="comment"># centroids = np.mat('-0.27409069  4.06949785;-4.46276867 -0.79273077;-2.65375091 -4.00954913;-4.53611874  4.14258773')</span></span><br><span class="line">    <span class="keyword">return</span> centroids</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 普通的k-均值聚类</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">k_means</span><span class="params">(dataset, k)</span>:</span></span><br><span class="line">    m = dataset.shape[<span class="number">0</span>]</span><br><span class="line">    cluster_assment = np.mat(np.zeros((m, <span class="number">2</span>)))  <span class="comment"># 与数据集相对应,第一列保存簇,即类别,第二列保存距离,即数据到质心的距离</span></span><br><span class="line">    centroids = get_randCenter(dataset, k)  <span class="comment"># 初始化k个质心</span></span><br><span class="line">    cluster_changed = <span class="keyword">True</span></span><br><span class="line">    <span class="keyword">while</span> cluster_changed:</span><br><span class="line">        cluster_changed = <span class="keyword">False</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(m):  <span class="comment"># 遍历数据集</span></span><br><span class="line">            min_j = -<span class="number">1</span></span><br><span class="line">            min_dist = np.inf</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(k):  <span class="comment"># 遍历质心,寻找最短距离</span></span><br><span class="line">                dist = get_distEuclidean(dataset[i, :], centroids[j, :])</span><br><span class="line">                <span class="keyword">if</span> min_dist &gt; dist:</span><br><span class="line">                    min_dist = dist</span><br><span class="line">                    min_j = j</span><br><span class="line">            <span class="keyword">if</span> cluster_assment[i, <span class="number">0</span>] != min_j:</span><br><span class="line">                cluster_changed = <span class="keyword">True</span></span><br><span class="line">            cluster_assment[i, :] = [min_j, min_dist ** <span class="number">2</span>]  <span class="comment"># 更新第i个数据对应的质心和与质心的距离</span></span><br><span class="line">        <span class="comment"># print centroids</span></span><br><span class="line">        <span class="keyword">for</span> cent <span class="keyword">in</span> range(k):</span><br><span class="line">            class_cent_list = (cluster_assment[:, <span class="number">0</span>].A == cent).nonzero()[<span class="number">0</span>]</span><br><span class="line">            centroids[cent, :] = np.mean(dataset[class_cent_list], axis=<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> centroids, cluster_assment</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 二分k-均值聚类</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bipartite_k_means</span><span class="params">(dataset, k)</span>:</span></span><br><span class="line">    m = dataset.shape[<span class="number">0</span>]</span><br><span class="line">    cluster_assment = np.mat(np.zeros((m, <span class="number">2</span>)))  <span class="comment"># 第一列保存所属的簇,第二列保存与该簇质心的距离</span></span><br><span class="line">    centroid_0 = np.mean(dataset, axis=<span class="number">0</span>).tolist()[<span class="number">0</span>]  <span class="comment"># 初始化整个数据集为一簇时的质心</span></span><br><span class="line">    centlist = [centroid_0]  <span class="comment"># 保存所有质心</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(m):  <span class="comment"># 遍历数据集,计算样本点到质心的距离</span></span><br><span class="line">        cluster_assment[i, <span class="number">1</span>] = get_distEuclidean(dataset[i, :], centroid_0)</span><br><span class="line">    <span class="keyword">while</span> len(centlist) &lt; k:</span><br><span class="line">        min_SSE = np.inf</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(centlist)):  <span class="comment"># 遍历已经聚类的簇</span></span><br><span class="line">            dataset_curr_cluster = dataset[(cluster_assment[:, <span class="number">0</span>].A == i).nonzero()[<span class="number">0</span>], :]  <span class="comment"># 将第i簇的数据集提取出来单独处理</span></span><br><span class="line">            centroid_i, cluster_split = k_means(dataset_curr_cluster, <span class="number">2</span>)</span><br><span class="line">            SSE_split = sum(cluster_split[:, <span class="number">1</span>])</span><br><span class="line">            SSE_non_split = sum(cluster_assment[(cluster_assment[:, <span class="number">0</span>].A != i).nonzero()[<span class="number">0</span>], <span class="number">1</span>])</span><br><span class="line">            <span class="keyword">if</span> (SSE_split + SSE_non_split) &lt; min_SSE:</span><br><span class="line">                min_SSE = SSE_non_split + SSE_split</span><br><span class="line">                minSSE_centroid_index = i  <span class="comment"># 记录使得误差平方和最小时的划分的母簇的序号</span></span><br><span class="line">                minSSE_cluster_split = cluster_split.copy()  <span class="comment"># 保存使得误差平方和最小时的划分的两个子簇数据集到各自质心的距离</span></span><br><span class="line">                minSSE_centroid = centroid_i  <span class="comment"># 保存使得误差平方和最小时的两个子簇的质心</span></span><br><span class="line">        <span class="comment"># 两个子簇在放入总的centlist前,需要将其簇序号分别设为centlist最后一个和当前分解的这个一边替换</span></span><br><span class="line">        minSSE_cluster_split[(minSSE_cluster_split[:, <span class="number">0</span>].A == <span class="number">1</span>).nonzero()[<span class="number">0</span>], <span class="number">0</span>] = len(centlist)</span><br><span class="line">        minSSE_cluster_split[(minSSE_cluster_split[:, <span class="number">0</span>].A == <span class="number">0</span>).nonzero()[<span class="number">0</span>], <span class="number">0</span>] = minSSE_centroid_index</span><br><span class="line">        cluster_assment[(cluster_assment[:, <span class="number">0</span>].A == minSSE_centroid_index).nonzero()[<span class="number">0</span>], :] = minSSE_cluster_split  <span class="comment"># 替换</span></span><br><span class="line">        centlist[minSSE_centroid_index] = minSSE_centroid.tolist()[<span class="number">0</span>]  <span class="comment"># 将分解得到的子簇添加到centlist中</span></span><br><span class="line">        centlist.append(minSSE_centroid.tolist()[<span class="number">1</span>])</span><br><span class="line">    <span class="keyword">return</span> centlist, cluster_assment</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 图形化展示结果</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_centroids</span><span class="params">(dataset, centroids)</span>:</span></span><br><span class="line">    fig = plt.figure()</span><br><span class="line">    ax = fig.add_subplot(<span class="number">111</span>)</span><br><span class="line">    dataset_x = dataset[:, <span class="number">0</span>].tolist()</span><br><span class="line">    dataset_y = dataset[:, <span class="number">1</span>].tolist()</span><br><span class="line">    ax.scatter(dataset_x, dataset_y, marker=<span class="string">'o'</span>, s=<span class="number">50</span>, c=<span class="string">'gray'</span>)</span><br><span class="line">    centroids_x = centroids[:, <span class="number">0</span>].tolist()</span><br><span class="line">    centroids_y = centroids[:, <span class="number">1</span>].tolist()</span><br><span class="line">    ax.scatter(centroids_x, centroids_y, marker=<span class="string">'+'</span>, s=<span class="number">200</span>, c=<span class="string">'red'</span>)</span><br><span class="line">    plt.title(<span class="string">'cluster efficiency'</span>)</span><br><span class="line">    plt.xlabel(<span class="string">'data_x'</span>)</span><br><span class="line">    plt.ylabel(<span class="string">'data_y'</span>)</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    k = <span class="number">4</span></span><br><span class="line">    dataset = load_dataset(<span class="string">"testSet.txt"</span>)</span><br><span class="line">    centroids, cluster_assment = bipartite_k_means(np.mat(dataset), k)</span><br><span class="line">    plot_centroids(np.mat(dataset), np.mat(centroids))</span><br></pre></td></tr></table></figure></p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/K-均值/" rel="tag">#K-均值</a>
+          
+            <a href="/tags/聚类/" rel="tag">#聚类</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/17/检索模型与搜索排序/" rel="next" title="检索模型与搜索排序">
+                <i class="fa fa-chevron-left"></i> 检索模型与搜索排序
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/12/17/K-均值聚类算法/"
+           data-title="K-均值聚类算法" data-url="http://yoursite.com/2015/12/17/K-均值聚类算法/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/me.jpg" alt="Andrew Xl" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Andrew Xl</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/legend4917" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3510855382" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 微博
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/137901355" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 豆瓣
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/legend4917" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 知乎
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://facebook.com/100009482720069" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> facebook
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">Links</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://jetmuffin.github.io" target="_blank">Jetmuffin的博客</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.sunzequn.com" target="_blank">sloriac的博客</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://innerac.github.io" target="_blank">InnerAc的博客</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.mapengju.com" target="_blank">GMpj的博客</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blkstone.github.io" target="_blank">blkstone的博客</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#K-_u5747_u503C_u805A_u7C7B_u7B97_u6CD5"><span class="nav-number">1.</span> <span class="nav-text">K-均值聚类算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4F7F_u7528_u540E_u5904_u7406_u6765_u63D0_u9AD8_u805A_u7C7B_u6027_u80FD"><span class="nav-number">2.</span> <span class="nav-text">使用后处理来提高聚类性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4E8C_u5206K-_u5747_u503C_u7B97_u6CD5"><span class="nav-number">3.</span> <span class="nav-text">二分K-均值算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5B9E_u9A8C_uFF08python_u5B9E_u73B0_uFF09"><span class="nav-number">4.</span> <span class="nav-text">实验（python实现）</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andrew Xl</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"legend4917"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+  
+
+</body>
+</html>

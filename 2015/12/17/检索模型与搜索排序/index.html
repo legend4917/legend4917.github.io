@@ -1,0 +1,790 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="搜索引擎," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;emsp;&amp;emsp;搜索结果排序是搜索引擎最核心的构成部分，很大程度上决定了搜索质量的好坏和用户接受与否，其最重要的两个因素是用户查询与网页的相关性以及网页链接情况，判断用户查询与网页内容的相关性依赖于搜索引擎所采用的检索模型，这里介绍几种重要的检索模型：布尔模型、向量空间模型、概率模型。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="检索模型与搜索排序">
+<meta property="og:url" content="http://yoursite.com/2015/12/17/检索模型与搜索排序/index.html">
+<meta property="og:site_name" content="witness">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;搜索结果排序是搜索引擎最核心的构成部分，很大程度上决定了搜索质量的好坏和用户接受与否，其最重要的两个因素是用户查询与网页的相关性以及网页链接情况，判断用户查询与网页内容的相关性依赖于搜索引擎所采用的检索模型，这里介绍几种重要的检索模型：布尔模型、向量空间模型、概率模型。">
+<meta property="og:image" content="http://yoursite.com/images/检索模型与搜索排序-1.png">
+<meta property="og:updated_time" content="2015-12-15T11:58:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="检索模型与搜索排序">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;搜索结果排序是搜索引擎最核心的构成部分，很大程度上决定了搜索质量的好坏和用户接受与否，其最重要的两个因素是用户查询与网页的相关性以及网页链接情况，判断用户查询与网页内容的相关性依赖于搜索引擎所采用的检索模型，这里介绍几种重要的检索模型：布尔模型、向量空间模型、概率模型。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> 检索模型与搜索排序 | witness </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?3f3b6fd80e2e6dad4a9372c4b95e93ceba";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">witness</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">where you are where amazing happen</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                检索模型与搜索排序
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-17T17:51:23+08:00" content="2015-12-17">
+              2015-12-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/搜索引擎/" itemprop="url" rel="index">
+                    <span itemprop="name">搜索引擎</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/17/检索模型与搜索排序/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/17/检索模型与搜索排序/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>&emsp;&emsp;搜索结果排序是搜索引擎最核心的构成部分，很大程度上决定了搜索质量的好坏和用户接受与否，其最重要的两个因素是用户查询与网页的相关性以及网页链接情况，判断用户查询与网页内容的相关性依赖于搜索引擎所采用的检索模型，这里介绍几种重要的检索模型：布尔模型、向量空间模型、概率模型。<br><a id="more"></a></p>
+<h2 id="u5E03_u5C14_u6A21_u578B"><a href="#u5E03_u5C14_u6A21_u578B" class="headerlink" title="布尔模型"></a>布尔模型</h2><p>&emsp;&emsp;布尔模型是检索模型中最简单的一种，其数学基础是集合论。在布尔模型中，文档与用户查询由其所包含的单词集合来表示，两者的相似性则通过布尔代数运算来进行判定。<br>&emsp;&emsp;用户查询内容一般使用布尔表达式，即使用“与/或/非”这些逻辑连接词将用户的查询词串联，依次最为用户的信息需求的表达。<br>&emsp;&emsp;布尔模型简单直观，导致一些明显的缺点。只要文档满足逻辑表达式，就会被认为是相关的，否则被认为是不相关的，其结果输出是二元的，即要么相关，要么不相关。至于文档在多大程度上与用户查询相关，能够按照相关程度排序输出搜索结果？这些布尔模型就无能为力了。</p>
+<h2 id="u5411_u91CF_u7A7A_u95F4_u6A21_u578B"><a href="#u5411_u91CF_u7A7A_u95F4_u6A21_u578B" class="headerlink" title="向量空间模型"></a>向量空间模型</h2><p>&emsp;&emsp;向量空间模型历史悠久，由信息检索领域奠基人 Salton 教授提出。向量空间模型作为一种文旦表示和相似性计算的工具，不仅仅在搜索领域，在自然语言处理、文本挖掘等诸多领域也是普遍采用的有效工具。</p>
+<h3 id="u6587_u6863_u8868_u793A"><a href="#u6587_u6863_u8868_u793A" class="headerlink" title="文档表示"></a>文档表示</h3><p>&emsp;&emsp;作为表示文档的工具，<strong>向量空间模型把每个文档看做是由 $t$ 维特征组成的一个向量，特征的定义一般为单词。其中，每个特征会更具一定依据计算其权值，这 $t$ 维带有权重的特征共同构成了一个文档，以此来表示文档的主题内容。</strong></p>
+<h3 id="u76F8_u4F3C_u6027_u8BA1_u7B97"><a href="#u76F8_u4F3C_u6027_u8BA1_u7B97" class="headerlink" title="相似性计算"></a>相似性计算</h3><p>&emsp;&emsp;将文档转化为特征向量后，就可以计算文档之间或者查询和文档之间的相似性了。对于搜索排序这种任务，理论上应该计算查询和网页内容之间的“相关性”，即文档与用户需求之间的相关性，之后按照相关程度高低排序。向量空间模型将问题做了转换，即以查询和文档内容之间的相似性来替代相关性，按照文档与查询的相似性得分高低排序来作为搜索结果，但两者并非同一概念。<br>&emsp;&emsp;给定用户查询的特征向量和文档的特征向量，Cosine 相似性是最常用也是最有效的计算相似性的方式。Cosine 相似性计算定义如下：<br>$$Cosine(Q,D_i)=\frac{\sum_{j=1}^{t}w_{ij}\times{q_j}}{\sqrt{\sum_{j=1}^{t}w_{ij}^2\times\sum_{j=1}^{t}q_j^2}}$$<br>&emsp;&emsp;这个公式计算用户查询 $Q$ 和 $D_i$ 文档的相似性，该公式的分子部分是将文档的每个特征权值和查询的每个特征权值相乘取和，也即两个向量的点积；公式的分母部分是两个特征向量在欧式空间中长度的乘积，作为对点积结果的规范化（对长文档的一种惩罚机制）。<br>&emsp;&emsp;Cosine 公式一个明显的缺陷就是对长文档的过分抑制。Cosine 相似性的集合解释就是特征空间中两个特征向量的夹角，这个夹角越小，那么这两个特征向量的内容也越相似，夹角越大，则两个向量的内容差异越大。</p>
+<h3 id="u7279_u5F81_u6743_u91CD_u8BA1_u7B97"><a href="#u7279_u5F81_u6743_u91CD_u8BA1_u7B97" class="headerlink" title="特征权重计算"></a>特征权重计算</h3><p>&emsp;&emsp;在向量空间模型中，特征权值计算框架一般被称为 Tf*IDF 框架，这一框架的两个计算因子是：词频 Tf 和逆文档词频 IDF。<br>&emsp;&emsp;<strong>词频因子(Tf)</strong><br>&emsp;&emsp;Tf 计算因子代表了词频，即一个单词在文档中出现的次数，一般来说，在某个文档中反复出现的单词，往往能够表征文档的主题信息，即 Tf 值越大，越能代表文档所反映的内容，那么应该赋予该单词更大的权值。<br>&emsp;&emsp;具体计算词频因子的时候，基于不同的出发点，可以采纳不同的计算公式。一种词频因子的变体计算公式是：<br>$$W_{Tf}=1+\log{Tf}$$<br>&emsp;&emsp;另外一种单词词频因子变体计算公式为：<br>$$W_{Tf}=a+(1-a)\times\frac{Tf}{Max(Tf)}$$<br>&emsp;&emsp;这种方法被称为增强型规范化 Tf，其中的 a 是调节因子，取值0.4效果较好。公式中的 Tf 代表这个单词的实际词频数目，而 Max(Tf) 代表了文档中所有单词出现次数最多的那个单词对应的词频数目。这样做的目的是对长文档的一种压制。<br>&emsp;&emsp;<strong>逆文档频率因子(IDF)</strong><br>&emsp;&emsp;词频因子是与文档密切相关的，而逆文档频率因子 IDF 代表的是文档集合范围内的一种全局因子。给定一个文档集合，那么每个单词的 IDF 值就唯一确定，跟具体的文档无关。所以 IDF 考虑的不是文档本身的特征，而是特征单词之间的相对重要性。<br>&emsp;&emsp;逆文档频率因子 IDF 计算公式如下：<br>$$IDF_k=\log{\frac{N}{n_k}}$$<br>&emsp;&emsp;其中，N 代表文档集合中文档的总数，而 $n_k$ 包含特征单词 k 的文档数量，即文档频率。由公式可知，文档频率 $n_k$  越高，则其 IDF 值越小，即越多文档包含某个特征单词，那么其 IDF 权值越小。IDF 反映的是特征词在整个文档集合中的分布情况，特征次出现的文档数目越多，IDF 值越低，这个词区分不同文档的能力就越差。整体而言，<strong>IDF 的计算公式是基于直觉和经验的，IDF代表了单词带有的信息量的多少，其值越高，说明其信息含量越多，就越有价值。</strong><br>&emsp;&emsp;<strong>Tf*IDF 框架</strong><br>&emsp;&emsp;Tf*IDF 框架就是结合了上述的词频因子和逆文档频率因子的计算框架，一般式将两者相乘作为特征权值，特征权值越大，则越可能是好的指示词，即：<br>$$Weight_{word}=Tf\times IDF$$<br>&emsp;&emsp;从上述公式可以看出，对某个文档 D 来说：<br>&emsp;&emsp;如果 D 中某个单词的词频很高，而且这个单词在文档集合的其它文档中很少出现，那么这个单词的权值会很高。<br>&emsp;&emsp;如果 D 中某个单词的词频很高，但是这个单词在文档集合的其它文档中经常出现，或者单词词频不高，但是在文档集合的其它文档中很少出现，那么这个单词的权值一般。<br>&emsp;&emsp;如果 D 中某个单词的词频很低，同时这个单词在文档集合的其它文档中经常出现，那么这个单词权值很低。</p>
+<h2 id="u6982_u7387_u68C0_u7D22_u6A21_u578B"><a href="#u6982_u7387_u68C0_u7D22_u6A21_u578B" class="headerlink" title="概率检索模型"></a>概率检索模型</h2><p>&emsp;&emsp;概率检索模型是目前效果最好的模型之一，在 TREC 等各种检索系统评测会议已经证明了这一点。</p>
+<h3 id="u6982_u7387_u6392_u5E8F_u539F_u7406"><a href="#u6982_u7387_u6392_u5E8F_u539F_u7406" class="headerlink" title="概率排序原理"></a>概率排序原理</h3><p>&emsp;&emsp;概率排序的基本思想是：给定一个用户查询，如果搜索系统能够在搜索结果排序时按照文档和用户需求的相关性由高到低排序，那么认为这个搜索系统的准确性是最优的。而在文档集合的基础上尽可能准确地对这种相关性进行估计则是其核心。<br>&emsp;&emsp;从概率排序的原理来看，这是一种直接对用户需求相关性进行建模的方法，这点与向量空间模型不同，向量空间模型是以查询和文档的相似性来代替相关性。<br>&emsp;&emsp;概率排序原理只是一种指导思想，怎样对文档与用户需求进行相关性建模？用户发出一个查询请求时，如果我们把文档集合划分为两个类别：相关文档子集和不相关文档子集，于是就可以将这种相关性衡量转换为一个分类问题。<br>&emsp;&emsp;对于某个文档 D 而言，如果其属于相关文档子集的概率大于属于不相关文档子集的概率，我们就可以认为这个文档与用户查询是相关的。假设 $P(R|D)$ 代表给定一个文档 D 对应的相关性概率，而 $P(NR|D)$ 代表该文档的不相关性概率。即如果 $P(R|D)&gt;P(NR|D)$，我们可以认为文档与用户查询相关。<br>&emsp;&emsp;由贝叶斯规则可得：<br>$$P(R|D)=\frac{P(D|R)R(R)}{P(D)} \\<br>P(NR|D)=\frac{P(D|NR)P(NR)}{P(D)}$$<br>&emsp;&emsp;相关性计算的目的是要判断是否 $P(R|D)&gt;P(NR|D)$，即：<br>$$\begin{align}<br>P(R|D)&gt;P(NR|D) &amp; \iff \frac{P(D|R)R(R)}{P(D)}&gt;\frac{P(D|NR)P(NR)}{P(D)} \\<br>&amp; \iff \frac{P(D|R)}{P(D|NR)}&gt;\frac{P(NR)}{P(R)}<br>\end{align}$$<br>&emsp;&emsp;尽管概率模型将相关性判断转换为一个二值分类问题，但搜索系统并不是要真正的分类，而是将搜索结果按照相关性得分由高到低排序，所以对于搜索系统来说只要将文档按照 $\frac{P(D|R)}{P(D|NR)}$ 大小降序排列即可，于是问题被转化为如何估算因子 $P(D|R)$ 和 $P(D|NR)$，而二元独立模型提供了计算这些因子的 框架。</p>
+<h3 id="u4E8C_u5143_u72EC_u7ACB_u6A21_u578B"><a href="#u4E8C_u5143_u72EC_u7ACB_u6A21_u578B" class="headerlink" title="二元独立模型"></a>二元独立模型</h3><p>&emsp;&emsp;为了能够使得估算上述两个因子可行，二元独立模型（BIM模型）做出了两个建设：<br>&emsp;&emsp;<strong>假设1：二元假设</strong><br>&emsp;&emsp;所谓二元假设，类似布尔模型中的文档表示方法，一篇文档在由特征进行表示的时候，以特征“出现”和“不出现”两种情况来表示，不考虑词频等其他因素。假设特征集合包含5个单词，某个文档 D 根据二元假设，表示为 {1,0,1,0,1}，其含义是这个文档出现了第1、3、5个单词，但不包含第2、4个单词。做出二元假设是将复杂问题简单化的一种措施。<br>&emsp;&emsp;<strong>词汇独立性假设</strong><br>&emsp;&emsp;所谓词汇独立性假设，是指文档中出现的单词之间没有任何联系，任意一个单词在文档的分布概率不依赖于其他单词是否出现。这个假设显然与现实不符，但是为了简化计算，很多方法都会做出词汇独立性假设。有了词汇独立性假设，我们可以将对一个文档的概率估计转换为对文档包含单词的概率估计，也即可以将文档概率转换为单词概率的乘积。<br>&emsp;&emsp;对于上文提到的文档 D 表示为 {1,0,1,0,1}，用 $p_i$ 表示第 i 个单词在相关文档集合内出现的概率，于是在已知相关文档集合的情况下，观察到的文档 D 的概率为：<br>$$P(D|R)=p_1\times(1-p_2)\times p_3\times(1-p_4)\times p_5$$<br>&emsp;&emsp;假设用 $s_i$ 表示第 i 个单词在不相关文档集合内出现的概率，于是在已知不相关文档集合的情况下，观察到文档 D 的概率为：<br>$$P(D|NR)=s_1\times(1-s_2)\times s_3\times(1-s_4)\times s_5$$<br>&emsp;&emsp;两个因子估算完毕，于是我们可以估算 $\frac{P(D|R)}{P(D|NR)}$，即：<br>$$\frac{P(D|R)}{P(D|NR)} = \frac{p_1\times(1-p_2)\times p_3\times(1-p_4)\times p_5}{s_1\times(1-s_2)\times s_3\times(1-s_4)\times s_5}$$<br>&emsp;&emsp;从这个具体的实例，我们用形式化方式表示为：<br>$$\frac{P(D|R)}{P(D|NR)} = \prod_{i:d_i=1}\frac{p_i}{s_i}\times\prod_{i:d_i=0}\frac{1-p_i}{1-s_i}$$<br>&emsp;&emsp;其中 $\prod_{i:d_i=1}$ 代表在文档 D 中出现过的各个单词的概率乘积，$\prod_{i:d_i=0}$ 代表没有在文档 D 中出现的各个特征单词的概率乘积。进一步变换得：<br>$$\begin{align}<br>\frac{P(D|R)}{P(D|NR)} &amp; = \prod_{i:d_i=1}\frac{p_i}{s_i}\times\Big(\prod_{i:d_i=1}\frac{1-s_i}{1-p_i}\times\prod_{i:d_i=1}\frac{1-p_i}{1-s_i}\Big)\times\prod_{i:d_i=0}\frac{1-p_i}{1-s_i} \\<br>&amp; = \Big(\prod_{i:d_i=1}\frac{p_i}{s_i}\times\prod_{i:d_i=1}\frac{1-s_i}{1-p_i}\Big)\times\Big(\prod_{i:d_i=1}\frac{1-p_i}{1-s_i}\times\prod_{i:d_i=0}\frac{1-p_i}{1-s_i}\Big) \\<br>&amp; = \prod_{i:d_i=1}\frac{p_i(1-s_i)}{s_i(1-p_i)}\times\prod_{i}\frac{1-p_i}{1-s_i}<br>\end{align}$$<br>&emsp;&emsp;该公式第一个组成部分 $\prod_{i:d_i=1}$ 代表在文档中出现的单词所计算得到的单词概率乘积，第二个部分代表 $\prod_{i}$ 代表对所有特征词计算得到的单词概率乘积。因为 $p_i$ 和 $s_i$ 是从相关文档和不相关文档集合中统计出来的全局概率，所以与具体文档无关，在排序中不起作用，于是得到最终的相关性估算公式：<br>$$\frac{P(D|R)}{P(D|NR)} = \prod_{i:d_i=1}\frac{p_i(1-s_i)}{s_i(1-p_i)}$$<br>&emsp;&emsp;为了计算方便，对上述公式取 log 值，得到：<br>$$\frac{P(D|R)}{P(D|NR)} = \sum_{i:d_i=1}\log{\frac{p_i(1-s_i)}{s_i(1-p_i)}}$$<br>&emsp;&emsp;到目前为止，我们已经获得了计算相关性的具体方法，接下来是如何计算单词概率 $p_i$ 和 $s_i$。给定用户查询，如果我们能确定那些文档构成了相关文档集合，那些文档构成了不相关文档集合，可以利用下表所列数据估算单词概率：<br><img src="/images/检索模型与搜索排序-1.png" width="512" height="512"><br>&emsp;&emsp;表中第3行的 $N$ 为文档集合总共包含的文档个数，$R$ 为相关文档的个数，于是 $N-R$ 就是不相关文档的个数。从表中可以看出，其它参数都可以由 $N、R、n_i、r_i$ 4个数值推出。<br>&emsp;&emsp;根据表格数据，即可估算 $s_i$ 和 $p_i$。在 BIM 模型的二元假设下，有 $p_i=r_i/R,\ s_i=(n_i-r_i)/(N-R)$。为避免 $log(0)$ 情况的出现可能，对 $p_i$ 和 $s_i$ 的估值公式进行平滑，分子部分加上 0.5，分母部分加上 1.0，即：<br>$$P_i=(r_i+0.5)/(R+1.0) \\<br>S_i = (n_i-r_i+0.5)/(N-R+1.0)$$<br>&emsp;&emsp;将这两个估值因子带入相关性估算公式，得到如下公式：<br>$$\sum_{i:q_i=d_i=1}\log{\frac{(r_i+0.5)/(R-r_i+0.5)}{(n_i-r_i+0.5)/((N-R)-(n_i-r_i)+0.5)}}$$<br>&emsp;&emsp;其代表的含义是：对于同时出现在用户查询 Q 和文档D中的单词，累加每个单词的估值，其和就是文档D和查询的相关性度量。如果我们事先不知道那些是相关文档，那些是不相关文档，可以给公式的估算因子赋予固定值，这种情况下该公式等价于在向量空间模型中提到的 IDF 因子。实验表明，根据二元独立关系模型计算相关性实际效果并不好，但是这个模型是非常成功的概率模型方法 BM25 的基础。</p>
+<h3 id="BM25__u6A21_u578B"><a href="#BM25__u6A21_u578B" class="headerlink" title="BM25 模型"></a>BM25 模型</h3><p>&emsp;&emsp;BIM 模型是基于二元假设推导而出，即对于单词特征，只考虑是否在文档中出现过，而没有考虑单词的权值。BM25 模型在 BIM模型基础上，考虑了单词在查询中的权值以及单词在文档中的权值，拟合出综合上述考虑因素的公式，并通过实验引入一些参数。BM25 模型是目前最成功的内容排序模型。<br>&emsp;&emsp;BM25 模型的具体计算公式如下：<br>$$\sum_{i\in Q}\log{\frac{(r_i+0.5)/(R-r_i+0.5)}{(n_i-r_i+0.5)/((N-R)-(n_i-r_i)+0.5)}}\cdot\frac{(k_1+1)f_i}{K+f_i}\cdot\frac{(k_2+1)qf_i}{k_2+qf_i}$$<br>&emsp;&emsp;对于查询 Q 中出现的每个查询词，依次计算单词在文档 D 中的分值，累加后就是文档 D 与查询 Q 之间的相关性得分。由公司可知：第1个组成部分就是上节所述的 BIM 模型计算得分；第2个组成部分是查询词在文档 D 中的权值，其中 $f_i$ 代表了单词在文档 D 中的词频，$k_1$ 和 $K$ 是经验参数；第3个部分是查询词自身的权值，其中 $qf_i$ 代表查询词在用户查询中的词频，如果查询词较短小的话，这个值往往是 1，$k_2$ 是经验参数。BM25 模型就是融合了这 3 个计算因子的相关性计算公式。<br>&emsp;&emsp;在第2个计算因子中，<br>$$K=k_1((1-b)+b\cdot\frac{dl}{avdl})$$<br>&emsp;&emsp;$K$ 因子代表了相对文档长度的考虑，dl 代表文档 D 的长度，而 avdl 则是文档集合中所有文档的平均长度，$k_1$ 和 b 是经验参数。通常情况下将 b 设定为 0.75 会获得较好的搜索结果。<br>&emsp;&emsp;BM25 公式中包含3个自由调节参数，除了调节因子 b 外，还有针对词频的调节因子 $k_1$ 和 $k_2$。$k_1$ 的作用是对查询词在文档中的词频进行调节，一般设为 1.2。调节因子 $k_2$ 与 $k_1$ 类似，一般设定在 0 到 1000 较大的范围内。原因是查询往往很短，不同查询词的词频都很小，词频之间的差异不大，较大的调节参数数值设定范围允许对这种差异进行放大。<br>&emsp;&emsp;<strong>实例：</strong><br>&emsp;&emsp;假设现有两个查询词 A 和 B，首先假定 BM25 中的第一个计算因子中，我们不知道哪些是相关文档，所以将所有相关文档个数 R 和包含相关文档个数 r 设定为 0，此时第1个计算因子退化成类似 IDF 的形式：<br>$$\log\frac{(0+0.5)/(0-0+0.5)}{(n_i-0+0.5)/((N-0)-(n_i-0)+0.5)}\iff \log\frac{N-n_i+0.5}{n_i+0.5} $$<br>&emsp;&emsp;因为查询中每个查询词都值出现了一次，所以其对应的都为1.其它数值假定如下：<br>&emsp;&emsp;文档集合总数 N=100000<br>&emsp;&emsp;文档集合中包含单词 A 的文档个数 $n_A = 1000$<br>&emsp;&emsp;文档集合中包含单词 B 的文档个数 $n_B = 100$<br>&emsp;&emsp;文档 D 中出现单词 A 的词频 $f_A = 8$<br>&emsp;&emsp;文档 D 中出现单词 B 的词频 $f_B = 5$<br>&emsp;&emsp;调节因子 $k_1 = 1.2$<br>&emsp;&emsp;调节因子 $k_2 = 200$<br>&emsp;&emsp;调节因子 $b = 0.75$<br>&emsp;&emsp;假定文档长度是平均文档长度的 1.5 倍，即 $K=1.2\times(0.25+0.75\times 1.5)=1.65$，将这些数值带入 BM25 计算公式，可以得到文档 D 和查询的相关性得分：<br>$$\begin{align}BM25(“A\ B”, D) &amp; = \log{\frac{100000-1000+0.5}{1000+0.5}\times\frac{(1.2+1)\times 8}{1.65+8}\times\frac{(200+1)\times 1}{200+1}}+ \\<br>&amp; \quad \log{\frac{100000-100+0.5}{100+0.5}\times\frac{(1.2+1)\times 5}{1.65+5}\times\frac{(200+1)\times 1}{200+1}} \\<br>&amp; =8.59\end{align}$$<br>&emsp;&emsp;对文档集合里的所有文档，都按照上述方法计算，将计算结果按照大小排序，就根据 BM25 公式得出了内容相关性排序。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/搜索引擎/" rel="tag">#搜索引擎</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/17/支持向量回归机/" rel="next" title="支持向量回归机">
+                <i class="fa fa-chevron-left"></i> 支持向量回归机
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/17/K-均值聚类算法/" rel="prev" title="K-均值聚类算法">
+                K-均值聚类算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/12/17/检索模型与搜索排序/"
+           data-title="检索模型与搜索排序" data-url="http://yoursite.com/2015/12/17/检索模型与搜索排序/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/me.jpg" alt="Andrew XL" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Andrew XL</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/legend4917" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3510855382" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 微博
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/137901355" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 豆瓣
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/legend4917" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 知乎
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://facebook.com/100009482720069" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> facebook
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">Links</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://jetmuffin.github.io" target="_blank">Jetmuffin的博客</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.sunzequn.com" target="_blank">sloriac的博客</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://innerac.github.io" target="_blank">InnerAc的博客</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.mapengju.com" target="_blank">GMpj的博客</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blkstone.github.io" target="_blank">blkstone的博客</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u5E03_u5C14_u6A21_u578B"><span class="nav-number">1.</span> <span class="nav-text">布尔模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5411_u91CF_u7A7A_u95F4_u6A21_u578B"><span class="nav-number">2.</span> <span class="nav-text">向量空间模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u6587_u6863_u8868_u793A"><span class="nav-number">2.1.</span> <span class="nav-text">文档表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u76F8_u4F3C_u6027_u8BA1_u7B97"><span class="nav-number">2.2.</span> <span class="nav-text">相似性计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u7279_u5F81_u6743_u91CD_u8BA1_u7B97"><span class="nav-number">2.3.</span> <span class="nav-text">特征权重计算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6982_u7387_u68C0_u7D22_u6A21_u578B"><span class="nav-number">3.</span> <span class="nav-text">概率检索模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u6982_u7387_u6392_u5E8F_u539F_u7406"><span class="nav-number">3.1.</span> <span class="nav-text">概率排序原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u4E8C_u5143_u72EC_u7ACB_u6A21_u578B"><span class="nav-number">3.2.</span> <span class="nav-text">二元独立模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BM25__u6A21_u578B"><span class="nav-number">3.3.</span> <span class="nav-text">BM25 模型</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andrew XL</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"legend4917"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+  
+
+</body>
+</html>

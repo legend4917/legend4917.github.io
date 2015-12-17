@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="分类,支持向量机," />
+  <meta name="keywords" content="凸优化,回归,拉格朗日对偶性,支持向量机," />
 
 
 
@@ -51,18 +51,16 @@
 
 
 
-<meta name="description" content="&amp;emsp;&amp;emsp;支持向量机（support vector machine，SVM）是一种二类分类模型。它的基本模型定义是定义在特征空间上的间隔最大的线性分类器；支持向量机还包括核技巧，这使得它成为实质上的非线性分类器。支持向量机的学习策略就是间隔最大化，可形式化为一个解凸二次规划的问题。">
+<meta name="description" content="&amp;emsp;&amp;emsp;回归问题与分类问题相似，它也是一个已知的训练集，设此训练集可表示为：$$T=\{(x_1,y_1,\cdots,(x_n,y_n)\}\in (\mathcal{X\times Y})^n$$&amp;emsp;&amp;emsp;其中 $x_i\in\mathcal{X}=R^n$ 是输入指标向量，或称输入或模式，$y_i\in\mathcal{Y}=R$ 是输出指标，或称输出。与分类问">
 <meta property="og:type" content="article">
-<meta property="og:title" content="序列最小最优化(SMO)算法">
-<meta property="og:url" content="http://yoursite.com/2015/12/17/序列最小最优化(SMO)算法/index.html">
+<meta property="og:title" content="支持向量回归机">
+<meta property="og:url" content="http://yoursite.com/2015/12/17/支持向量回归机/index.html">
 <meta property="og:site_name" content="witness">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;支持向量机（support vector machine，SVM）是一种二类分类模型。它的基本模型定义是定义在特征空间上的间隔最大的线性分类器；支持向量机还包括核技巧，这使得它成为实质上的非线性分类器。支持向量机的学习策略就是间隔最大化，可形式化为一个解凸二次规划的问题。">
-<meta property="og:image" content="http://yoursite.com/images/支持向量机-1.png">
-<meta property="og:image" content="http://yoursite.com/images/支持向量机-2.png">
-<meta property="og:updated_time" content="2015-12-15T12:00:20.000Z">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;回归问题与分类问题相似，它也是一个已知的训练集，设此训练集可表示为：$$T=\{(x_1,y_1,\cdots,(x_n,y_n)\}\in (\mathcal{X\times Y})^n$$&amp;emsp;&amp;emsp;其中 $x_i\in\mathcal{X}=R^n$ 是输入指标向量，或称输入或模式，$y_i\in\mathcal{Y}=R$ 是输出指标，或称输出。与分类问">
+<meta property="og:updated_time" content="2015-12-15T12:02:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="序列最小最优化(SMO)算法">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;支持向量机（support vector machine，SVM）是一种二类分类模型。它的基本模型定义是定义在特征空间上的间隔最大的线性分类器；支持向量机还包括核技巧，这使得它成为实质上的非线性分类器。支持向量机的学习策略就是间隔最大化，可形式化为一个解凸二次规划的问题。">
+<meta name="twitter:title" content="支持向量回归机">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;回归问题与分类问题相似，它也是一个已知的训练集，设此训练集可表示为：$$T=\{(x_1,y_1,\cdots,(x_n,y_n)\}\in (\mathcal{X\times Y})^n$$&amp;emsp;&amp;emsp;其中 $x_i\in\mathcal{X}=R^n$ 是输入指标向量，或称输入或模式，$y_i\in\mathcal{Y}=R$ 是输出指标，或称输出。与分类问">
 
 
 
@@ -74,7 +72,7 @@
   };
 </script>
 
-  <title> 序列最小最优化(SMO)算法 | witness </title>
+  <title> 支持向量回归机 | witness </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -224,7 +222,7 @@
             
             
               
-                序列最小最优化(SMO)算法
+                支持向量回归机
               
             
           </h1>
@@ -259,8 +257,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/17/序列最小最优化(SMO)算法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/17/序列最小最优化(SMO)算法/" itemprop="commentsCount"></span>
+                <a href="/2015/12/17/支持向量回归机/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/17/支持向量回归机/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -279,40 +277,18 @@
       
 
       
-        <span itemprop="articleBody"><p>&emsp;&emsp;支持向量机（support vector machine，SVM）是一种二类分类模型。它的基本模型定义是定义在特征空间上的间隔最大的线性分类器；支持向量机还包括核技巧，这使得它成为实质上的非线性分类器。支持向量机的学习策略就是间隔最大化，可形式化为一个解凸二次规划的问题。<br><a id="more"></a></p>
-<h2 id="u7EBF_u6027_u53EF_u5206_u652F_u6301_u5411_u91CF_u673A_u548C_u786C_u95F4_u9694_u6700_u5927_u5316"><a href="#u7EBF_u6027_u53EF_u5206_u652F_u6301_u5411_u91CF_u673A_u548C_u786C_u95F4_u9694_u6700_u5927_u5316" class="headerlink" title="线性可分支持向量机和硬间隔最大化"></a>线性可分支持向量机和硬间隔最大化</h2><h3 id="u7EBF_u6027_u53EF_u5206_u652F_u6301_u5411_u91CF_u673A"><a href="#u7EBF_u6027_u53EF_u5206_u652F_u6301_u5411_u91CF_u673A" class="headerlink" title="线性可分支持向量机"></a>线性可分支持向量机</h3><p>&emsp;&emsp;给定线性可分的训练数据集，通过间隔最大化或等价地求解相应地凸二次规划问题学习得到的分离超平面为：<br>$$w^*\cdot x+b^* = 0$$</p>
-<p>&emsp;&emsp;以及相应地分类决策函数为：<br>$$f(x)=sign(w^*\cdot x+b^*)$$</p>
-<p>&emsp;&emsp;称为线性可分支持向量机。例如下图：<br><img src="/images/支持向量机-1.png" width="256" height="256" title="示例"></p>
-<h3 id="u51FD_u6570_u95F4_u9694_u548C_u51E0_u4F55_u95F4_u9694"><a href="#u51FD_u6570_u95F4_u9694_u548C_u51E0_u4F55_u95F4_u9694" class="headerlink" title="函数间隔和几何间隔"></a>函数间隔和几何间隔</h3><p>&emsp;&emsp;对于给定的训练集$\ T\ $和超平面$(w,b)$，定义超平面和样本的<strong>函数间隔</strong>为：<br>$$\hat{\gamma}_i=y_i(w\cdot x_i + b)$$</p>
-<p>&emsp;&emsp;定义超平面$(w,b)$关于训练数据集$\ T\ $的函数间隔为超平面$(w,b)$关于$\ T\ $中所有样本点$(x_i,y_i)$的函数间隔的最小值，即：<br>$$\hat{\gamma}=\min_{i=1,\cdots,N}\hat{\gamma}_i$$</p>
-<p>&emsp;&emsp;由于函数间隔会随$\ w\ $和$\ b\ $成比例的改变，因此可以对分离超平面的法向量$\ w\ $进行规范化，$||w||=1$，使得函数间隔是确定的，这时函数间隔就变成了几何间隔。<br>&emsp;&emsp;对于给定的训练集$\ T\ $ 和超平面$(w,b)$，定义超平面$(w,b)$和样本的<strong>几何间隔</strong>为：<br>$$\gamma_i=y_i\Big(\frac{w}{||w||}\cdot x_i + \frac{d}{||w||}\Big)$$</p>
-<p>&emsp;&emsp;定义超平面$(w,b)$关于训练数据集$\ T\ $的几何间隔为超平面$(w,b)$关于$\ T\ $中所有样本点$(x_i,y_i)$的几何间隔的最小值，即：<br>$$\gamma=\min_{i=1,\cdots,N}\gamma_i$$</p>
-<p>&emsp;&emsp;因此函数间隔与几何间隔之间的关系为：<br>$$<br>\gamma_i=\frac{\hat{\gamma_i}}{||w||} \\<br>\gamma=\frac{\hat{\gamma}}{||w||}<br>$$</p>
-<h3 id="u95F4_u9694_u6700_u5927_u5316"><a href="#u95F4_u9694_u6700_u5927_u5316" class="headerlink" title="间隔最大化"></a>间隔最大化</h3><p>&emsp;&emsp;间隔最大化的直观解释就是：不仅将正负实例点分开，而且对最难分的实例点也有足够大的确信度将它们分开。这样的超平面应该对未知的新实例有很好地分类预测能力。<br><strong>最大间隔分离超平面</strong><br>&emsp;&emsp;最大化几何间隔的分类超平面问题可以表示为下面的约束最优化问题：<br>$$ \begin{align}<br>\max_{w,b} \quad &amp; \gamma \\<br>s.t. \quad &amp; y_i\Big(\frac{w}{||w||}\cdot x_i + \frac{d}{||w||}\Big) \ge \gamma, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
-<p>&emsp;&emsp;考虑几何间隔与函数间隔的关系，上述问题可以改写为：<br>$$ \begin{align}<br>\max_{w,b} \quad &amp; \frac{\hat{\gamma}}{||w||} \\<br>s.t. \quad &amp; y_i(w\cdot x_i + b) \ge \hat{\gamma}, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
-<p>&emsp;&emsp;不失一般性，我们令$\ \hat{\gamma}=1$，并作一些转化，我们可以得到：<br>$$ \begin{align}<br>\min_{w,b} \quad &amp; \frac{1}{2}{||w||}^2 \\<br>s.t. \quad &amp; y_i(w\cdot x_i + b) - 1 \ge 0, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
-<p><strong>学习的对偶算法</strong><br>&emsp;&emsp;显然上面是一个凸二次规划（convex quadratic programming）问题。通过<a href="/2015/11/27/Lagrange duality/">拉格朗日对偶性</a>这篇博客的启发，我们首先构造拉格朗日函数,引入拉格朗日乘子$\alpha_i \ge 0,\quad i=1,2,\cdots,N$，则有：<br>$$L(w,b,\alpha)=\frac{1}{2}||w||^2-\sum^{N}_{i=1}\alpha_iy_i(w\cdot x_i+b)+\sum^{N}_{i=1}\alpha_i<br>$$</p>
-<p>&emsp;&emsp;根据拉格朗日对偶性，原始问题的对偶问题是极大极小问题：<br>$$\max_\alpha\ \min_{w,b}\ L(w,b,\alpha)$$</p>
-<p>&emsp;&emsp;因此，为了得到对偶问题的解，需要先求$\ L(w,b,\alpha)\ $对$\ w,b\ $的极小，再求对$\ \alpha\ $的极大。我们可以得到下面的对偶最优化问题：<br>$$ \begin{align}<br>\min_\alpha \quad &amp; \frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i\alpha_jy_iy_j(x_i\cdot x_j)-\sum_{i=1}^{N}\alpha_i \\<br>s.t. \quad &amp; \sum_{i=1}^{N}\alpha_iy_i=0 \\<br>&amp; \alpha_i \ge 0, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
-<p>&emsp;&emsp;若对偶最优化的解为$\   \alpha^*=(\alpha_1^*,\alpha_2^*,\cdots,\alpha_l^*)^T\ $，原始问题的最优解为$\ (w^*,b^*)\ $，有KKT条件可知：<br>$$<br>w^* = \sum_{i=1}^{N}\alpha_i^*y_ix_i \\<br>b^* =y_i-\sum_{i=1}^{N}\alpha_i^*y_i(x_i\cdot x_j)<br>$$</p>
-<p><strong>支持向量</strong><br>&emsp;&emsp;将训练数据集中对应于$\ \alpha_i^* &gt; 0\ $的样本点$\ (x_i,y_i)\ $的实例$\ x_i\in R^n\ $称为<strong>支持向量</strong>。有KKT互补条件可知：<br>$$\alpha_i^*(y_i(w^*\cdot x_i+b^*)-1) = 0, \quad i=1,2,\cdots,N$$</p>
-<p>&emsp;&emsp;中对应于$\ \alpha_i^* &gt; 0\ $的实例$\ x_i\ $，有：<br>$$w^*\cdot x_i+b^* = \pm 1$$</p>
-<p>&emsp;&emsp;即$\ x_i\ $一定在间隔边界上。<br><img src="/images/支持向量机-2.png" width="256" height="256" title="示例"></p>
-<p>&emsp;&emsp;综上所述，对于给定的线性可分的训练数据集，可以首先求对偶问题的解$\ \alpha^*\ $；在求出原始问题的解$\ (w^*,b^*)\ $；从而得到分离超平面及分类决策函数。这种算法称为线性可分的对偶学习算法。</p>
-<h2 id="u7EBF_u6027_u652F_u6301_u5411_u91CF_u673A_u4E0E_u8F6F_u95F4_u9694_u6700_u5927_u5316"><a href="#u7EBF_u6027_u652F_u6301_u5411_u91CF_u673A_u4E0E_u8F6F_u95F4_u9694_u6700_u5927_u5316" class="headerlink" title="线性支持向量机与软间隔最大化"></a>线性支持向量机与软间隔最大化</h2><h3 id="u7EBF_u6027_u652F_u6301_u5411_u91CF_u673A"><a href="#u7EBF_u6027_u652F_u6301_u5411_u91CF_u673A" class="headerlink" title="线性支持向量机"></a>线性支持向量机</h3><p>&emsp;&emsp;在线性不可分训练数据集中，上述的线性可分支持向量机的学习算法是不适用的，下面就需要修改硬间隔最大化为软间隔最大，即引入<strong>松弛变量</strong>$\ \xi \ge 0\ $，使函数间隔加上松弛变量大于1，即可得到线性不可分的线性支持向量机的学习问题变成下面的凸二次规划问题（原始问题）：<br>$$ \begin{align}<br>\max_{w,b,\xi} \quad &amp; \frac{1}{2}{||w||}^2 + C\sum_{i=1}^{N}\xi_i \\<br>s.t. \quad &amp; y_i(w\cdot x_i + b) \ge 1 - \xi_i, \quad i=1,2,\cdots,N \\<br>&amp; \xi_i \ge 0, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
-<p>&emsp;&emsp;由拉格朗日对偶性可得出原始问题的对偶问题是：<br>$$ \begin{align}<br>\min_\alpha \quad &amp; \frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i\alpha_jy_iy_j(x_i\cdot x_j)-\sum_{i=1}^{N}\alpha_i \\<br>s.t. \quad &amp; \sum_{i=1}^{N}\alpha_iy_i=0 \\<br>&amp; 0 \le \alpha_i \le C, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
-<p>&emsp;&emsp;同样的，若对偶问题的解为$\   \alpha^*=(\alpha_1^*,\alpha_2^*,\cdots,\alpha_N^*)^T\ $，原始问题的最优解为$\ (w^*,b^*)\ $，必须满足KKT条件（这里特别的列出了线性支持向量机的KKT条件，这对后面的学习算法（SMO算法）十分重要）：<br>$$ \begin{align}<br>\nabla_wL(w^*,b^*,\xi^*,\alpha^*,\mu^*) &amp; = w^*-\sum_{i=1}^{N}\alpha_i^*y_ix_i=0 \\<br>\nabla_wL(w^*,b^*,\xi^*,\alpha^*,\mu^*) &amp; = -\sum_{i=1}^{N}\alpha_i^*y_i=0 \\<br>\nabla_wL(w^*,b^*,\xi^*,\alpha^*,\mu^*) &amp; = C-\alpha^*-\mu^*=0 \\<br>\alpha_i^*(y_i(w^*\cdot x_i+b^*)-1+\xi_i^*) &amp; = 0\\<br>\mu_i^*\xi_i^* &amp; = 0 \\<br>y_i(w^*\cdot x_i+b^*)-1+\xi_i^* &amp; \ge 0 \\<br>\xi_i^* &amp; \ge 0 \\<br>\alpha_i^* &amp; \ge 0 \\<br>\mu_i^* &amp; \ge 0, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
-<p>&emsp;&emsp;并可推导出对于一个分量$\ \alpha_j^*\ ,\ 0 &lt; \alpha_j^* &lt; C$，则原始问题的解$\ w^*,b^*\ $可按下式求得：<br>$$ \begin{align}<br>w^* &amp; = \sum_{i=1}^{N}\alpha_i^*y_ix_i \\<br>b^* &amp; = y_j - \sum_{i=1}^{N}\alpha_i^*y_i(x_i\cdot x_j)<br>\end{align} $$</p>
-<p><strong>支持向量</strong><br>&emsp;&emsp;在线性不可分的情况下，将对偶问题的解$\   \alpha^*=(\alpha_1^*,\alpha_2^*,\cdots,\alpha_N^*)^T\ $中对应于$\ \alpha_i^* &gt; 0\ $的样本点$\ (x_i,y_i)\ $的实例$\ x_i\ $称为支持向量（软间隔的支持向量）。这时的支持向量$\ x_i\ $或者在间隔边界上，或者在间隔边界与分离超平面之间，或者在分离超平面误分类一侧。<br>&emsp;&emsp;- $\ \alpha_i^* &lt; C\ $，则$\ \xi_i^* = 0\ $，支持变量$\ x_i^*\ $恰好落在间隔边界上；<br>&emsp;&emsp;- $\ \alpha_i^* = C\ $，则$\ 0 &lt; \xi_i^* &lt; 1\ $，则分类正确，支持变量$\ x_i^*\ $恰好落在间隔边界与分离超平面之间；<br>&emsp;&emsp;- $\ \alpha_i^* = C\ $，则$\ \xi_i^* = 1\ $，支持变量$\ x_i^*\ $在分离超平面上；<br>&emsp;&emsp;- $\ \alpha_i^* = C\ $，则$\ \xi_i^* &gt; 1\ $，支持变量$\ x_i^*\ $位于分离超平面误分类一侧；</p>
-<h2 id="u652F_u6301_u5411_u91CF_u5206_u7C7B_u673A_28SVC_29"><a href="#u652F_u6301_u5411_u91CF_u5206_u7C7B_u673A_28SVC_29" class="headerlink" title="支持向量分类机(SVC)"></a>支持向量分类机(SVC)</h2><p>&emsp;&emsp;前面介绍了两种处理线性不可分问题，即线性软间隔分类机（线性支持向量分类机）和非线性硬间隔分类机（可分支持向量分类机）。综合这两种方法，得到更常用的非线性软间隔分类机，主要有以下两种形式：</p>
-<h3 id="C-_u652F_u6301_u5411_u91CF_u673A_28c-SVC_29"><a href="#C-_u652F_u6301_u5411_u91CF_u673A_28c-SVC_29" class="headerlink" title="C-支持向量机(c-SVC)"></a>C-支持向量机(c-SVC)</h3><p>&emsp;&emsp;原始问题：<br>$$ \begin{align}<br>\min_{w,b,\xi} \quad &amp; \frac{1}{2}{||w||}^2 + C\sum_{i=1}^{N}\xi_i \\<br>s.t. \quad &amp; y_i(w\cdot x_i + b) \ge 1 - \xi_i, \quad i=1,2,\cdots,N \\<br>&amp; \xi_i \ge 0, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
-<p>&emsp;&emsp;对偶问题：<br>$$ \begin{align}<br>\min_\alpha \quad &amp; \frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i\alpha_jy_iy_jK(x_i,x_j)-\sum_{i=1}^{N}\alpha_i \\<br>s.t. \quad &amp; \sum_{i=1}^{N}\alpha_iy_i=0 \\<br>&amp; 0 \le \alpha_i \le C, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
-<p>&emsp;&emsp;<strong>算法：</strong><br>&emsp;&emsp;（1）已知训练数据集$\ T=\{(x_1,y_1),(x_2,y_2),\cdots,(x_N,y_N)\}$，其中，$x_i\in\mathcal{X}= R^n,y\in\mathcal{Y}=\{-1,1\},\ i=1,2,\cdots,N $<br>&emsp;&emsp;（2）选取适当地核函数$\ K(x,x^{‘})\ $和适当的参数$\ C\ $，构造并求解优化问题：<br>$$\begin{align}<br>\min_\alpha \quad &amp; \frac{1}{2}\sum^N_{i=1}\sum^N_{j=1}y_iy_j\alpha_i\alpha_jK(x_i,x_j)-\sum^N_{j=1}\alpha_j \\<br>s.t. \quad &amp; \sum^N_{i=1}y_i\alpha_i=0 \\<br>&amp; 0 \le \alpha_i \le C, \quad i=1,2,\cdots,N<br>\end{align}$$</p>
-<p>&emsp;&emsp;的最优解$\ \alpha^*=(\alpha_1^*,\cdots,\alpha_n^*)$；<br>&emsp;&emsp;（3）选取$\ \alpha^*\ $的一个分量$\ 0&lt;\alpha_j^* &lt; C$，并据此计算阀值$\ b^*=y_j-\sum^N_{i=1}y_i\alpha_i^*K(x_i,x_j)$<br>&emsp;&emsp;（4）构造决策函数$\displaystyle\ f(x)=sgn\Big(\sum^N_{i=1}\alpha_i^*y_iK(x,x_i)+b^*\Big)。$</p>
-<h3 id="v-_u652F_u6301_u5411_u91CF_u5206_u7C7B_u673A_28v-SVC_29"><a href="#v-_u652F_u6301_u5411_u91CF_u5206_u7C7B_u673A_28v-SVC_29" class="headerlink" title="v-支持向量分类机(v-SVC)"></a>v-支持向量分类机(v-SVC)</h3><p>&emsp;&emsp;原始问题：<br>$$ \begin{align}<br>\min_{w,b,\xi,\rho} \quad &amp; \frac{1}{2}{||w||}^2 - v\rho + \frac{1}{N}\sum_{i=1}^{N}\xi_i \\<br>s.t. \quad &amp; y_i(w\cdot x_i + b) \ge \rho - \xi_i, \quad i=1,2,\cdots,N \\<br>&amp; \xi_i \ge 0, \quad i=1,2,\cdots,N \\<br>&amp; \rho \ge 0<br>\end{align} $$</p>
-<p>&emsp;&emsp;对偶问题：<br>$$ \begin{align}<br>\min_\alpha \quad &amp; \frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i\alpha_jy_iy_jK(x_i,x_j)-\sum_{i=1}^{N}\alpha_i \\<br>s.t. \quad &amp; \sum_{i=1}^{N}\alpha_iy_i=0 \\<br>&amp; 0 \le \alpha_i \le \frac{1}{N}, \quad i=1,2,\cdots,N \\<br>&amp; \sum^N_{i=1}\alpha_i \ge v<br>\end{align} $$</p>
-<p>&emsp;&emsp;<strong>算法：</strong><br>&emsp;&emsp;（1）已知训练数据集$\ T=\{(x_1,y_1),(x_2,y_2),\cdots,(x_N,y_N)\}$，其中，$x_i\in\mathcal{X}= R^n,y\in\mathcal{Y}=\{-1,1\},\ i=1,2,\cdots,N $<br>&emsp;&emsp;（2）选取适当地核函数$\ K(x,x^{‘})\ $和适当的参数$\ C\ $，构造并求解优化问题：<br>$$ \begin{align}<br>\min_\alpha \quad &amp; \frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i\alpha_jy_iy_jK(x_i,x_j)-\sum_{i=1}^{N}\alpha_i \\<br>s.t. \quad &amp; \sum_{i=1}^{N}\alpha_iy_i=0 \\<br>&amp; 0 \le \alpha<em>i \le \frac{1}{N}, \quad i=1,2,\cdots,N \\<br>&amp; \sum^N\</em>{i=1}\alpha_i \ge v<br>\end{align} $$</p>
-<p>&emsp;&emsp;的最优解$\ \alpha^*=(\alpha_1^*,\cdots,\alpha_n^*)$；<br>&emsp;&emsp;（3）选取$\ j\in S_+=\{i\ |\ \alpha_i^*\in(0,1/N),y_i=1\},k\in S_-=\{i\ |\ \alpha_i^*\in(0,1/N),y_i=1\},\ $的一个分量$\ 0&lt;\alpha_j^* &lt; C$，并据此计算阀值:<br>$$\ b^*=-\frac{1}{2}\sum^N_{i=1}y_i\alpha_i^*(K(x_i,x_j)+K(x_i,x_k))$$<br>&emsp;&emsp;（4）构造决策函数$\displaystyle\ f(x)=sgn\Big(\sum^N_{i=1}\alpha_i^*y_iK(x,x_i)+b^*\Big)。$</p>
+        <span itemprop="articleBody"><p>&emsp;&emsp;回归问题与分类问题相似，它也是一个已知的训练集，设此训练集可表示为：<br>$$T=\{(x_1,y_1,\cdots,(x_n,y_n)\}\in (\mathcal{X\times Y})^n$$<br>&emsp;&emsp;其中 $x_i\in\mathcal{X}=R^n$ 是输入指标向量，或称输入或模式，$y_i\in\mathcal{Y}=R$ 是输出指标，或称输出。与分类问题不同的是，这里的 $y_i$ 并不限定取 -1 或1，而是可取任意实数。回归学习需要解决的是，给定一个新的输入模式，根据训练集 $T$ 推断它所对应的输出 $y$ 是多少。<br><a id="more"></a></p>
+<h2 id="u7EBF_u6027_u56DE_u5F52_u95EE_u9898_u4E0E_u786C__24_5Cvarepsilon_24-_u5E26_u8D85_u5E73_u9762"><a href="#u7EBF_u6027_u56DE_u5F52_u95EE_u9898_u4E0E_u786C__24_5Cvarepsilon_24-_u5E26_u8D85_u5E73_u9762" class="headerlink" title="线性回归问题与硬 $\varepsilon$-带超平面"></a>线性回归问题与硬 $\varepsilon$-带超平面</h2><h3 id="u7EBF_u6027_u56DE_u5F52_u95EE_u9898"><a href="#u7EBF_u6027_u56DE_u5F52_u95EE_u9898" class="headerlink" title="线性回归问题"></a>线性回归问题</h3><p>&emsp;&emsp;线性回归问题就是寻找函数 $f(x)$ 为线性函数：<br>$$y=f(x)=w\cdot x+b$$</p>
+<p>&emsp;&emsp;这个线性函数对应与空间 $R^n\times R$ 上的一个超平面。所以从几何上看，线性回归问题就是在给定训练集的条件下，寻找一个 $n+1$ 维空间 $R^{n+1}$ 上的超平面。<br>&emsp;&emsp;<strong>超平面的 $\varepsilon$-带</strong>：设 $\varepsilon&gt;0$，一个超平面$ y=w\cdot x+b $   的 $\varepsilon$-带是指该超平面沿 $y$ 轴依次上下平移扫过的区域。<br>&emsp;&emsp;<strong>硬 $\varepsilon$-带超平面</strong>：对于训练集 $T$，如果超平面 $y=w\cdot x+b$ 满足：<br>$$-\varepsilon\le y_i-(w\cdot x_i+b)\le \varepsilon$$</p>
+<p>&emsp;&emsp;则称该超平面为硬 $\varepsilon$-带超平面。<br>&emsp;&emsp;从给定的训练集 $T$ 出发构造出两类点，具体做法是将训练集 $T$ 中每个训练点的 $y$ 值分别增加 $\varepsilon$ 和减少 $\varepsilon$，得到正类点和负类点两个集合，分别记它们为 $D^+$ 和 $D^-$，即：<br>$$D^+=\{(x^T_i,y_i+\varepsilon),\ i=1,2,\cdots,N\} \\<br>D^-=\{(x^T_i,y_i-\varepsilon),\ i=1,2,\cdots,N\}$$</p>
+<p>&emsp;&emsp;对于给定的训练集 $T$ 和 $\varepsilon&gt;0$，则一个超平面 $y=w\cdot x+b$ 是硬 $\varepsilon$-硬带超平面的充要条件是 $D^+$ 凸壳和 $D^-$ 凸壳分别位于该超平面的两侧。当 $\varepsilon\ge \varepsilon_{min}$ 时，硬 $\varepsilon$-硬带超平面等价于分离集合 $D^+$ 和$D^-$。这样就将回归问题转化为集合 $D^+\cup D^-$ 的分类问题。</p>
+<h3 id="u786C__24_5Cvarepsilon_24-_u5E26_u8D85_u5E73_u9762_u7684_u6784_u9020"><a href="#u786C__24_5Cvarepsilon_24-_u5E26_u8D85_u5E73_u9762_u7684_u6784_u9020" class="headerlink" title="硬 $\varepsilon$-带超平面的构造"></a>硬 $\varepsilon$-带超平面的构造</h3><p>&emsp;&emsp;首先将训练集变形。令 $(x^T_{N+i},y_{N+i}-\varepsilon)^T=(x^T_i,y_i-\varepsilon)$，则训练集可表示为：<br>$$\{((x^T_1,y_1+\varepsilon);1),\cdots,((x^T_N,y_N+\varepsilon);1),((x^T_{N+1},y_{N+1}-\varepsilon);-1),\cdots,((x^T_{2N},y_{2N}-\varepsilon);-1)\}$$</p>
+<p>&emsp;&emsp;这里的 $w$ 比分类问题中的 $w$ 多了一个对应于 $y$ 的分量，即回归问题的权分类应为 $(w^T,\eta)^T$。于是得到下面的最优化问题：<br>$$\begin{align}<br>\min_{w,b,\eta} \quad &amp; \frac{1}{2}||w||^2+\frac{1}{2}\eta^2 \\<br>s.t. \quad &amp; w\cdot x_i+\eta(y_i+\varepsilon)+b\ge 1,\quad i=1,2,\cdots,N \\<br>&amp; w\cdot x_j + \eta(y_j-\varepsilon)+b\le -1,\quad j=N+1,N+2,\cdots,2N<br>\end{align}$$</p>
+<p>&emsp;&emsp;若令：<br>$$z_i=\left\{<br>\begin{array}<br>&amp; 1, \qquad &amp; i=1,2,\cdots,N \\<br>-1, \qquad &amp; i=N+1,N+2,\cdots,2N<br>\end{array}<br>\right.$$</p>
+<p>&emsp;&emsp;则上述问题可以表述为：<br>$$\begin{align}<br>\min_{w,b,\eta} \quad &amp; \frac{1}{2}||w||^2+\frac{1}{2}\eta^2 \\<br>s.t. \quad &amp; z_i(w\cdot x_i+\eta(y_i+z_i\varepsilon)+b)\ge 1,\quad i=1,2,\cdots,2N<br>\end{align}$$</p>
+<p>&emsp;&emsp;求得该问题的最优解 $(w^*,\eta^*,b^*)$ 后，便可构造分化超平面 $w^*\cdot x+\eta^* y+b^*=0$，整理后便可得到 $y=w\cdot x+b$，其中 $\displaystyle w=-\frac{w^*}{\eta^*},b=-\frac{b^*}{\eta^*}$。</p>
+<p>&emsp;&emsp;该最优化问题的对偶问题为：<br>$$\begin{align}<br>\min_{\alpha} \quad &amp; \frac{1}{2}\sum^{2N}_{i=1}\sum^{2N}_{j=1}z_iz_j\alpha_i\alpha_j\big((x^T_i,y_i+z_i\varepsilon)^T\cdot(x^T_j,y_j+z_j\varepsilon)^T\big)-\sum^{2N}_{j=1}\alpha_j \\<br>s.t. \quad &amp; \sum^{2N}_{i=1}z_i\alpha_i=0, \\<br>&amp; \alpha_i \ge 0, \quad i=1,2,\cdots,2N<br>\end{align}$$</p>
+<h3 id="u63A8_u5E7F_u7684_u6700_u5927_u95F4_u9694_u56DE_u5F52_u6CD5"><a href="#u63A8_u5E7F_u7684_u6700_u5927_u95F4_u9694_u56DE_u5F52_u6CD5" class="headerlink" title="推广的最大间隔回归法"></a>推广的最大间隔回归法</h3><p>&emsp;&emsp;最优化问题为：<br>$$\begin{align}<br>\min_{w,b,\eta} \quad &amp; \frac{1}{2}||w||^2+\frac{1}{2}\eta^2+C\sum^{2N}_{i=1}\xi_i \\<br>s.t. \quad &amp; z_i(w\cdot x_i+\eta(y_i+z_i\varepsilon)+b)\ge 1-\xi_i,\quad i=1,2,\cdots,2N \\<br>&amp; \xi_i \ge 0, \quad i=1,2,\cdots,2N<br>\end{align}$$</p>
 </span>
       
     </div>
@@ -321,7 +297,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/分类/" rel="tag">#分类</a>
+            <a href="/tags/凸优化/" rel="tag">#凸优化</a>
+          
+            <a href="/tags/回归/" rel="tag">#回归</a>
+          
+            <a href="/tags/拉格朗日对偶性/" rel="tag">#拉格朗日对偶性</a>
           
             <a href="/tags/支持向量机/" rel="tag">#支持向量机</a>
           
@@ -332,16 +312,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/17/凸优化/" rel="next" title="凸优化">
-                <i class="fa fa-chevron-left"></i> 凸优化
+              <a href="/2015/12/17/支持向量分类机/" rel="next" title="支持向量分类机">
+                <i class="fa fa-chevron-left"></i> 支持向量分类机
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/17/拉格朗日对偶性/" rel="prev" title="拉格朗日对偶性">
-                拉格朗日对偶性 <i class="fa fa-chevron-right"></i>
+              <a href="/2015/12/17/检索模型与搜索排序/" rel="prev" title="检索模型与搜索排序">
+                检索模型与搜索排序 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -369,8 +349,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/12/17/序列最小最优化(SMO)算法/"
-           data-title="序列最小最优化(SMO)算法" data-url="http://yoursite.com/2015/12/17/序列最小最优化(SMO)算法/">
+      <div class="ds-thread" data-thread-key="2015/12/17/支持向量回归机/"
+           data-title="支持向量回归机" data-url="http://yoursite.com/2015/12/17/支持向量回归机/">
       </div>
     
   </div>
@@ -525,7 +505,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u7EBF_u6027_u53EF_u5206_u652F_u6301_u5411_u91CF_u673A_u548C_u786C_u95F4_u9694_u6700_u5927_u5316"><span class="nav-number">1.</span> <span class="nav-text">线性可分支持向量机和硬间隔最大化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u7EBF_u6027_u53EF_u5206_u652F_u6301_u5411_u91CF_u673A"><span class="nav-number">1.1.</span> <span class="nav-text">线性可分支持向量机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u51FD_u6570_u95F4_u9694_u548C_u51E0_u4F55_u95F4_u9694"><span class="nav-number">1.2.</span> <span class="nav-text">函数间隔和几何间隔</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u95F4_u9694_u6700_u5927_u5316"><span class="nav-number">1.3.</span> <span class="nav-text">间隔最大化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7EBF_u6027_u652F_u6301_u5411_u91CF_u673A_u4E0E_u8F6F_u95F4_u9694_u6700_u5927_u5316"><span class="nav-number">2.</span> <span class="nav-text">线性支持向量机与软间隔最大化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u7EBF_u6027_u652F_u6301_u5411_u91CF_u673A"><span class="nav-number">2.1.</span> <span class="nav-text">线性支持向量机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u652F_u6301_u5411_u91CF_u5206_u7C7B_u673A_28SVC_29"><span class="nav-number">3.</span> <span class="nav-text">支持向量分类机(SVC)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C-_u652F_u6301_u5411_u91CF_u673A_28c-SVC_29"><span class="nav-number">3.1.</span> <span class="nav-text">C-支持向量机(c-SVC)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v-_u652F_u6301_u5411_u91CF_u5206_u7C7B_u673A_28v-SVC_29"><span class="nav-number">3.2.</span> <span class="nav-text">v-支持向量分类机(v-SVC)</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u7EBF_u6027_u56DE_u5F52_u95EE_u9898_u4E0E_u786C__24_5Cvarepsilon_24-_u5E26_u8D85_u5E73_u9762"><span class="nav-number">1.</span> <span class="nav-text">线性回归问题与硬 $\varepsilon$-带超平面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u7EBF_u6027_u56DE_u5F52_u95EE_u9898"><span class="nav-number">1.1.</span> <span class="nav-text">线性回归问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u786C__24_5Cvarepsilon_24-_u5E26_u8D85_u5E73_u9762_u7684_u6784_u9020"><span class="nav-number">1.2.</span> <span class="nav-text">硬 $\varepsilon$-带超平面的构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u63A8_u5E7F_u7684_u6700_u5927_u95F4_u9694_u56DE_u5F52_u6CD5"><span class="nav-number">1.3.</span> <span class="nav-text">推广的最大间隔回归法</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

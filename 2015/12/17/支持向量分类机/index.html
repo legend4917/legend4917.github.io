@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="分类,支持向量机," />
+  <meta name="keywords" content="凸优化,分类,拉格朗日对偶性,支持向量机," />
 
 
 
@@ -53,15 +53,15 @@
 
 <meta name="description" content="&amp;emsp;&amp;emsp;支持向量机（support vector machine，SVM）是一种二类分类模型。它的基本模型定义是定义在特征空间上的间隔最大的线性分类器；支持向量机还包括核技巧，这使得它成为实质上的非线性分类器。支持向量机的学习策略就是间隔最大化，可形式化为一个解凸二次规划的问题。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="序列最小最优化(SMO)算法">
-<meta property="og:url" content="http://yoursite.com/2015/12/17/序列最小最优化(SMO)算法/index.html">
+<meta property="og:title" content="支持向量分类机">
+<meta property="og:url" content="http://yoursite.com/2015/12/17/支持向量分类机/index.html">
 <meta property="og:site_name" content="witness">
 <meta property="og:description" content="&amp;emsp;&amp;emsp;支持向量机（support vector machine，SVM）是一种二类分类模型。它的基本模型定义是定义在特征空间上的间隔最大的线性分类器；支持向量机还包括核技巧，这使得它成为实质上的非线性分类器。支持向量机的学习策略就是间隔最大化，可形式化为一个解凸二次规划的问题。">
 <meta property="og:image" content="http://yoursite.com/images/支持向量机-1.png">
 <meta property="og:image" content="http://yoursite.com/images/支持向量机-2.png">
-<meta property="og:updated_time" content="2015-12-15T12:00:20.000Z">
+<meta property="og:updated_time" content="2015-12-15T12:01:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="序列最小最优化(SMO)算法">
+<meta name="twitter:title" content="支持向量分类机">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;支持向量机（support vector machine，SVM）是一种二类分类模型。它的基本模型定义是定义在特征空间上的间隔最大的线性分类器；支持向量机还包括核技巧，这使得它成为实质上的非线性分类器。支持向量机的学习策略就是间隔最大化，可形式化为一个解凸二次规划的问题。">
 
 
@@ -74,7 +74,7 @@
   };
 </script>
 
-  <title> 序列最小最优化(SMO)算法 | witness </title>
+  <title> 支持向量分类机 | witness </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -224,7 +224,7 @@
             
             
               
-                序列最小最优化(SMO)算法
+                支持向量分类机
               
             
           </h1>
@@ -259,8 +259,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/17/序列最小最优化(SMO)算法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/17/序列最小最优化(SMO)算法/" itemprop="commentsCount"></span>
+                <a href="/2015/12/17/支持向量分类机/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/17/支持向量分类机/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -305,14 +305,16 @@
 <p>&emsp;&emsp;并可推导出对于一个分量$\ \alpha_j^*\ ,\ 0 &lt; \alpha_j^* &lt; C$，则原始问题的解$\ w^*,b^*\ $可按下式求得：<br>$$ \begin{align}<br>w^* &amp; = \sum_{i=1}^{N}\alpha_i^*y_ix_i \\<br>b^* &amp; = y_j - \sum_{i=1}^{N}\alpha_i^*y_i(x_i\cdot x_j)<br>\end{align} $$</p>
 <p><strong>支持向量</strong><br>&emsp;&emsp;在线性不可分的情况下，将对偶问题的解$\   \alpha^*=(\alpha_1^*,\alpha_2^*,\cdots,\alpha_N^*)^T\ $中对应于$\ \alpha_i^* &gt; 0\ $的样本点$\ (x_i,y_i)\ $的实例$\ x_i\ $称为支持向量（软间隔的支持向量）。这时的支持向量$\ x_i\ $或者在间隔边界上，或者在间隔边界与分离超平面之间，或者在分离超平面误分类一侧。<br>&emsp;&emsp;- $\ \alpha_i^* &lt; C\ $，则$\ \xi_i^* = 0\ $，支持变量$\ x_i^*\ $恰好落在间隔边界上；<br>&emsp;&emsp;- $\ \alpha_i^* = C\ $，则$\ 0 &lt; \xi_i^* &lt; 1\ $，则分类正确，支持变量$\ x_i^*\ $恰好落在间隔边界与分离超平面之间；<br>&emsp;&emsp;- $\ \alpha_i^* = C\ $，则$\ \xi_i^* = 1\ $，支持变量$\ x_i^*\ $在分离超平面上；<br>&emsp;&emsp;- $\ \alpha_i^* = C\ $，则$\ \xi_i^* &gt; 1\ $，支持变量$\ x_i^*\ $位于分离超平面误分类一侧；</p>
 <h2 id="u652F_u6301_u5411_u91CF_u5206_u7C7B_u673A_28SVC_29"><a href="#u652F_u6301_u5411_u91CF_u5206_u7C7B_u673A_28SVC_29" class="headerlink" title="支持向量分类机(SVC)"></a>支持向量分类机(SVC)</h2><p>&emsp;&emsp;前面介绍了两种处理线性不可分问题，即线性软间隔分类机（线性支持向量分类机）和非线性硬间隔分类机（可分支持向量分类机）。综合这两种方法，得到更常用的非线性软间隔分类机，主要有以下两种形式：</p>
-<h3 id="C-_u652F_u6301_u5411_u91CF_u673A_28c-SVC_29"><a href="#C-_u652F_u6301_u5411_u91CF_u673A_28c-SVC_29" class="headerlink" title="C-支持向量机(c-SVC)"></a>C-支持向量机(c-SVC)</h3><p>&emsp;&emsp;原始问题：<br>$$ \begin{align}<br>\min_{w,b,\xi} \quad &amp; \frac{1}{2}{||w||}^2 + C\sum_{i=1}^{N}\xi_i \\<br>s.t. \quad &amp; y_i(w\cdot x_i + b) \ge 1 - \xi_i, \quad i=1,2,\cdots,N \\<br>&amp; \xi_i \ge 0, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
+<h3 id="24C_24-_u652F_u6301_u5411_u91CF_u673A_28_24C_24-SVC_29"><a href="#24C_24-_u652F_u6301_u5411_u91CF_u673A_28_24C_24-SVC_29" class="headerlink" title="$C$-支持向量机($C$-SVC)"></a>$C$-支持向量机($C$-SVC)</h3><p>&emsp;&emsp;原始问题：<br>$$ \begin{align}<br>\min_{w,b,\xi} \quad &amp; \frac{1}{2}{||w||}^2 + C\sum_{i=1}^{N}\xi_i \\<br>s.t. \quad &amp; y_i(w\cdot x_i + b) \ge 1 - \xi_i, \quad i=1,2,\cdots,N \\<br>&amp; \xi_i \ge 0, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
 <p>&emsp;&emsp;对偶问题：<br>$$ \begin{align}<br>\min_\alpha \quad &amp; \frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i\alpha_jy_iy_jK(x_i,x_j)-\sum_{i=1}^{N}\alpha_i \\<br>s.t. \quad &amp; \sum_{i=1}^{N}\alpha_iy_i=0 \\<br>&amp; 0 \le \alpha_i \le C, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
 <p>&emsp;&emsp;<strong>算法：</strong><br>&emsp;&emsp;（1）已知训练数据集$\ T=\{(x_1,y_1),(x_2,y_2),\cdots,(x_N,y_N)\}$，其中，$x_i\in\mathcal{X}= R^n,y\in\mathcal{Y}=\{-1,1\},\ i=1,2,\cdots,N $<br>&emsp;&emsp;（2）选取适当地核函数$\ K(x,x^{‘})\ $和适当的参数$\ C\ $，构造并求解优化问题：<br>$$\begin{align}<br>\min_\alpha \quad &amp; \frac{1}{2}\sum^N_{i=1}\sum^N_{j=1}y_iy_j\alpha_i\alpha_jK(x_i,x_j)-\sum^N_{j=1}\alpha_j \\<br>s.t. \quad &amp; \sum^N_{i=1}y_i\alpha_i=0 \\<br>&amp; 0 \le \alpha_i \le C, \quad i=1,2,\cdots,N<br>\end{align}$$</p>
 <p>&emsp;&emsp;的最优解$\ \alpha^*=(\alpha_1^*,\cdots,\alpha_n^*)$；<br>&emsp;&emsp;（3）选取$\ \alpha^*\ $的一个分量$\ 0&lt;\alpha_j^* &lt; C$，并据此计算阀值$\ b^*=y_j-\sum^N_{i=1}y_i\alpha_i^*K(x_i,x_j)$<br>&emsp;&emsp;（4）构造决策函数$\displaystyle\ f(x)=sgn\Big(\sum^N_{i=1}\alpha_i^*y_iK(x,x_i)+b^*\Big)。$</p>
-<h3 id="v-_u652F_u6301_u5411_u91CF_u5206_u7C7B_u673A_28v-SVC_29"><a href="#v-_u652F_u6301_u5411_u91CF_u5206_u7C7B_u673A_28v-SVC_29" class="headerlink" title="v-支持向量分类机(v-SVC)"></a>v-支持向量分类机(v-SVC)</h3><p>&emsp;&emsp;原始问题：<br>$$ \begin{align}<br>\min_{w,b,\xi,\rho} \quad &amp; \frac{1}{2}{||w||}^2 - v\rho + \frac{1}{N}\sum_{i=1}^{N}\xi_i \\<br>s.t. \quad &amp; y_i(w\cdot x_i + b) \ge \rho - \xi_i, \quad i=1,2,\cdots,N \\<br>&amp; \xi_i \ge 0, \quad i=1,2,\cdots,N \\<br>&amp; \rho \ge 0<br>\end{align} $$</p>
+<h3 id="24v_24-_u652F_u6301_u5411_u91CF_u5206_u7C7B_u673A_28_24v_24-SVC_29"><a href="#24v_24-_u652F_u6301_u5411_u91CF_u5206_u7C7B_u673A_28_24v_24-SVC_29" class="headerlink" title="$v$-支持向量分类机($v$-SVC)"></a>$v$-支持向量分类机($v$-SVC)</h3><p>&emsp;&emsp;原始问题：<br>$$ \begin{align}<br>\min_{w,b,\xi,\rho} \quad &amp; \frac{1}{2}{||w||}^2 - v\rho + \frac{1}{N}\sum_{i=1}^{N}\xi_i \\<br>s.t. \quad &amp; y_i(w\cdot x_i + b) \ge \rho - \xi_i, \quad i=1,2,\cdots,N \\<br>&amp; \xi_i \ge 0, \quad i=1,2,\cdots,N \\<br>&amp; \rho \ge 0<br>\end{align} $$</p>
 <p>&emsp;&emsp;对偶问题：<br>$$ \begin{align}<br>\min_\alpha \quad &amp; \frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i\alpha_jy_iy_jK(x_i,x_j)-\sum_{i=1}^{N}\alpha_i \\<br>s.t. \quad &amp; \sum_{i=1}^{N}\alpha_iy_i=0 \\<br>&amp; 0 \le \alpha_i \le \frac{1}{N}, \quad i=1,2,\cdots,N \\<br>&amp; \sum^N_{i=1}\alpha_i \ge v<br>\end{align} $$</p>
-<p>&emsp;&emsp;<strong>算法：</strong><br>&emsp;&emsp;（1）已知训练数据集$\ T=\{(x_1,y_1),(x_2,y_2),\cdots,(x_N,y_N)\}$，其中，$x_i\in\mathcal{X}= R^n,y\in\mathcal{Y}=\{-1,1\},\ i=1,2,\cdots,N $<br>&emsp;&emsp;（2）选取适当地核函数$\ K(x,x^{‘})\ $和适当的参数$\ C\ $，构造并求解优化问题：<br>$$ \begin{align}<br>\min_\alpha \quad &amp; \frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i\alpha_jy_iy_jK(x_i,x_j)-\sum_{i=1}^{N}\alpha_i \\<br>s.t. \quad &amp; \sum_{i=1}^{N}\alpha_iy_i=0 \\<br>&amp; 0 \le \alpha<em>i \le \frac{1}{N}, \quad i=1,2,\cdots,N \\<br>&amp; \sum^N\</em>{i=1}\alpha_i \ge v<br>\end{align} $$</p>
+<p>&emsp;&emsp;<strong>算法：</strong><br>&emsp;&emsp;（1）已知训练数据集$\ T=\{(x_1,y_1),(x_2,y_2),\cdots,(x_N,y_N)\}$，其中，$x_i\in\mathcal{X}= R^n,y\in\mathcal{Y}=\{-1,1\},\ i=1,2,\cdots,N $<br>&emsp;&emsp;（2）选取适当地核函数$\ K(x,x^{‘})\ $和适当的参数$\ v\ $，构造并求解优化问题：<br>$$ \begin{align}<br>\min_\alpha \quad &amp; \frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i\alpha_jy_iy_jK(x_i,x_j)-\sum_{i=1}^{N}\alpha_i \\<br>s.t. \quad &amp; \sum_{i=1}^{N}\alpha_iy_i=0 \\<br>&amp; 0 \le \alpha_i \le \frac{1}{N}, \quad i=1,2,\cdots,N \\<br>&amp; \sum^N_{i=1}\alpha_i \ge v<br>\end{align} $$</p>
 <p>&emsp;&emsp;的最优解$\ \alpha^*=(\alpha_1^*,\cdots,\alpha_n^*)$；<br>&emsp;&emsp;（3）选取$\ j\in S_+=\{i\ |\ \alpha_i^*\in(0,1/N),y_i=1\},k\in S_-=\{i\ |\ \alpha_i^*\in(0,1/N),y_i=1\},\ $的一个分量$\ 0&lt;\alpha_j^* &lt; C$，并据此计算阀值:<br>$$\ b^*=-\frac{1}{2}\sum^N_{i=1}y_i\alpha_i^*(K(x_i,x_j)+K(x_i,x_k))$$<br>&emsp;&emsp;（4）构造决策函数$\displaystyle\ f(x)=sgn\Big(\sum^N_{i=1}\alpha_i^*y_iK(x,x_i)+b^*\Big)。$</p>
+<p>&emsp;&emsp;<strong>参数$\ v\ $的意义：</strong><br>&emsp;&emsp;间隔错误样本点的定义为：如果$\ \xi_i^*&gt;0$，则对应的样本点$\ (x_i,y_i)\ $为间隔错误样本点。由KKT条件可知间隔错误样本点$\ (x_i,y_i)\ $满足$\ y_i(w^*\cdot x_i+b)=\rho^* - \xi_i^*$，也即$\ y_i(w^*\cdot x_i+b)&lt;\rho^*\ $，相应地两个间隔超平面为：<br>$$(w^*\cdot x)+b^*=\pm\rho^*$$</p>
+<p>&emsp;&emsp;若记间隔错误样本点的个数为$\ p$，支持向量的个数为$\ q$，则有：$p/N \le v \le q/N$。<br>&emsp;&emsp;另外，在一定条件下，当样本点个数 $N\rightarrow\infty$ 时，$v$ 以1的概率渐近于支持向量个数和样本点个数之比。为 $v$ 值的选取提供了一个依据。</p>
 </span>
       
     </div>
@@ -321,7 +323,11 @@
       
         <div class="post-tags">
           
+            <a href="/tags/凸优化/" rel="tag">#凸优化</a>
+          
             <a href="/tags/分类/" rel="tag">#分类</a>
+          
+            <a href="/tags/拉格朗日对偶性/" rel="tag">#拉格朗日对偶性</a>
           
             <a href="/tags/支持向量机/" rel="tag">#支持向量机</a>
           
@@ -332,16 +338,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/17/凸优化/" rel="next" title="凸优化">
-                <i class="fa fa-chevron-left"></i> 凸优化
+              <a href="/2015/12/17/拉格朗日对偶性/" rel="next" title="拉格朗日对偶性">
+                <i class="fa fa-chevron-left"></i> 拉格朗日对偶性
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/17/拉格朗日对偶性/" rel="prev" title="拉格朗日对偶性">
-                拉格朗日对偶性 <i class="fa fa-chevron-right"></i>
+              <a href="/2015/12/17/支持向量回归机/" rel="prev" title="支持向量回归机">
+                支持向量回归机 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -369,8 +375,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/12/17/序列最小最优化(SMO)算法/"
-           data-title="序列最小最优化(SMO)算法" data-url="http://yoursite.com/2015/12/17/序列最小最优化(SMO)算法/">
+      <div class="ds-thread" data-thread-key="2015/12/17/支持向量分类机/"
+           data-title="支持向量分类机" data-url="http://yoursite.com/2015/12/17/支持向量分类机/">
       </div>
     
   </div>
@@ -525,7 +531,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u7EBF_u6027_u53EF_u5206_u652F_u6301_u5411_u91CF_u673A_u548C_u786C_u95F4_u9694_u6700_u5927_u5316"><span class="nav-number">1.</span> <span class="nav-text">线性可分支持向量机和硬间隔最大化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u7EBF_u6027_u53EF_u5206_u652F_u6301_u5411_u91CF_u673A"><span class="nav-number">1.1.</span> <span class="nav-text">线性可分支持向量机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u51FD_u6570_u95F4_u9694_u548C_u51E0_u4F55_u95F4_u9694"><span class="nav-number">1.2.</span> <span class="nav-text">函数间隔和几何间隔</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u95F4_u9694_u6700_u5927_u5316"><span class="nav-number">1.3.</span> <span class="nav-text">间隔最大化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7EBF_u6027_u652F_u6301_u5411_u91CF_u673A_u4E0E_u8F6F_u95F4_u9694_u6700_u5927_u5316"><span class="nav-number">2.</span> <span class="nav-text">线性支持向量机与软间隔最大化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u7EBF_u6027_u652F_u6301_u5411_u91CF_u673A"><span class="nav-number">2.1.</span> <span class="nav-text">线性支持向量机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u652F_u6301_u5411_u91CF_u5206_u7C7B_u673A_28SVC_29"><span class="nav-number">3.</span> <span class="nav-text">支持向量分类机(SVC)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C-_u652F_u6301_u5411_u91CF_u673A_28c-SVC_29"><span class="nav-number">3.1.</span> <span class="nav-text">C-支持向量机(c-SVC)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v-_u652F_u6301_u5411_u91CF_u5206_u7C7B_u673A_28v-SVC_29"><span class="nav-number">3.2.</span> <span class="nav-text">v-支持向量分类机(v-SVC)</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u7EBF_u6027_u53EF_u5206_u652F_u6301_u5411_u91CF_u673A_u548C_u786C_u95F4_u9694_u6700_u5927_u5316"><span class="nav-number">1.</span> <span class="nav-text">线性可分支持向量机和硬间隔最大化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u7EBF_u6027_u53EF_u5206_u652F_u6301_u5411_u91CF_u673A"><span class="nav-number">1.1.</span> <span class="nav-text">线性可分支持向量机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u51FD_u6570_u95F4_u9694_u548C_u51E0_u4F55_u95F4_u9694"><span class="nav-number">1.2.</span> <span class="nav-text">函数间隔和几何间隔</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u95F4_u9694_u6700_u5927_u5316"><span class="nav-number">1.3.</span> <span class="nav-text">间隔最大化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7EBF_u6027_u652F_u6301_u5411_u91CF_u673A_u4E0E_u8F6F_u95F4_u9694_u6700_u5927_u5316"><span class="nav-number">2.</span> <span class="nav-text">线性支持向量机与软间隔最大化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u7EBF_u6027_u652F_u6301_u5411_u91CF_u673A"><span class="nav-number">2.1.</span> <span class="nav-text">线性支持向量机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u652F_u6301_u5411_u91CF_u5206_u7C7B_u673A_28SVC_29"><span class="nav-number">3.</span> <span class="nav-text">支持向量分类机(SVC)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#24C_24-_u652F_u6301_u5411_u91CF_u673A_28_24C_24-SVC_29"><span class="nav-number">3.1.</span> <span class="nav-text">$C$-支持向量机($C$-SVC)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24v_24-_u652F_u6301_u5411_u91CF_u5206_u7C7B_u673A_28_24v_24-SVC_29"><span class="nav-number">3.2.</span> <span class="nav-text">$v$-支持向量分类机($v$-SVC)</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

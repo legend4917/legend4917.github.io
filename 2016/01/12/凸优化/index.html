@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="凸优化,回归,拉格朗日对偶性,支持向量机," />
+  <meta name="keywords" content="凸优化," />
 
 
 
@@ -51,16 +51,16 @@
 
 
 
-<meta name="description" content="&amp;emsp;&amp;emsp;回归问题与分类问题相似，它也是一个已知的训练集，设此训练集可表示为：$$T=\{(x_1,y_1,\cdots,(x_n,y_n)\}\in (\mathcal{X\times Y})^n$$&amp;emsp;&amp;emsp;其中 $x_i\in\mathcal{X}=R^n$ 是输入指标向量，或称输入或模式，$y_i\in\mathcal{Y}=R$ 是输出指标，或称输出。与分类问">
+<meta name="description" content="&amp;emsp;&amp;emsp;研究凸优化问题是因为其有一套非常完备的求解算法，如果将某个优化问题确认或者转化为凸优化问题，那么能够快速给出最优解。在MATLAB软件里面有相应的软件包，可以用来学习。也可以利用其他的开源的计算软件，利用现成的软件包来解决凸优化问题。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="支持向量回归机">
-<meta property="og:url" content="http://yoursite.com/2015/12/17/支持向量回归机/index.html">
+<meta property="og:title" content="凸优化">
+<meta property="og:url" content="http://yoursite.com/2016/01/12/凸优化/index.html">
 <meta property="og:site_name" content="witness">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;回归问题与分类问题相似，它也是一个已知的训练集，设此训练集可表示为：$$T=\{(x_1,y_1,\cdots,(x_n,y_n)\}\in (\mathcal{X\times Y})^n$$&amp;emsp;&amp;emsp;其中 $x_i\in\mathcal{X}=R^n$ 是输入指标向量，或称输入或模式，$y_i\in\mathcal{Y}=R$ 是输出指标，或称输出。与分类问">
-<meta property="og:updated_time" content="2015-12-15T12:02:12.000Z">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;研究凸优化问题是因为其有一套非常完备的求解算法，如果将某个优化问题确认或者转化为凸优化问题，那么能够快速给出最优解。在MATLAB软件里面有相应的软件包，可以用来学习。也可以利用其他的开源的计算软件，利用现成的软件包来解决凸优化问题。">
+<meta property="og:updated_time" content="2016-01-12T05:27:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="支持向量回归机">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;回归问题与分类问题相似，它也是一个已知的训练集，设此训练集可表示为：$$T=\{(x_1,y_1,\cdots,(x_n,y_n)\}\in (\mathcal{X\times Y})^n$$&amp;emsp;&amp;emsp;其中 $x_i\in\mathcal{X}=R^n$ 是输入指标向量，或称输入或模式，$y_i\in\mathcal{Y}=R$ 是输出指标，或称输出。与分类问">
+<meta name="twitter:title" content="凸优化">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;研究凸优化问题是因为其有一套非常完备的求解算法，如果将某个优化问题确认或者转化为凸优化问题，那么能够快速给出最优解。在MATLAB软件里面有相应的软件包，可以用来学习。也可以利用其他的开源的计算软件，利用现成的软件包来解决凸优化问题。">
 
 
 
@@ -72,7 +72,7 @@
   };
 </script>
 
-  <title> 支持向量回归机 | witness </title>
+  <title> 凸优化 | witness </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -222,7 +222,7 @@
             
             
               
-                支持向量回归机
+                凸优化
               
             
           </h1>
@@ -231,8 +231,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-12-17T17:51:23+08:00" content="2015-12-17">
-              2015-12-17
+            <time itemprop="dateCreated" datetime="2016-01-12T13:27:23+08:00" content="2016-01-12">
+              2016-01-12
             </time>
           </span>
 
@@ -241,8 +241,8 @@
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/机器学习/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习</span>
+                  <a href="/categories/数学/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
                   </a>
                 </span>
 
@@ -257,8 +257,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/17/支持向量回归机/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/17/支持向量回归机/" itemprop="commentsCount"></span>
+                <a href="/2016/01/12/凸优化/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/12/凸优化/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -277,18 +277,12 @@
       
 
       
-        <span itemprop="articleBody"><p>&emsp;&emsp;回归问题与分类问题相似，它也是一个已知的训练集，设此训练集可表示为：<br>$$T=\{(x_1,y_1,\cdots,(x_n,y_n)\}\in (\mathcal{X\times Y})^n$$<br>&emsp;&emsp;其中 $x_i\in\mathcal{X}=R^n$ 是输入指标向量，或称输入或模式，$y_i\in\mathcal{Y}=R$ 是输出指标，或称输出。与分类问题不同的是，这里的 $y_i$ 并不限定取 -1 或1，而是可取任意实数。回归学习需要解决的是，给定一个新的输入模式，根据训练集 $T$ 推断它所对应的输出 $y$ 是多少。<br><a id="more"></a></p>
-<h2 id="u7EBF_u6027_u56DE_u5F52_u95EE_u9898_u4E0E_u786C__24_5Cvarepsilon_24-_u5E26_u8D85_u5E73_u9762"><a href="#u7EBF_u6027_u56DE_u5F52_u95EE_u9898_u4E0E_u786C__24_5Cvarepsilon_24-_u5E26_u8D85_u5E73_u9762" class="headerlink" title="线性回归问题与硬 $\varepsilon$-带超平面"></a>线性回归问题与硬 $\varepsilon$-带超平面</h2><h3 id="u7EBF_u6027_u56DE_u5F52_u95EE_u9898"><a href="#u7EBF_u6027_u56DE_u5F52_u95EE_u9898" class="headerlink" title="线性回归问题"></a>线性回归问题</h3><p>&emsp;&emsp;线性回归问题就是寻找函数 $f(x)$ 为线性函数：<br>$$y=f(x)=w\cdot x+b$$</p>
-<p>&emsp;&emsp;这个线性函数对应与空间 $R^n\times R$ 上的一个超平面。所以从几何上看，线性回归问题就是在给定训练集的条件下，寻找一个 $n+1$ 维空间 $R^{n+1}$ 上的超平面。<br>&emsp;&emsp;<strong>超平面的 $\varepsilon$-带</strong>：设 $\varepsilon&gt;0$，一个超平面$ y=w\cdot x+b $   的 $\varepsilon$-带是指该超平面沿 $y$ 轴依次上下平移扫过的区域。<br>&emsp;&emsp;<strong>硬 $\varepsilon$-带超平面</strong>：对于训练集 $T$，如果超平面 $y=w\cdot x+b$ 满足：<br>$$-\varepsilon\le y_i-(w\cdot x_i+b)\le \varepsilon$$</p>
-<p>&emsp;&emsp;则称该超平面为硬 $\varepsilon$-带超平面。<br>&emsp;&emsp;从给定的训练集 $T$ 出发构造出两类点，具体做法是将训练集 $T$ 中每个训练点的 $y$ 值分别增加 $\varepsilon$ 和减少 $\varepsilon$，得到正类点和负类点两个集合，分别记它们为 $D^+$ 和 $D^-$，即：<br>$$D^+=\{(x^T_i,y_i+\varepsilon),\ i=1,2,\cdots,N\} \\<br>D^-=\{(x^T_i,y_i-\varepsilon),\ i=1,2,\cdots,N\}$$</p>
-<p>&emsp;&emsp;对于给定的训练集 $T$ 和 $\varepsilon&gt;0$，则一个超平面 $y=w\cdot x+b$ 是硬 $\varepsilon$-硬带超平面的充要条件是 $D^+$ 凸壳和 $D^-$ 凸壳分别位于该超平面的两侧。当 $\varepsilon\ge \varepsilon_{min}$ 时，硬 $\varepsilon$-硬带超平面等价于分离集合 $D^+$ 和$D^-$。这样就将回归问题转化为集合 $D^+\cup D^-$ 的分类问题。</p>
-<h3 id="u786C__24_5Cvarepsilon_24-_u5E26_u8D85_u5E73_u9762_u7684_u6784_u9020"><a href="#u786C__24_5Cvarepsilon_24-_u5E26_u8D85_u5E73_u9762_u7684_u6784_u9020" class="headerlink" title="硬 $\varepsilon$-带超平面的构造"></a>硬 $\varepsilon$-带超平面的构造</h3><p>&emsp;&emsp;首先将训练集变形。令 $(x^T_{N+i},y_{N+i}-\varepsilon)^T=(x^T_i,y_i-\varepsilon)$，则训练集可表示为：<br>$$\{((x^T_1,y_1+\varepsilon);1),\cdots,((x^T_N,y_N+\varepsilon);1),((x^T_{N+1},y_{N+1}-\varepsilon);-1),\cdots,((x^T_{2N},y_{2N}-\varepsilon);-1)\}$$</p>
-<p>&emsp;&emsp;这里的 $w$ 比分类问题中的 $w$ 多了一个对应于 $y$ 的分量，即回归问题的权分类应为 $(w^T,\eta)^T$。于是得到下面的最优化问题：<br>$$\begin{align}<br>\min_{w,b,\eta} \quad &amp; \frac{1}{2}||w||^2+\frac{1}{2}\eta^2 \\<br>s.t. \quad &amp; w\cdot x_i+\eta(y_i+\varepsilon)+b\ge 1,\quad i=1,2,\cdots,N \\<br>&amp; w\cdot x_j + \eta(y_j-\varepsilon)+b\le -1,\quad j=N+1,N+2,\cdots,2N<br>\end{align}$$</p>
-<p>&emsp;&emsp;若令：<br>$$z_i=\left\{<br>\begin{array}<br>&amp; 1, \qquad &amp; i=1,2,\cdots,N \\<br>-1, \qquad &amp; i=N+1,N+2,\cdots,2N<br>\end{array}<br>\right.$$</p>
-<p>&emsp;&emsp;则上述问题可以表述为：<br>$$\begin{align}<br>\min_{w,b,\eta} \quad &amp; \frac{1}{2}||w||^2+\frac{1}{2}\eta^2 \\<br>s.t. \quad &amp; z_i(w\cdot x_i+\eta(y_i+z_i\varepsilon)+b)\ge 1,\quad i=1,2,\cdots,2N<br>\end{align}$$</p>
-<p>&emsp;&emsp;求得该问题的最优解 $(w^*,\eta^*,b^*)$ 后，便可构造分化超平面 $w^*\cdot x+\eta^* y+b^*=0$，整理后便可得到 $y=w\cdot x+b$，其中 $\displaystyle w=-\frac{w^*}{\eta^*},b=-\frac{b^*}{\eta^*}$。</p>
-<p>&emsp;&emsp;该最优化问题的对偶问题为：<br>$$\begin{align}<br>\min_{\alpha} \quad &amp; \frac{1}{2}\sum^{2N}_{i=1}\sum^{2N}_{j=1}z_iz_j\alpha_i\alpha_j\big((x^T_i,y_i+z_i\varepsilon)^T\cdot(x^T_j,y_j+z_j\varepsilon)^T\big)-\sum^{2N}_{j=1}\alpha_j \\<br>s.t. \quad &amp; \sum^{2N}_{i=1}z_i\alpha_i=0, \\<br>&amp; \alpha_i \ge 0, \quad i=1,2,\cdots,2N<br>\end{align}$$</p>
-<h3 id="u63A8_u5E7F_u7684_u6700_u5927_u95F4_u9694_u56DE_u5F52_u6CD5"><a href="#u63A8_u5E7F_u7684_u6700_u5927_u95F4_u9694_u56DE_u5F52_u6CD5" class="headerlink" title="推广的最大间隔回归法"></a>推广的最大间隔回归法</h3><p>&emsp;&emsp;最优化问题为：<br>$$\begin{align}<br>\min_{w,b,\eta} \quad &amp; \frac{1}{2}||w||^2+\frac{1}{2}\eta^2+C\sum^{2N}_{i=1}\xi_i \\<br>s.t. \quad &amp; z_i(w\cdot x_i+\eta(y_i+z_i\varepsilon)+b)\ge 1-\xi_i,\quad i=1,2,\cdots,2N \\<br>&amp; \xi_i \ge 0, \quad i=1,2,\cdots,2N<br>\end{align}$$</p>
+        <span itemprop="articleBody"><p>&emsp;&emsp;研究凸优化问题是因为其有一套非常完备的求解算法，如果将某个优化问题确认或者转化为凸优化问题，那么能够快速给出最优解。在MATLAB软件里面有相应的软件包，可以用来学习。也可以利用其他的开源的计算软件，利用现成的软件包来解决凸优化问题。<br><a id="more"></a></p>
+<h2 id="u51F8_u4F18_u5316_u95EE_u9898"><a href="#u51F8_u4F18_u5316_u95EE_u9898" class="headerlink" title="凸优化问题"></a>凸优化问题</h2><p>&emsp;&emsp;凸优化问题的标准形式为：<br>$$\begin{align}<br>minimize \quad &amp; f_0(x) \\<br>subject\ to \quad &amp; f_i(x)\le 0, \quad i=1,2,\cdots,m \\<br>&amp; a_i^Tx=b_i, \quad i=1,2,\cdots, p<br>\end{align}$$<br>&emsp;&emsp;其中，<strong>目标函数必须是凸函数，不等式约束函数必须是凸函数，等式约束函数必须是仿射函数</strong>。由约束条件得到的定义域为凸集，即凸优化问题是在凸集上最小化目标凸函数。<br>&emsp;&emsp;凸优化问题的一个十分重要的性质是：<strong>凸优化问题的任何局部最优解也是全局最优解</strong>。</p>
+<h2 id="u7EBF_u6027_u4F18_u5316_u95EE_u9898_28LP_29"><a href="#u7EBF_u6027_u4F18_u5316_u95EE_u9898_28LP_29" class="headerlink" title="线性优化问题(LP)"></a>线性优化问题(LP)</h2><p>&emsp;&emsp;线性优化的一般形式为：<br>$$\begin{align}<br>minimize \quad &amp; c^Tx+d \\<br>subject\ to \quad &amp; Gx\le h,  \\<br>&amp; Ax=b,<br>\end{align}$$<br>&emsp;&emsp;其目标函数和约束函数都是仿射函数。可行集是一个超平面，也即LP问题是在约束超平面上最小化目标函数。<br>&emsp;&emsp;<strong>标准形式的线性规划问题(standard form LP)</strong><br>$$\begin{align}<br>minimize \quad &amp; c^Tx \\<br>subject\ to \quad &amp; Ax=b,  \\<br>&amp; x\ge 0<br>\end{align}$$<br>&emsp;&emsp;<strong>不等式形式的线性规划问题(inequality form LP)</strong><br>$$\begin{align}<br>minimize \quad &amp; c^Tx \\<br>subject\ to \quad &amp; Ax\le b,<br>\end{align}$$</p>
+<h2 id="u4E8C_u6B21_u4F18_u5316_u95EE_u9898"><a href="#u4E8C_u6B21_u4F18_u5316_u95EE_u9898" class="headerlink" title="二次优化问题"></a>二次优化问题</h2><h3 id="u51F8_u4E8C_u6B21_u89C4_u5212_u95EE_u9898_28QP_29"><a href="#u51F8_u4E8C_u6B21_u89C4_u5212_u95EE_u9898_28QP_29" class="headerlink" title="凸二次规划问题(QP)"></a>凸二次规划问题(QP)</h3><p>&emsp;&emsp;凸二次规划的形式为：<br>$$\begin{align}<br>minimize \quad &amp; 1/2x^TPx+q^Tx+r \\<br>subject\ to \quad &amp; Gx\le h, \\<br>&amp; Ax=b,<br>\end{align}$$<br>&emsp;&emsp;其中 $P$ 是半正定矩阵，目标函数是凸二次函数，约束函数都是仿射函数。凸二次规划是在超平面上最小化目标函数。</p>
+<h3 id="u4E8C_u6B21_u7EA6_u675F_u51F8_u4E8C_u6B21_u89C4_u5212_u95EE_u9898_28QCQP_29"><a href="#u4E8C_u6B21_u7EA6_u675F_u51F8_u4E8C_u6B21_u89C4_u5212_u95EE_u9898_28QCQP_29" class="headerlink" title="二次约束凸二次规划问题(QCQP)"></a>二次约束凸二次规划问题(QCQP)</h3><p>&emsp;&emsp;QCQP的形式为：<br>$$\begin{align}<br>minimize \quad &amp; (1/2)x^TP_0x+q_0^Tx+r_0 \\<br>subject\ to \quad &amp; (1/2)x^TP_ix+q_i^Tx+r_i \le 0, \quad i=1,2,\cdots,m \\<br>&amp; Ax=b,<br>\end{align}$$</p>
+<h2 id="u4E8C_u9636_u9525_u89C4_u5212_28SOCP_29"><a href="#u4E8C_u9636_u9525_u89C4_u5212_28SOCP_29" class="headerlink" title="二阶锥规划(SOCP)"></a>二阶锥规划(SOCP)</h2><p>&emsp;&emsp;二阶锥规划(SOCP)的形式如下：<br>$$\begin{align}<br>minimize \quad &amp; f^Tx\\<br>subject\ to \quad &amp; |A_ix+b_i|_2\le c_i^Tx+d_i, \quad i=1,2,\cdots,m \\<br>&amp; Fx=g,<br>\end{align}$$<br>&emsp;&emsp;其中约束形式：$|Ax+b|_2\le c^Tx+d$ 称为二阶锥约束。如果 $c_i=0,i=1,2,\cdots,m$ ，那么SOCP问题与QCQP问题等价；如果 $A_i=0,i=1,2,\cdots,m$ ，那么SOCP问题与LP问题等价。</p>
 </span>
       
     </div>
@@ -299,12 +293,6 @@
           
             <a href="/tags/凸优化/" rel="tag">#凸优化</a>
           
-            <a href="/tags/回归/" rel="tag">#回归</a>
-          
-            <a href="/tags/拉格朗日对偶性/" rel="tag">#拉格朗日对偶性</a>
-          
-            <a href="/tags/支持向量机/" rel="tag">#支持向量机</a>
-          
         </div>
       
 
@@ -312,16 +300,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/17/支持向量分类机/" rel="next" title="支持向量分类机">
-                <i class="fa fa-chevron-left"></i> 支持向量分类机
+              <a href="/2015/12/17/K-均值聚类算法/" rel="next" title="K-均值聚类算法">
+                <i class="fa fa-chevron-left"></i> K-均值聚类算法
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/17/检索模型与搜索排序/" rel="prev" title="检索模型与搜索排序">
-                检索模型与搜索排序 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/01/12/单纯形方法/" rel="prev" title="单纯形方法">
+                单纯形方法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -349,8 +337,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/12/17/支持向量回归机/"
-           data-title="支持向量回归机" data-url="http://yoursite.com/2015/12/17/支持向量回归机/">
+      <div class="ds-thread" data-thread-key="2016/01/12/凸优化/"
+           data-title="凸优化" data-url="http://yoursite.com/2016/01/12/凸优化/">
       </div>
     
   </div>
@@ -505,7 +493,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u7EBF_u6027_u56DE_u5F52_u95EE_u9898_u4E0E_u786C__24_5Cvarepsilon_24-_u5E26_u8D85_u5E73_u9762"><span class="nav-number">1.</span> <span class="nav-text">线性回归问题与硬 $\varepsilon$-带超平面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u7EBF_u6027_u56DE_u5F52_u95EE_u9898"><span class="nav-number">1.1.</span> <span class="nav-text">线性回归问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u786C__24_5Cvarepsilon_24-_u5E26_u8D85_u5E73_u9762_u7684_u6784_u9020"><span class="nav-number">1.2.</span> <span class="nav-text">硬 $\varepsilon$-带超平面的构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u63A8_u5E7F_u7684_u6700_u5927_u95F4_u9694_u56DE_u5F52_u6CD5"><span class="nav-number">1.3.</span> <span class="nav-text">推广的最大间隔回归法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u51F8_u4F18_u5316_u95EE_u9898"><span class="nav-number">1.</span> <span class="nav-text">凸优化问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7EBF_u6027_u4F18_u5316_u95EE_u9898_28LP_29"><span class="nav-number">2.</span> <span class="nav-text">线性优化问题(LP)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4E8C_u6B21_u4F18_u5316_u95EE_u9898"><span class="nav-number">3.</span> <span class="nav-text">二次优化问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u51F8_u4E8C_u6B21_u89C4_u5212_u95EE_u9898_28QP_29"><span class="nav-number">3.1.</span> <span class="nav-text">凸二次规划问题(QP)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u4E8C_u6B21_u7EA6_u675F_u51F8_u4E8C_u6B21_u89C4_u5212_u95EE_u9898_28QCQP_29"><span class="nav-number">3.2.</span> <span class="nav-text">二次约束凸二次规划问题(QCQP)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4E8C_u9636_u9525_u89C4_u5212_28SOCP_29"><span class="nav-number">4.</span> <span class="nav-text">二阶锥规划(SOCP)</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

@@ -35,7 +35,7 @@
 <link href="/index.html/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="凸优化,拉格朗日对偶性," />
+  <meta name="keywords" content="割平面法,整数规划," />
 
 
 
@@ -51,16 +51,28 @@
 
 
 
-<meta name="description" content="&amp;emsp;&amp;emsp;拉格朗日对偶性在数学优化中扮演着非常重要的角色，本章介绍从优化问题到构造拉格朗日函数，以及其对偶函数的定义，让后分析了其弱对偶性和强对偶性的&amp;nbsp;Slater&amp;nbsp;条件，最后着重介绍了&amp;nbsp;KKT&amp;nbsp;最优性条件。">
+<meta name="description" content="整数规划如果除了目标函数和约束函数是线性函数以外，还要求决策变量取整数值，那么这类问题就是线性整数规划，简称为整数规划。其中，如果要求所有变量都要取整数值，则称纯整数规划；如果部分变量取整数值，则称混合整数规划；如果要求变量取 0 或 1，则称0-1规划。一般表示为：
+$$\begin{aligned}
+\min \quad &amp; cx \\
+s.t. \quad &amp; Ax=b \\
+&amp; x \ge">
 <meta property="og:type" content="article">
-<meta property="og:title" content="拉格朗日对偶性">
-<meta property="og:url" content="http://yoursite.com/2015/12/17/拉格朗日对偶性/index.html">
+<meta property="og:title" content="整数规划">
+<meta property="og:url" content="http://yoursite.com/2016/01/12/整数规划/index.html">
 <meta property="og:site_name" content="witness">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;拉格朗日对偶性在数学优化中扮演着非常重要的角色，本章介绍从优化问题到构造拉格朗日函数，以及其对偶函数的定义，让后分析了其弱对偶性和强对偶性的&amp;nbsp;Slater&amp;nbsp;条件，最后着重介绍了&amp;nbsp;KKT&amp;nbsp;最优性条件。">
-<meta property="og:updated_time" content="2015-12-15T12:00:42.000Z">
+<meta property="og:description" content="整数规划如果除了目标函数和约束函数是线性函数以外，还要求决策变量取整数值，那么这类问题就是线性整数规划，简称为整数规划。其中，如果要求所有变量都要取整数值，则称纯整数规划；如果部分变量取整数值，则称混合整数规划；如果要求变量取 0 或 1，则称0-1规划。一般表示为：
+$$\begin{aligned}
+\min \quad &amp; cx \\
+s.t. \quad &amp; Ax=b \\
+&amp; x \ge">
+<meta property="og:updated_time" content="2016-01-12T11:48:01.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="拉格朗日对偶性">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;拉格朗日对偶性在数学优化中扮演着非常重要的角色，本章介绍从优化问题到构造拉格朗日函数，以及其对偶函数的定义，让后分析了其弱对偶性和强对偶性的&amp;nbsp;Slater&amp;nbsp;条件，最后着重介绍了&amp;nbsp;KKT&amp;nbsp;最优性条件。">
+<meta name="twitter:title" content="整数规划">
+<meta name="twitter:description" content="整数规划如果除了目标函数和约束函数是线性函数以外，还要求决策变量取整数值，那么这类问题就是线性整数规划，简称为整数规划。其中，如果要求所有变量都要取整数值，则称纯整数规划；如果部分变量取整数值，则称混合整数规划；如果要求变量取 0 或 1，则称0-1规划。一般表示为：
+$$\begin{aligned}
+\min \quad &amp; cx \\
+s.t. \quad &amp; Ax=b \\
+&amp; x \ge">
 
 
 
@@ -72,7 +84,7 @@
   };
 </script>
 
-  <title> 拉格朗日对偶性 | witness </title>
+  <title> 整数规划 | witness </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -222,7 +234,7 @@
             
             
               
-                拉格朗日对偶性
+                整数规划
               
             
           </h1>
@@ -231,8 +243,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-12-17T17:51:23+08:00" content="2015-12-17">
-              2015-12-17
+            <time itemprop="dateCreated" datetime="2016-01-12T19:14:33+08:00" content="2016-01-12">
+              2016-01-12
             </time>
           </span>
 
@@ -241,8 +253,8 @@
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/index.html/categories/数学/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
+                  <a href="/index.html/categories/优化/" itemprop="url" rel="index">
+                    <span itemprop="name">优化</span>
                   </a>
                 </span>
 
@@ -257,8 +269,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/index.html/2015/12/17/拉格朗日对偶性/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/17/拉格朗日对偶性/" itemprop="commentsCount"></span>
+                <a href="/index.html/2016/01/12/整数规划/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/12/整数规划/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -277,29 +289,31 @@
       
 
       
-        <span itemprop="articleBody"><p>&emsp;&emsp;拉格朗日对偶性在数学优化中扮演着非常重要的角色，本章介绍从优化问题到构造拉格朗日函数，以及其对偶函数的定义，让后分析了其弱对偶性和强对偶性的&nbsp;Slater&nbsp;条件，最后着重介绍了&nbsp;KKT&nbsp;最优性条件。<br><a id="more"></a></p>
-<h2 id="u62C9_u683C_u6717_u65E5_u5BF9_u5076_u51FD_u6570"><a href="#u62C9_u683C_u6717_u65E5_u5BF9_u5076_u51FD_u6570" class="headerlink" title="拉格朗日对偶函数"></a>拉格朗日对偶函数</h2><h3 id="u95EE_u9898_u5F15_u5165"><a href="#u95EE_u9898_u5F15_u5165" class="headerlink" title="问题引入"></a>问题引入</h3><p>&emsp;&emsp;首先，考虑标准形式的凸最优化问题：<br>$$ \begin{align}<br>minimize \quad &amp; f_0(x) \\\<br>subject to \quad &amp; f_i(x)\le0, \quad i=1,\cdots,m \\\<br>&amp; h_i(x)=0, \quad i=1,\cdots,p<br>\end{align} $$</p>
-<p>&emsp;&emsp;其变量$x\in\mathcal{R}^n$,并且其定义域$\mathcal{D}=\bigcap^m_{i=0}\mathrm{dom} f_i\cap\bigcap^p_{i=1}\mathrm{dom} h_i$是非空的。则其拉格朗日函数为：<br>$$<br>L(x,\lambda,\nu)=f_0(x)+\sum_{i=1}^m\lambda_i f_i(x)+\sum_{i=1}^p\nu_ih_i(x)<br>$$</p>
-<p>&emsp;&emsp;其中$ \lambda_i $被称为与$ f_i(x)\le 0 $相关的<strong>拉格朗日乘子</strong>，$\nu_i $被称为与$ h_i(x)=0 $相关的<strong>拉格朗日乘子</strong>，向量$\lambda$和$\nu$被称为<strong>对偶变量</strong>或<strong>拉格朗日乘子向量</strong>。</p>
-<h3 id="u51FD_u6570_u5B9A_u4E49"><a href="#u51FD_u6570_u5B9A_u4E49" class="headerlink" title="函数定义"></a>函数定义</h3><p>&emsp;&emsp;有了拉格朗日函数，下面我们定义<strong>拉格朗日对偶函数</strong>：<br>$$<br>g(\lambda,\nu)=\inf_{x\in\mathcal{D}}L(x,\lambda,\nu)=\inf_{x\in\mathcal{D}}\Big(f_0(x)+\sum\limits_{i=1}^m\lambda_i f_i(x)+\sum\limits_{i=1}^p\nu_ih_i(x)\Big)<br>$$</p>
-<p>&emsp;&emsp;下面介绍拉格朗日对偶函数的一个重要性质：<br><strong>拉格朗日对偶函数构成了原凸最优化问题最优值$p^*$的下界</strong>，也即：对任意的$\lambda\ge0$和$\nu$，我们有：<br>$$ g(\lambda,\nu)\le p^* $$</p>
-<p>&emsp;&emsp;但是当$g(\lambda,\nu)=-\infty$是其意义不大。只有当$\lambda\ge0$且$(\lambda,\nu)\in \mathrm{dom} g$即$g(\lambda,\nu)&gt;-\infty$时，对偶函数才能给出$p^*$的一个非平凡下界，我们称满足$\lambda\ge0$以及$(\lambda,\nu)\in \mathrm{dom} g$的$(\lambda,\nu)$是<strong>对偶可行</strong>的。</p>
-<h2 id="u62C9_u683C_u6717_u65E5_u5BF9_u5076_u95EE_u9898"><a href="#u62C9_u683C_u6717_u65E5_u5BF9_u5076_u95EE_u9898" class="headerlink" title="拉格朗日对偶问题"></a>拉格朗日对偶问题</h2><p>接下来我们思考：从Lagrange函数能够得到的最好下界是什么？也即：<br>$$ \begin{align}<br>maximize\quad &amp; g(\lambda,\nu)\\\<br>subject to\quad &amp; \lambda\ge0<br>\end{align}$$<br>&emsp;&emsp;上述问题被称为<strong>Lagrange对偶问题</strong>。前面描述的对偶可行的一组$(\lambda,\nu)$就是对偶问题的一个可行解。如果解$(\lambda^*,\nu^*)$是对偶问题的最优解，则称解$(\lambda^*,\nu^*)$是<strong>对偶最优解</strong>或者是<strong>最优Lagrange乘子</strong><br>&emsp;&emsp;Lagrange对偶问题是一个凸优化问题，因为极大化的目标函数是凹函数，且约束集合是凸集。因此，对偶问题的凸性和原问题是否是凸优化问题无关。</p>
-<h3 id="u5F31_u5BF9_u5076_u6027"><a href="#u5F31_u5BF9_u5076_u6027" class="headerlink" title="弱对偶性"></a>弱对偶性</h3><p>&emsp;&emsp;用$d^*$表示Lagrange对偶问题的最优值，由上面的性质可得下面的不等式：<br>$$ d^*\le p^* $$</p>
-<p>&emsp;&emsp;即使原问题不是凸问题上述不等式也成立，这个性质称为<strong>弱对偶性</strong>。<br>&emsp;&emsp;定义差值$p^*-d^*$是原问题的<strong>最优对偶间隙</strong>。它给出了原问题最优值以及通过Lagrange对偶函数所能得到的最好（最大）下界之间的差值。最优对偶间隙总是非负的。<br>&emsp;&emsp;但原问题很难求解时，弱对偶不等式可以给出原问题最优值的一个下界，这是因为对偶问题总是凸问题，而且在很多情况下都可以进行有效的求解得到$d^*$。</p>
-<h3 id="u5F3A_u5BF9_u5076_u6027_u548CSlater_u7EA6_u675F_u51C6_u5219"><a href="#u5F3A_u5BF9_u5076_u6027_u548CSlater_u7EA6_u675F_u51C6_u5219" class="headerlink" title="强对偶性和Slater约束准则"></a>强对偶性和Slater约束准则</h3><p>&emsp;&emsp;如果：$$d^*=p^*$$&emsp;&emsp;成立，即最优对偶间隙为零，那么<strong>强对偶性</strong>成立。<br>&emsp;&emsp;如果原问题是凸问题，可以表述为：<br>$$ \begin{align}<br>minimize\quad &amp; f_0(x) \\\<br>subject to\quad &amp; f_i(x)\le0, \quad i=1,\cdots,m\\\<br>&amp; Ax=b,<br>\end{align}$$</p>
-<p>&emsp;&emsp;使得强对偶性成立的一个简单的约束准则是<strong>Slater条件</strong>：存在一点$x\in \mathrm{relint}  \mathcal{D} $ 使得下式成立：<br>$$ f_i(x) &lt; 0, \quad i=1,\cdots,m \quad Ax=b.$$ &emsp;&emsp;满足上述条件称为<strong>严格可行</strong>，这是因为不等式约束严格成立。<br>&emsp;&emsp;若不等式约束函数$ f_i $中有一些是仿射函数时，Slater条件可以进一步改进。如果最前面的$ k $个约束函数$ f_1,\cdots,f_k $是仿射的，则若下列弱化条件成立，强对偶性成立。该条件为：存在一点$ x\in\mathrm{relint} \mathcal{D} $使得：<br>$$f_i(x)\le0,\quad i=1,\cdots,k,\qquad f_i(x) &lt; 0 \quad i=k+1,\cdots,m,\qquad Ax=b$$</p>
-<p>&emsp;&emsp;也就是说，仿射不等式不需要严格成立。<br>&emsp;&emsp;若Slater条件满足，不但对于凸问题强对偶性成立，也意味着当$ d^*&gt;-\infty $时对偶问题能够取得最优值，即存在一组对偶可行解$(\lambda^*,\nu^*)$，使得$ g(\lambda^*,\nu^*)=d^*=p^*$。</p>
-<h2 id="u6700_u4F18_u6027_u6761_u4EF6"><a href="#u6700_u4F18_u6027_u6761_u4EF6" class="headerlink" title="最优性条件"></a>最优性条件</h2><h3 id="u7EC8_u6B62_u51C6_u5219"><a href="#u7EC8_u6B62_u51C6_u5219" class="headerlink" title="终止准则"></a>终止准则</h3><p>&emsp;&emsp;定义原问题和对偶问题目标函数的差值$$f_0(x)-g(\lambda,\nu)$$&emsp;&emsp;为原问题可行解$ x $和对偶可行解$ (\lambda,\nu) $之间的<strong>对偶间隙</strong>。一对原对偶问题的可行点$ x,(\lambda,\nu) $将原问题（对偶问题）的最优值限制在一个区间上：$$p^*\in[g(\lambda,\nu),f_0(x)],\qquad d^*\in[g(\lambda,\nu),f_0(x)],$$&emsp;&emsp;区间的长度即为上面定义的对偶间隙。<br>&emsp;&emsp;上述现象可以用在优化算法中给出非启发式停止准则。某个算法给出一系列原问题可行解$ x^{(k)} $以及对偶问题可行解$ (\lambda,\nu), k=1,2,\cdots, $给定要求的绝对精度$ \epsilon_{abs}&gt;0, $那么停止准则是：$$f_0(x^{(k)})-g(\lambda^{(k)},\nu^{(k)})\le\epsilon_{abs}$$&emsp;&emsp;保证当算法终止的时候，$x^ {(k)} $是$ \epsilon_{abs}$-次优。（当然，只有在强对偶性成立的条件下，此方法对任意小的$ \epsilon_{abs}$才都可行）</p>
-<h3 id="u4E92_u8865_u677E_u5F1B_u6027"><a href="#u4E92_u8865_u677E_u5F1B_u6027" class="headerlink" title="互补松弛性"></a>互补松弛性</h3><p>&emsp;&emsp;设原问题和对偶问题的最优值都可以达到且相等（即强对偶性成立）。令$ x^* $是原问题的最优解，$(\lambda^*,\nu^*) $是对偶问题的最优解，这表明：<br>$$\begin{align}f_0(x^*) &amp;= g(\lambda^*,\nu^*) \\\<br>&amp;=\inf_x\Big(f_0(x)+\sum_{i=1}^m\lambda_i^* f_i(x)+\sum_{i=1}^p\nu_i^*h_i(x)\Big)\\\<br>&amp;\le f_0(x^*)+\sum_{i=1}^m\lambda_i^* f_i(x^*)+\sum_{i=1}^p\nu_i^*h_i(x^*)\\\<br>&amp;\le f_0(x^*)\end{align}$$</p>
-<p>&emsp;&emsp;由上面的推导可以得出一个重要的结论：<br>$$ \sum_{i=1}^m\lambda_i^* f_i(x^*)=0 $$</p>
-<p>&emsp;&emsp;实际上，求和项的每一项都非正，因此有：<br>$$\lambda^*f_i(x^*)=0,\quad i=1,\cdots,m.$$</p>
-<p>&emsp;&emsp;上述条件称为<strong>互补松弛性</strong>，它对任意原问题最优解$ x^* $都成立（当强对偶性成立时）。我们可以将互补松弛条件写成：<br>$$ \begin{align}<br>\lambda^* &gt; 0 &amp; \Longrightarrow f_i(x^*) = 0 \\\<br>f_i(x^*) &lt; 0 &amp; \Longrightarrow \lambda_i^* = 0<br>\end{align} $$</p>
-<p>&emsp;&emsp;上式意味着在最优点处，除了第$ i $个约束起了作用的情况，最优Lagrange乘子的第$ i $项都为零。</p>
-<h3 id="KKT__u6700_u4F18_u6761_u4EF6"><a href="#KKT__u6700_u4F18_u6761_u4EF6" class="headerlink" title="KKT 最优条件"></a>KKT 最优条件</h3><p>&emsp;&emsp;现在假设函数$ f_0,\cdots,f_m,h_1,\cdots,h_p $可微（定义域开集），但是并不假设这些函数是凸函数。<br><strong>非凸问题的&nbsp;KKT&nbsp;条</strong><br>&emsp;&emsp;和前面一样，令$ x^* $是原问题的最优解，$(\lambda^*,\nu^*) $是对偶问题的最优解，对偶间隙为零。因为$ L(x,\lambda^*,\nu^*) $关于$ x $求极小在$ x^* $处取得最小值，因此函数在$ x $处的导数必须为零，即：<br>$$<br>\nabla f_0(x^*)+\sum_{i=1}^m\lambda_i^*\nabla f_i(x)+\sum_{i=1}^p\nu_i^*\nabla h_i(x)=0<br>$$</p>
-<p>&emsp;&emsp;因此我们有：<br>$$\begin{align}<br>f_i(x^*) &amp;\le0,\quad i=1,\cdots,m \\\<br>h_i(x^*) &amp;= 0,\quad i=1,\cdots,p \\\<br>\lambda_i^* &amp;\ge0,\quad i=0,\cdots,m \\\<br>\lambda_i^*f_i(x^*) &amp;= 0,\quad i=0,\cdots,m \\\<br>\nabla f_0(x^*)+\sum_{i=1}^m\lambda_i^*\nabla f_i(x)+\sum_{i=1}^p\nu_i^*\nabla h_i(x) &amp;= 0<br>\end{align}$$</p>
-<p>&emsp;&emsp;我们称上式为<strong>Karush-Kuhn-Tucker（KKT）条件</strong>。<br>&emsp;&emsp;总之，对于目标函数和约束函数可微的任意优化问题，如何强对偶性成立，那么任何一对原问题最优解和对偶问题最优解必须满足&nbsp;KKT&nbsp;条件。<br><strong>凸问题的&nbsp;KKT&nbsp;条件</strong><br>&emsp;&emsp;当原问题是凸问题时，满足&nbsp;KKT&nbsp;条件的点也是原、对偶最优解。也就是说，如何函数$ f_i $是凸函数，$h_i $是仿射函数，$\widetilde{x},\widetilde{\lambda},\widetilde{\nu} $是任意满足&nbsp;KKT&nbsp;条件的点，也即：<br>$$\begin{align}<br>f_i(\widetilde{x}) &amp;\le 0,\quad i=1,\cdots,m \\\<br>h_i(\widetilde{x}) &amp;= 0,\quad i=1,\cdots,p \\\<br>\widetilde{\lambda_i} &amp;\ge 0,\quad i=1,\cdots,m \\\<br>\widetilde{\lambda_i}f_i(\widetilde{x}) &amp;=0,\quad i=1,\cdots, m \\\<br>\nabla f_0(\widetilde{x})+\sum_{i=1}^m\widetilde{\lambda_i}\nabla f_i(\widetilde{x})+\sum_{i=1}^p\widetilde{\nu_i}\nabla h_i(\widetilde{x}) &amp;= 0<br>\end{align} $$</p>
-<p>&emsp;&emsp;那么$ \widetilde{x} $和$ (\widetilde{\lambda},\widetilde{\nu}) $分别是原问题和对偶问题的最优解，对偶间隙为零。<br>&emsp;&emsp;总之，对目标函数和约束函数可微的任意凸优化问题，任意满足&nbsp;KKT&nbsp;条件的点分别是原、对偶问题最优解，对偶间隙为零。<br>&emsp;&emsp;<strong>若某个凸优化问题具有可微的目标函数和约束函数，且满足&nbsp;Slater&nbsp;条件，那么KKT条件是最优性的充要条件：&nbsp;Slater&nbsp;条件意味着最优对偶间隙为零且对偶最优解可以达到，因此$ x $是原问题的最优解，当且仅当存在$ (\lambda,\nu) $，二者都满足&nbsp;KKT&nbsp;条件。</strong><br>&emsp;&emsp;KKT&nbsp;条件在优化领域有着重要的作用。在一些特殊的情形下，是可以解析求解&nbsp;KKT&nbsp;条件的。更一般的，很多求解凸优化问题的方法可以认为或者理解为求解&nbsp;KKT&nbsp;条件的方法。</p>
+        <span itemprop="articleBody"><h2 id="u6574_u6570_u89C4_u5212"><a href="#u6574_u6570_u89C4_u5212" class="headerlink" title="整数规划"></a>整数规划</h2><p>如果除了目标函数和约束函数是线性函数以外，还要求决策变量取整数值，那么这类问题就是<strong>线性整数规划</strong>，简称为<strong>整数规划</strong>。其中，如果要求所有变量都要取整数值，则称<strong>纯整数规划</strong>；如果部分变量取整数值，则称<strong>混合整数规划</strong>；如果要求变量取 0 或 1，则称<strong>0-1规划</strong>。一般表示为：<br>
+$$\begin{aligned}
+\min \quad & cx \\
+s.t. \quad & Ax=b \\
+& x \ge 0, \quad x_j为整数，\quad \forall\ j\in IN.
+\end{aligned}$$
+
+其中，$IN$ 是取整数变量的下标集。
+</p>
+<h2 id="u5272_u5E73_u9762_u6CD5"><a href="#u5272_u5E73_u9762_u6CD5" class="headerlink" title="割平面法"></a>割平面法</h2><p>1958年，R.E.gomory 创立了解整数规划的割平面法。这种方法的思想是<strong>首先求解整数规划的线性松弛问题，如果得到的最优解满足整数的要求，则为整数规划的最优解；否则选择一个不满足整数要求的基变量，定义一个新约束，添加到原来的约束集中。这个约束的作用是：切掉一切不满足整数要求的可行解，缩小可行域，而保留所有整数可行解。然后，解新的松弛线性规划。重复以上过程，直至求出最优解。</strong>这个方法中，关键是如果定义切割约束，下面给予简要介绍。<br>
+考略整数规划问题：
+$$\begin{aligned}
+\min \quad & cx \\
+s.t. \quad & Ax=b \\
+& x \ge 0, \quad x的分量为整数.
+\end{aligned}$$
+
+该整数规划问题的线性松弛问题是：
+$$\begin{aligned}
+\min \quad & cx \\
+s.t. \quad & Ax=b \\
+& x \ge 0
+\end{aligned}$$
+
+</p>
 </span>
       
     </div>
@@ -308,9 +322,9 @@
       
         <div class="post-tags">
           
-            <a href="/index.html/tags/凸优化/" rel="tag">#凸优化</a>
+            <a href="/index.html/tags/割平面法/" rel="tag">#割平面法</a>
           
-            <a href="/index.html/tags/拉格朗日对偶性/" rel="tag">#拉格朗日对偶性</a>
+            <a href="/index.html/tags/整数规划/" rel="tag">#整数规划</a>
           
         </div>
       
@@ -319,17 +333,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/index.html/2015/12/17/序列最小最优化(SMO)算法/" rel="next" title="序列最小最优化(SMO)算法">
-                <i class="fa fa-chevron-left"></i> 序列最小最优化(SMO)算法
+              <a href="/index.html/2016/01/12/单纯形方法/" rel="next" title="单纯形方法">
+                <i class="fa fa-chevron-left"></i> 单纯形方法
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/index.html/2015/12/17/支持向量分类机/" rel="prev" title="支持向量分类机">
-                支持向量分类机 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -356,8 +366,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/12/17/拉格朗日对偶性/"
-           data-title="拉格朗日对偶性" data-url="http://yoursite.com/2015/12/17/拉格朗日对偶性/">
+      <div class="ds-thread" data-thread-key="2016/01/12/整数规划/"
+           data-title="整数规划" data-url="http://yoursite.com/2016/01/12/整数规划/">
       </div>
     
   </div>
@@ -512,7 +522,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u62C9_u683C_u6717_u65E5_u5BF9_u5076_u51FD_u6570"><span class="nav-number">1.</span> <span class="nav-text">拉格朗日对偶函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u95EE_u9898_u5F15_u5165"><span class="nav-number">1.1.</span> <span class="nav-text">问题引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u51FD_u6570_u5B9A_u4E49"><span class="nav-number">1.2.</span> <span class="nav-text">函数定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u62C9_u683C_u6717_u65E5_u5BF9_u5076_u95EE_u9898"><span class="nav-number">2.</span> <span class="nav-text">拉格朗日对偶问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u5F31_u5BF9_u5076_u6027"><span class="nav-number">2.1.</span> <span class="nav-text">弱对偶性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5F3A_u5BF9_u5076_u6027_u548CSlater_u7EA6_u675F_u51C6_u5219"><span class="nav-number">2.2.</span> <span class="nav-text">强对偶性和Slater约束准则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6700_u4F18_u6027_u6761_u4EF6"><span class="nav-number">3.</span> <span class="nav-text">最优性条件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u7EC8_u6B62_u51C6_u5219"><span class="nav-number">3.1.</span> <span class="nav-text">终止准则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u4E92_u8865_u677E_u5F1B_u6027"><span class="nav-number">3.2.</span> <span class="nav-text">互补松弛性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KKT__u6700_u4F18_u6761_u4EF6"><span class="nav-number">3.3.</span> <span class="nav-text">KKT 最优条件</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u6574_u6570_u89C4_u5212"><span class="nav-number">1.</span> <span class="nav-text">整数规划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5272_u5E73_u9762_u6CD5"><span class="nav-number">2.</span> <span class="nav-text">割平面法</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

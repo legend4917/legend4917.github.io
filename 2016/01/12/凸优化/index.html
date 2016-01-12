@@ -21,7 +21,7 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+  <link href="/index.html/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
@@ -30,9 +30,9 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/index.html/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+<link href="/index.html/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="凸优化," />
@@ -44,7 +44,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.jpg?v=0.4.5.2" />
 
 
 
@@ -111,7 +111,7 @@
   
 
   <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
+    <a href="/index.html/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">witness</span>
       <span class="logo-line-after"><i></i></span>
@@ -241,7 +241,7 @@
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/数学/" itemprop="url" rel="index">
+                  <a href="/index.html/categories/数学/" itemprop="url" rel="index">
                     <span itemprop="name">数学</span>
                   </a>
                 </span>
@@ -257,7 +257,7 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/01/12/凸优化/#comments" itemprop="discussionUrl">
+                <a href="/index.html/2016/01/12/凸优化/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/12/凸优化/" itemprop="commentsCount"></span>
                 </a>
               </span>
@@ -278,11 +278,11 @@
 
       
         <span itemprop="articleBody"><p>&emsp;&emsp;研究凸优化问题是因为其有一套非常完备的求解算法，如果将某个优化问题确认或者转化为凸优化问题，那么能够快速给出最优解。在MATLAB软件里面有相应的软件包，可以用来学习。也可以利用其他的开源的计算软件，利用现成的软件包来解决凸优化问题。<br><a id="more"></a></p>
-<h2 id="u51F8_u4F18_u5316_u95EE_u9898"><a href="#u51F8_u4F18_u5316_u95EE_u9898" class="headerlink" title="凸优化问题"></a>凸优化问题</h2><p>&emsp;&emsp;凸优化问题的标准形式为：<br>$$\begin{align}<br>minimize \quad &amp; f_0(x) \\<br>subject\ to \quad &amp; f_i(x)\le 0, \quad i=1,2,\cdots,m \\<br>&amp; a_i^Tx=b_i, \quad i=1,2,\cdots, p<br>\end{align}$$<br>&emsp;&emsp;其中，<strong>目标函数必须是凸函数，不等式约束函数必须是凸函数，等式约束函数必须是仿射函数</strong>。由约束条件得到的定义域为凸集，即凸优化问题是在凸集上最小化目标凸函数。<br>&emsp;&emsp;凸优化问题的一个十分重要的性质是：<strong>凸优化问题的任何局部最优解也是全局最优解</strong>。</p>
-<h2 id="u7EBF_u6027_u4F18_u5316_u95EE_u9898_28LP_29"><a href="#u7EBF_u6027_u4F18_u5316_u95EE_u9898_28LP_29" class="headerlink" title="线性优化问题(LP)"></a>线性优化问题(LP)</h2><p>&emsp;&emsp;线性优化的一般形式为：<br>$$\begin{align}<br>minimize \quad &amp; c^Tx+d \\<br>subject\ to \quad &amp; Gx\le h,  \\<br>&amp; Ax=b,<br>\end{align}$$<br>&emsp;&emsp;其目标函数和约束函数都是仿射函数。可行集是一个超平面，也即LP问题是在约束超平面上最小化目标函数。<br>&emsp;&emsp;<strong>标准形式的线性规划问题(standard form LP)</strong><br>$$\begin{align}<br>minimize \quad &amp; c^Tx \\<br>subject\ to \quad &amp; Ax=b,  \\<br>&amp; x\ge 0<br>\end{align}$$<br>&emsp;&emsp;<strong>不等式形式的线性规划问题(inequality form LP)</strong><br>$$\begin{align}<br>minimize \quad &amp; c^Tx \\<br>subject\ to \quad &amp; Ax\le b,<br>\end{align}$$</p>
-<h2 id="u4E8C_u6B21_u4F18_u5316_u95EE_u9898"><a href="#u4E8C_u6B21_u4F18_u5316_u95EE_u9898" class="headerlink" title="二次优化问题"></a>二次优化问题</h2><h3 id="u51F8_u4E8C_u6B21_u89C4_u5212_u95EE_u9898_28QP_29"><a href="#u51F8_u4E8C_u6B21_u89C4_u5212_u95EE_u9898_28QP_29" class="headerlink" title="凸二次规划问题(QP)"></a>凸二次规划问题(QP)</h3><p>&emsp;&emsp;凸二次规划的形式为：<br>$$\begin{align}<br>minimize \quad &amp; 1/2x^TPx+q^Tx+r \\<br>subject\ to \quad &amp; Gx\le h, \\<br>&amp; Ax=b,<br>\end{align}$$<br>&emsp;&emsp;其中 $P$ 是半正定矩阵，目标函数是凸二次函数，约束函数都是仿射函数。凸二次规划是在超平面上最小化目标函数。</p>
-<h3 id="u4E8C_u6B21_u7EA6_u675F_u51F8_u4E8C_u6B21_u89C4_u5212_u95EE_u9898_28QCQP_29"><a href="#u4E8C_u6B21_u7EA6_u675F_u51F8_u4E8C_u6B21_u89C4_u5212_u95EE_u9898_28QCQP_29" class="headerlink" title="二次约束凸二次规划问题(QCQP)"></a>二次约束凸二次规划问题(QCQP)</h3><p>&emsp;&emsp;QCQP的形式为：<br>$$\begin{align}<br>minimize \quad &amp; (1/2)x^TP_0x+q_0^Tx+r_0 \\<br>subject\ to \quad &amp; (1/2)x^TP_ix+q_i^Tx+r_i \le 0, \quad i=1,2,\cdots,m \\<br>&amp; Ax=b,<br>\end{align}$$</p>
-<h2 id="u4E8C_u9636_u9525_u89C4_u5212_28SOCP_29"><a href="#u4E8C_u9636_u9525_u89C4_u5212_28SOCP_29" class="headerlink" title="二阶锥规划(SOCP)"></a>二阶锥规划(SOCP)</h2><p>&emsp;&emsp;二阶锥规划(SOCP)的形式如下：<br>$$\begin{align}<br>minimize \quad &amp; f^Tx\\<br>subject\ to \quad &amp; |A_ix+b_i|_2\le c_i^Tx+d_i, \quad i=1,2,\cdots,m \\<br>&amp; Fx=g,<br>\end{align}$$<br>&emsp;&emsp;其中约束形式：$|Ax+b|_2\le c^Tx+d$ 称为二阶锥约束。如果 $c_i=0,i=1,2,\cdots,m$ ，那么SOCP问题与QCQP问题等价；如果 $A_i=0,i=1,2,\cdots,m$ ，那么SOCP问题与LP问题等价。</p>
+<h2 id="u51F8_u4F18_u5316_u95EE_u9898"><a href="#u51F8_u4F18_u5316_u95EE_u9898" class="headerlink" title="凸优化问题"></a>凸优化问题</h2><p>&emsp;&emsp;凸优化问题的标准形式为：<br>$$\begin{align}<br>minimize \quad &amp; f_0(x) \\\<br>subject to \quad &amp; f_i(x)\le 0, \quad i=1,2,\cdots,m \\\<br>&amp; a_i^Tx=b_i, \quad i=1,2,\cdots, p<br>\end{align}$$<br>&emsp;&emsp;其中，<strong>目标函数必须是凸函数，不等式约束函数必须是凸函数，等式约束函数必须是仿射函数</strong>。由约束条件得到的定义域为凸集，即凸优化问题是在凸集上最小化目标凸函数。<br>&emsp;&emsp;凸优化问题的一个十分重要的性质是：<strong>凸优化问题的任何局部最优解也是全局最优解</strong>。</p>
+<h2 id="u7EBF_u6027_u4F18_u5316_u95EE_u9898_28LP_29"><a href="#u7EBF_u6027_u4F18_u5316_u95EE_u9898_28LP_29" class="headerlink" title="线性优化问题(LP)"></a>线性优化问题(LP)</h2><p>&emsp;&emsp;线性优化的一般形式为：<br>$$\begin{align}<br>minimize \quad &amp; c^Tx+d \\\<br>subject to \quad &amp; Gx\le h,  \\\<br>&amp; Ax=b,<br>\end{align}$$<br>&emsp;&emsp;其目标函数和约束函数都是仿射函数。可行集是一个超平面，也即LP问题是在约束超平面上最小化目标函数。<br>&emsp;&emsp;<strong>标准形式的线性规划问题(standard form LP)</strong><br>$$\begin{align}<br>minimize \quad &amp; c^Tx \\\<br>subject to \quad &amp; Ax=b,  \\\<br>&amp; x\ge 0<br>\end{align}$$<br>&emsp;&emsp;<strong>不等式形式的线性规划问题(inequality form LP)</strong><br>$$\begin{align}<br>minimize \quad &amp; c^Tx \\\<br>subject to \quad &amp; Ax\le b,<br>\end{align}$$</p>
+<h2 id="u4E8C_u6B21_u4F18_u5316_u95EE_u9898"><a href="#u4E8C_u6B21_u4F18_u5316_u95EE_u9898" class="headerlink" title="二次优化问题"></a>二次优化问题</h2><h3 id="u51F8_u4E8C_u6B21_u89C4_u5212_u95EE_u9898_28QP_29"><a href="#u51F8_u4E8C_u6B21_u89C4_u5212_u95EE_u9898_28QP_29" class="headerlink" title="凸二次规划问题(QP)"></a>凸二次规划问题(QP)</h3><p>&emsp;&emsp;凸二次规划的形式为：<br>$$\begin{align}<br>minimize \quad &amp; 1/2x^TPx+q^Tx+r \\\<br>subject to \quad &amp; Gx\le h, \\\<br>&amp; Ax=b,<br>\end{align}$$<br>&emsp;&emsp;其中 $P$ 是半正定矩阵，目标函数是凸二次函数，约束函数都是仿射函数。凸二次规划是在超平面上最小化目标函数。</p>
+<h3 id="u4E8C_u6B21_u7EA6_u675F_u51F8_u4E8C_u6B21_u89C4_u5212_u95EE_u9898_28QCQP_29"><a href="#u4E8C_u6B21_u7EA6_u675F_u51F8_u4E8C_u6B21_u89C4_u5212_u95EE_u9898_28QCQP_29" class="headerlink" title="二次约束凸二次规划问题(QCQP)"></a>二次约束凸二次规划问题(QCQP)</h3><p>&emsp;&emsp;QCQP的形式为：<br>$$\begin{align}<br>minimize \quad &amp; (1/2)x^TP_0x+q_0^Tx+r_0 \\\<br>subject to \quad &amp; (1/2)x^TP_ix+q_i^Tx+r_i \le 0, \quad i=1,2,\cdots,m \\\<br>&amp; Ax=b,<br>\end{align}$$</p>
+<h2 id="u4E8C_u9636_u9525_u89C4_u5212_28SOCP_29"><a href="#u4E8C_u9636_u9525_u89C4_u5212_28SOCP_29" class="headerlink" title="二阶锥规划(SOCP)"></a>二阶锥规划(SOCP)</h2><p>&emsp;&emsp;二阶锥规划(SOCP)的形式如下：<br>$$\begin{align}<br>minimize \quad &amp; f^Tx\\\<br>subject to \quad &amp; |A_ix+b_i|_2\le c_i^Tx+d_i, \quad i=1,2,\cdots,m \\\<br>&amp; Fx=g,<br>\end{align}$$<br>&emsp;&emsp;其中约束形式：$|Ax+b|_2\le c^Tx+d$ 称为二阶锥约束。如果 $c_i=0,i=1,2,\cdots,m$ ，那么SOCP问题与QCQP问题等价；如果 $A_i=0,i=1,2,\cdots,m$ ，那么SOCP问题与LP问题等价。</p>
 </span>
       
     </div>
@@ -291,7 +291,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/凸优化/" rel="tag">#凸优化</a>
+            <a href="/index.html/tags/凸优化/" rel="tag">#凸优化</a>
           
         </div>
       
@@ -300,7 +300,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/17/K-均值聚类算法/" rel="next" title="K-均值聚类算法">
+              <a href="/index.html/2015/12/17/K-均值聚类算法/" rel="next" title="K-均值聚类算法">
                 <i class="fa fa-chevron-left"></i> K-均值聚类算法
               </a>
             
@@ -308,7 +308,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/01/12/单纯形方法/" rel="prev" title="单纯形方法">
+              <a href="/index.html/2016/01/12/单纯形方法/" rel="prev" title="单纯形方法">
                 单纯形方法 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -382,7 +382,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -396,7 +396,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -540,7 +540,7 @@
     <div class="back-to-top"></div>
   </div>
 
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+  <script type="text/javascript" src="/index.html/vendors/jquery/index.js?v=2.1.3"></script>
 
   
   
@@ -572,23 +572,23 @@
   
 
   
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/index.html/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/index.html/js/fancy-box.js?v=0.4.5.2"></script>
 
 
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+  <script type="text/javascript" src="/index.html/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/index.html/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/index.html/vendors/velocity/velocity.ui.min.js"></script>
 
-<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+<script type="text/javascript" src="/index.html/js/motion.js?v=0.4.5.2" id="motion.global"></script>
 
 
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  <script type="text/javascript" src="/index.html/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/index.html/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
   
   
-<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+<script type="text/javascript" src="/index.html/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
 
 
 <script type="text/javascript" id="sidebar.toc.highlight">
@@ -749,7 +749,7 @@
 
 
 
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/index.html/js/bootstrap.js"></script>
 
   
   

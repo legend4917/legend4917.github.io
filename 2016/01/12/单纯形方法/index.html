@@ -21,7 +21,7 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+  <link href="/index.html/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
@@ -30,9 +30,9 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/index.html/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+<link href="/index.html/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="单纯形方法,线性规划," />
@@ -44,7 +44,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.jpg?v=0.4.5.2" />
 
 
 
@@ -57,7 +57,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/01/12/单纯形方法/index.html">
 <meta property="og:site_name" content="witness">
 <meta property="og:description" content="单纯形方法是一种线性规划问题的计算方法，是 G.B.Dantzig 在1947年提出的。后来人们不断对其进行改进，形成很多变种。几十年的实践证明，单纯形方法确实是一种行之有效的方法。如今，它已经成为线性规划的中心内容。">
-<meta property="og:updated_time" content="2016-01-12T09:16:40.000Z">
+<meta property="og:updated_time" content="2016-01-12T15:16:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="单纯形方法">
 <meta name="twitter:description" content="单纯形方法是一种线性规划问题的计算方法，是 G.B.Dantzig 在1947年提出的。后来人们不断对其进行改进，形成很多变种。几十年的实践证明，单纯形方法确实是一种行之有效的方法。如今，它已经成为线性规划的中心内容。">
@@ -111,7 +111,7 @@
   
 
   <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
+    <a href="/index.html/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">witness</span>
       <span class="logo-line-after"><i></i></span>
@@ -241,7 +241,7 @@
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/优化/" itemprop="url" rel="index">
+                  <a href="/index.html/categories/优化/" itemprop="url" rel="index">
                     <span itemprop="name">优化</span>
                   </a>
                 </span>
@@ -257,7 +257,7 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/01/12/单纯形方法/#comments" itemprop="discussionUrl">
+                <a href="/index.html/2016/01/12/单纯形方法/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/12/单纯形方法/" itemprop="commentsCount"></span>
                 </a>
               </span>
@@ -278,178 +278,37 @@
 
       
         <span itemprop="articleBody"><p>单纯形方法是一种线性规划问题的计算方法，是 G.B.Dantzig 在1947年提出的。后来人们不断对其进行改进，形成很多变种。几十年的实践证明，单纯形方法确实是一种行之有效的方法。如今，它已经成为线性规划的中心内容。<br><a id="more"></a></p>
-<h2 id="u7EBF_u6027_u89C4_u5212_u57FA_u672C_u6027_u8D28"><a href="#u7EBF_u6027_u89C4_u5212_u57FA_u672C_u6027_u8D28" class="headerlink" title="线性规划基本性质"></a>线性规划基本性质</h2><p>一般线性规划的标准形式如下：<br>
-$$\begin{aligned}
-\min \quad & cx \\
-s.t. \quad & Ax = b \\
-& x \ge 0
-\end{aligned}$$
-</p>
-<p>遇到非标准的线性规划问题时，形如：<br>
-$$\begin{aligned}
-\min \quad & c_1x_1+c_2x_2+\cdots +c_nx_n \\
-s.t. \quad & a_{11}x_1+a_{12}x_2+\cdots +a_{1n}x_n \le b_1, \\
-& a_{21}x_1+a_{22}x_2+\cdots +a_{2n}x_n \le b_2, \\
-& \cdots \\
-& a_{n1}x_1+a_{n2}x_2+\cdots +a_{nn}x_n \le b_n, \\
-& x_1,x_2,\cdots,x_n \ge 0.
-\end{aligned}$$
-</p>
-<p>引进松弛变量$x_{n+1},\cdots,x_{n+m}$，即可将该问题转化为标准形式：<br>
-$$\begin{aligned}
-\min \quad & c_1x_1+c_2x_2+\cdots +c_nx_n \\
-s.t. \quad 
-& a_{11}x_1+a_{12}x_2+\cdots +a_{1n}x_n+x_{n+1} = b_1, \\
-& a_{21}x_1+a_{22}x_2+\cdots +a_{2n}x_n+x_{n+2} = b_2, \\
-& \cdots \\
-& a_{n1}x_1+a_{n2}x_2+\cdots +a_{nn}x_n+x_{n+m} = b_n, \\
-& x_1,x_2,\cdots,x_n,x_{n+1},\cdots,x_{n+m}\ge 0.
-\end{aligned}$$
-</p>
-<h3 id="u6700_u4F18_u57FA_u672C_u53EF_u884C_u89E3"><a href="#u6700_u4F18_u57FA_u672C_u53EF_u884C_u89E3" class="headerlink" title="最优基本可行解"></a>最优基本可行解</h3>
-设矩阵 $A$ 的秩为 $m$，又假设 $A=[B,N]$，其中 $B$ 为 $m$ 阶可逆矩阵。如果 $A$的前 $m$ 列是线性相关的，则可以通过列变换，使得前 $m$ 列是线性无关的。因此关于 $B$ 可逆的假设不是一般性。同时记：
-$$x=\left[
-\begin{array}{ccc}
-x_B \\
-x_N
-\end{array}
-\right]$$
-
-其中，$x_B$ 的分量与 $B$ 中的列相对应，$x_N$ 的分量与 $N$ 中的列相对应。这样 $Ax=b$ 就可以写成：
-$$(B,N)\left[
-\begin{array}{ccc}
-x_B \\
-x_N
-\end{array}
-\right]=b$$
-
-即：
-$$Bx_B+Nx_N=b$$
-
-上式两端左乘 $B^{-1}$，即得：
-$$x_B=B^{-1}b-B^{-1}Nx_N$$
-
-上式中 $x_N$ 就是线性代数中所谓的自由未知量，它们取不同的值都会得到不同的解。特别的，令 $x_N=0$，则得到解：
-$$x=\left[
-\begin{array}{ccc}
-x_B \\
-x_N
-\end{array}
-\right]=\left[
-\begin{array}{ccc}
-B^{-1}b \\
-0
-\end{array}
-\right]$$
-
-
+<h2 id="u7EBF_u6027_u89C4_u5212_u57FA_u672C_u6027_u8D28"><a href="#u7EBF_u6027_u89C4_u5212_u57FA_u672C_u6027_u8D28" class="headerlink" title="线性规划基本性质"></a>线性规划基本性质</h2><p>一般线性规划的标准形式如下：<br>$$\begin{aligned}<br>\min \quad &amp; cx \\<br>s.t. \quad &amp; Ax = b \\<br>&amp; x \ge 0<br>\end{aligned}$$</p>
+<p>遇到非标准的线性规划问题时，形如：<br>$$\begin{aligned}<br>\min \quad &amp; c_1x_1+c_2x_2+\cdots +c_nx_n \\<br>s.t. \quad &amp; a_{11}x_1+a_{12}x_2+\cdots +a_{1n}x_n \le b_1, \\<br>&amp; a_{21}x_1+a_{22}x_2+\cdots +a_{2n}x_n \le b_2, \\<br>&amp; \cdots \\<br>&amp; a_{n1}x_1+a_{n2}x_2+\cdots +a_{nn}x_n \le b_n, \\<br>&amp; x_1,x_2,\cdots,x_n \ge 0.<br>\end{aligned}$$</p>
+<p>引进松弛变量 $x_{n+1},\cdots,x_{n+m}$，即可将该问题转化为标准形式：<br>$$\begin{aligned}<br>\min \quad &amp; c_1x_1+c_2x_2+\cdots +c_nx_n \\<br>s.t. \quad<br>&amp; a_{11}x_1+a_{12}x_2+\cdots +a_{1n}x_n+x_{n+1} = b_1, \\<br>&amp; a_{21}x_1+a_{22}x_2+\cdots +a_{2n}x_n+x_{n+2} = b_2, \\<br>&amp; \cdots \\<br>&amp; a_{n1}x_1+a_{n2}x_2+\cdots +a_{nn}x_n+x_{n+m} = b_n, \\<br>&amp; x_1,x_2,\cdots,x_n,x_{n+1},\cdots,x_{n+m}\ge 0.<br>\end{aligned}$$</p>
+<h3 id="u6700_u4F18_u57FA_u672C_u53EF_u884C_u89E3"><a href="#u6700_u4F18_u57FA_u672C_u53EF_u884C_u89E3" class="headerlink" title="最优基本可行解"></a>最优基本可行解</h3><p>设矩阵 $A$ 的秩为 $m$，又假设 $A=[B,N]$，其中 $B$ 为 $m$ 阶可逆矩阵。如果 $A$的前 $m$ 列是线性相关的，则可以通过列变换，使得前 $m$ 列是线性无关的。因此关于 $B$ 可逆的假设不是一般性。同时记：<br>$$x=\left[<br>\begin{array}{ccc}<br>x_B \\<br>x_N<br>\end{array}<br>\right]$$</p>
+<p>其中，$x_B$ 的分量与 $B$ 中的列相对应，$x_N$ 的分量与 $N$ 中的列相对应。这样 $Ax=b$ 就可以写成：<br>$$(B,N)\left[<br>\begin{array}{ccc}<br>x_B \\<br>x_N<br>\end{array}<br>\right]=b$$</p>
+<p>即：<br>$$Bx_B+Nx_N=b$$</p>
+<p>上式两端左乘 $B^{-1}$，即得：<br>$$x_B=B^{-1}b-B^{-1}Nx_N$$</p>
+<p>上式中 $x_N$ 就是线性代数中所谓的自由未知量，它们取不同的值都会得到不同的解。特别的，令 $x_N=0$，则得到解：<br>$$x=\left[<br>\begin{array}{ccc}<br>x_B \\<br>x_N<br>\end{array}<br>\right]=\left[<br>\begin{array}{ccc}<br>B^{-1}b \\<br>0<br>\end{array}<br>\right]$$</p>
 <p>为<strong>基本解</strong>，相应的 $B$ 为<strong>基矩阵</strong>，$x_B$ 的各分量为<strong>基变量</strong>，基变量的全体 $x_{B_1},x_{B_2},\cdots,x_{B_m}$ 称为<strong>一组基</strong>，$x_N$ 的各分量称为<strong>非基变量</strong></p>
 <p>如果 $B^{-1}b \ge 0$，则 $x$ 为<strong>基本可行解</strong>，相应的 $B$ 为<strong>可行基矩阵</strong>，$x_{B_1},x_{B_2},\cdots,x_{B_m}$ 称为<strong>一组可行基</strong>。</p>
-<h2 id="u5355_u7EAF_u5F62_u65B9_u6CD5"><a href="#u5355_u7EAF_u5F62_u65B9_u6CD5" class="headerlink" title="单纯形方法"></a>单纯形方法</h2><h3 id="u5355_u7EAF_u5F62_u65B9_u6CD5_u539F_u7406"><a href="#u5355_u7EAF_u5F62_u65B9_u6CD5_u539F_u7406" class="headerlink" title="单纯形方法原理"></a>单纯形方法原理</h3><p>单纯形方法的基本思想是<strong>从一个基本可行解出发，求一个使得目标函数值有所改善的基本可行解，通过不断改善基本可行解，从而力图达到最优基本可行解。</strong><br>
-考虑问题：
-$$\begin{aligned}
-\min \quad & f\overset{def}{=}cx \\
-s.t. \quad & Ax=b \\
-& x \ge 0
-\end{aligned}$$
-
-记 $A=(p_1,p_2,\cdots,p_3)$，现将 $A$ 分解成 $(B,N)$，使得 $B$ 为基矩阵，$N$ 为非矩阵。设：
-$$x^{(0)}=\left[
-\begin{array}{ccc}
-B^{-1}b \\
-0
-\end{array}
-\right]$$
-
-是基本可行解，在 $x^{(0)}$ 处的目标函数值为：
-$$\begin{aligned}
-f_0 & = cx^{(0)} = (c_B,c_N)\left[
-\begin{array}{ccc}
-B^{-1}b \\
-0
-\end{array}
-\right] \\
-& = c_BB^{-1}b
-\end{aligned}$$
-
-其中，$c_B$ 是 $c$ 中与基变量对应的分量组成的 $m$ 维行向量，$c_N$ 是 $c$ 中与非基变量对应的分量组成的 $n-m$ 维行向量。接下来分析从基本可行解 $x^{(0)}$ 出发，求一个改进的基本可行解。设：
-$$x=\left[
-\begin{array}{ccc}
-x_B \\
-x_N
-\end{array}
-\right]$$
-
-是任一可行解，则其目标函数值为：
-$$\begin{aligned}
-f & = cx = (c_B,c_N)\left[
-\begin{array}{ccc}
-x_B \\
-x_N
-\end{array}
-\right] \\
-& = c_Bx_b + c_Nx_N \\
-& = c_BB^{-1}b-(c_BB^{-1}N-c_N)x_N \\
-& = c_BB^{-1}b-\sum_{j\in R}(c_BB^{-1}p_j-c_j)x_j \\
-& = c_BB^{-1}b-\sum_{j\in R}(z_j-c_j)x_j
-\end{aligned}$$
-
-其中，$R$ 是非基变量下标集，$z_j=c_BB^{-1}p_j$。可以看出，选取适当的自由未知量 $x_j(j\in R)$ 的数值就可能使得：
-$$\sum_{j\in R}(z_j-c_j)x_j > 0$$
-
-从而得到使得目标函数值减小的基本可行解。因此，原来的 $n-m$ 个非基变量中，使得 $n-m-1$ 个非基变量的值仍取 0，而剩下的那个非基变量（$x_k$）增大，变成正值。接下来分析该如何选取这个 $k$ 值。由上式可知，当 $x_j(j\in R)$ 取值相同时，$z_j-c_j$（正数）越大，目标函数值下降越多。因此，选择 $x_k$，使得：
-$$z_k-c_k=\max_{j\in R}\{z_j-c_j\}$$
-
-这里假设 $z_k-c_k > 0$，$x_k$ 由 0 变为正数后，得到方程组 $Ax=b$ 的解：
-$$x_B = B^{-1}b-B^{-1}p_kx_k = \overline{b}-y_kx_k$$
-
-其中，$\overline{b}$ 和 $y_k$ 是 $m$ 维列向量，$\overline{b}=B^{-1}b,y_k=B^{-1}p_k$，把 $x_B$ 按分量写出，即：
-$$x_B=\left[\begin{array}{ccc}
-x_{B_1} \\
-x_{B_2} \\
-\vdots \\
-x_{B_m}
-\end{array}\right]=\left[\begin{array}{ccc}
-\overline{b}_1 \\
-\overline{b}_2 \\
-\vdots \\
-\overline{b}_m
-\end{array}\right]-\left[\begin{array}{ccc}
-y_{1k} \\
-y_{2k} \\
-\vdots \\
-y_{nk}
-\end{array}\right]x_k \\
-x_N = (0,\cdots,0,x_k,0,\cdots,0)^T$$
-
-在新得到的点处，目标函数值为：
-$$f=f_0-(z_k-c_k)x_k$$
-
-再来分析 $x_k$ 的取值，一方面，$x_k$ 取值越大函数值下降越多；令一方面，$x_k$ 受到可行性限制，不可能无限增大。对于某个 $i$，当 $y_{ik}\le 0$ 时，$x_k$ 取任何正值都有 $x_{B_i}>0$，而当 $y_{ik}>0$ 时，为了保证：
-$$x_{Bi}=\overline{b}_i-y_{ik}x_k \ge 0$$
-
-就必须取值：
-$$x_k \le \frac{\overline{b}_i}{y_ik}$$
-
-因此，为了使得 $x_{B} \ge 0$，必须满足：
-$$x_k=\min\Big\{\frac{\overline{b}_i}{y_{ik}}\Big |\ y_ik > 0\Big\}=\frac{\overline{b}_r}{y_{rk}}$$
-
-$x_k$ 取值 $\frac{\overline{b}_r}{y_{rk}}$ 后，原来的基变量 $x_{B_r}$ 的值变为 0，得到新的基本可行解：
-$$x=(x_{B_1},\cdots,x_{B_{r-1}},0,x_{B_{r+1}},0,\cdots,x_k,0,\cdots,0)^T$$
-
-经过上述转化后，$x_k$ 由原来的非基变量变为基变量，$x_{B_r}$ 由原来的基变量变为非基变量。在新的基本可行解处，目标函数值减少了 $(z_k-c_k)x_k$，重复上述过程，可进一步改进基本可行解，直到所有的 $z_j-c_j$ 均非正数，以致任何一个非基变量取正值都不能使目标函数值减少时为止。
-</p>
-<p><strong>定理</strong>&emsp;若在极小化问题中，对于某个基本可行解，所有 $z_j-c_j \le 0$，则这个基本可行解是最优解；若在极大化问题中，对于某个基本可行解，所有 $z_j-c_j \ge 0$，则这个基本可行解是最优解。其中：
-$$z_j-c_j=c_BB^{-1}p_j-c_j, \quad j=1,\cdots,m$$
-
-<br>在现行规划中，通常称 $z_j-c_j$ 为<strong>判别数</strong>或<strong>检验数</strong>。</p>
+<h2 id="u5355_u7EAF_u5F62_u65B9_u6CD5"><a href="#u5355_u7EAF_u5F62_u65B9_u6CD5" class="headerlink" title="单纯形方法"></a>单纯形方法</h2><h3 id="u5355_u7EAF_u5F62_u65B9_u6CD5_u539F_u7406"><a href="#u5355_u7EAF_u5F62_u65B9_u6CD5_u539F_u7406" class="headerlink" title="单纯形方法原理"></a>单纯形方法原理</h3><p>单纯形方法的基本思想是<strong>从一个基本可行解出发，求一个使得目标函数值有所改善的基本可行解，通过不断改善基本可行解，从而力图达到最优基本可行解。</strong></p>
+<p>考虑问题：<br>$$\begin{aligned}<br>\min \quad &amp; f\overset{def}{=}cx \\<br>s.t. \quad &amp; Ax=b \\<br>&amp; x \ge 0<br>\end{aligned}$$</p>
+<p>记 $A=(p_1,p_2,\cdots,p_3)$，现将 $A$ 分解成 $(B,N)$，使得 $B$ 为基矩阵，$N$ 为非矩阵。设：<br>$$x^{(0)}=\left[<br>\begin{array}{ccc}<br>B^{-1}b \\<br>0<br>\end{array}<br>\right]$$</p>
+<p>是基本可行解，在 $x^{(0)}$ 处的目标函数值为：<br>$$\begin{aligned}<br>f_0 &amp; = cx^{(0)} = (c_B,c_N)\left[<br>\begin{array}{ccc}<br>B^{-1}b \\<br>0<br>\end{array}<br>\right] \\<br>&amp; = c_BB^{-1}b<br>\end{aligned}$$</p>
+<p>其中，$c_B$ 是 $c$ 中与基变量对应的分量组成的 $m$ 维行向量，$c_N$ 是 $c$ 中与非基变量对应的分量组成的 $n-m$ 维行向量。接下来分析从基本可行解 $x^{(0)}$ 出发，求一个改进的基本可行解。设：<br>$$x=\left[<br>\begin{array}{ccc}<br>x_B \\<br>x_N<br>\end{array}<br>\right]$$</p>
+<p>是任一可行解，则其目标函数值为：<br>$$\begin{aligned}<br>f &amp; = cx = (c_B,c_N)\left[<br>\begin{array}{ccc}<br>x_B \\<br>x_N<br>\end{array}<br>\right] \\<br>&amp; = c_Bx_b + c_Nx_N \\<br>&amp; = c_BB^{-1}b-(c_BB^{-1}N-c_N)x_N \\<br>&amp; = c_BB^{-1}b-\sum_{j\in R}(c_BB^{-1}p_j-c_j)x_j \\<br>&amp; = c_BB^{-1}b-\sum_{j\in R}(z_j-c_j)x_j<br>\end{aligned}$$</p>
+<p>其中，$R$ 是非基变量下标集，$z_j=c_BB^{-1}p_j$。可以看出，选取适当的自由未知量 $x_j(j\in R)$ 的数值就可能使得：<br>$$\sum_{j\in R}(z_j-c_j)x_j &gt; 0$$</p>
+<p>从而得到使得目标函数值减小的基本可行解。因此，原来的 $n-m$ 个非基变量中，使得 $n-m-1$ 个非基变量的值仍取 0，而剩下的那个非基变量（$x_k$）增大，变成正值。接下来分析该如何选取这个 $k$ 值。由上式可知，当 $x_j(j\in R)$ 取值相同时，$z_j-c_j$（正数）越大，目标函数值下降越多。因此，选择 $x_k$，使得：<br>$$z_k-c_k=\max_{j\in R}\{z_j-c_j\}$$</p>
+<p>这里假设 $z_k-c_k &gt; 0$，$x_k$ 由 0 变为正数后，得到方程组 $Ax=b$ 的解：<br>$$x_B = B^{-1}b-B^{-1}p_kx_k = \overline{b}-y_kx_k$$</p>
+<p>其中，$\overline{b}$ 和 $y_k$ 是 $m$ 维列向量，$\overline{b}=B^{-1}b,y_k=B^{-1}p_k$，把 $x_B$ 按分量写出，即：<br>$$x_B=\left[\begin{array}{ccc}<br>x_{B_1} \\<br>x_{B_2} \\<br>\vdots \\<br>x_{B_m}<br>\end{array}\right]=\left[\begin{array}{ccc}<br>\overline{b}_1 \\<br>\overline{b}_2 \\<br>\vdots \\<br>\overline{b}_m<br>\end{array}\right]-\left[\begin{array}{ccc}<br>y_{1k} \\<br>y_{2k} \\<br>\vdots \\<br>y_{nk}<br>\end{array}\right]x_k \\<br>x_N = (0,\cdots,0,x_k,0,\cdots,0)^T$$</p>
+<p>在新得到的点处，目标函数值为：<br>$$f=f_0-(z_k-c_k)x_k$$</p>
+<p>再来分析 $x_k$ 的取值，一方面，$x_k$ 取值越大函数值下降越多；令一方面，$x_k$ 受到可行性限制，不可能无限增大。对于某个 $i$，当 $y_{ik}\le 0$ 时，$x_k$ 取任何正值都有 $x_{B_i}&gt;0$，而当 $y_{ik}&gt;0$ 时，为了保证：<br>$$x_{Bi}=\overline{b}_i-y_{ik}x_k \ge 0$$</p>
+<p>就必须取值：<br>$$x_k \le \frac{\overline{b}_i}{y_ik}$$</p>
+<p>因此，为了使得 $x_{B} \ge 0$，必须满足：<br>$$x_k=\min\Big\{\frac{\overline{b}_i}{y_{ik}}\Big | y_ik &gt; 0\Big\}=\frac{\overline{b}_r}{y_{rk}}$$</p>
+<p>$x_k$ 取值 $\frac{\overline{b}_r}{y_{rk}}$ 后，原来的基变量 $x_{B_r}$ 的值变为 0，得到新的基本可行解：<br>$$x=(x_{B_1},\cdots,x_{B_{r-1}},0,x_{B_{r+1}},0,\cdots,x_k,0,\cdots,0)^T$$</p>
+<p>经过上述转化后，$x_k$ 由原来的非基变量变为基变量，$x_{B_r}$ 由原来的基变量变为非基变量。在新的基本可行解处，目标函数值减少了 $(z_k-c_k)x_k$，重复上述过程，可进一步改进基本可行解，直到所有的 $z_j-c_j$ 均非正数，以致任何一个非基变量取正值都不能使目标函数值减少时为止。</p>
+<p><strong>定理</strong>&emsp;若在极小化问题中，对于某个基本可行解，所有 $z_j-c_j \le 0$，则这个基本可行解是最优解；若在极大化问题中，对于某个基本可行解，所有 $z_j-c_j \ge 0$，则这个基本可行解是最优解。其中：<br>$$z_j-c_j=c_BB^{-1}p_j-c_j, \quad j=1,\cdots,m$$</p>
+<p>在现行规划中，通常称 $z_j-c_j$ 为<strong>判别数</strong>或<strong>检验数</strong>。</p>
 <h3 id="u5355_u7EAF_u5F62_u65B9_u6CD5_u8BA1_u7B97_u6B65_u9AA4"><a href="#u5355_u7EAF_u5F62_u65B9_u6CD5_u8BA1_u7B97_u6B65_u9AA4" class="headerlink" title="单纯形方法计算步骤"></a>单纯形方法计算步骤</h3><p>以极小化问题为例，首先设初始基矩阵为 $B$，然后执行下列步骤：</p>
 <blockquote>
-<p>（1） 解 $Bx_B=b$，求得 $x_B = B^{-1}b = \overline{b}$，令 $x_N=0$，计算目标函数值 $f=c_Bx_B$。<br>（2） 求单纯形乘子 $w$，解 $wB=c_B$，得到 $w=c_BB^{-1}$。对于所有非基变量，计算判别数 $z_j-c_j = wp_j-c_j$，令：
-$$z_k-c_k=\min_{j\in R}\{z_j-c_j\}$$
-若 $z_k-c_k \le 0$，停止计算，当前基本可行解就是最优解。否则进行步骤(3)。<br>（3） 解 $By_k=p_k$，得到 $y_k=B^{-1}p_k$，若 $y_k \le 0$，则停止计算，问题不存在有限最优解。否则进行步骤(4)。<br>（4） 确定下标 $r$，使得：
-$$\frac{\overline{b}_r}{y_{rk}} = \min\Big\{\frac{\overline{b}_i}{y_{ik}}\Big |\ y_ik > 0\Big\}$$
-其中，$x_{B_r}$ 为离基变量，$x_k$ 为进基变量。用 $p_k$ 替换 $p_{B_r}$，得到新的基矩阵，转(1)继续计算。</p>
+<p>（1） 解 $Bx_B=b$，求得 $x_B = B^{-1}b = \overline{b}$，令 $x_N=0$，计算目标函数值 $f=c_Bx_B$。<br>（2） 求单纯形乘子 $w$，解 $wB=c_B$，得到 $w=c_BB^{-1}$。对于所有非基变量，计算判别数 $z_j-c_j = wp_j-c_j$，令：<br>$$z_k-c_k=\min_{j\in R}\{z_j-c_j\}$$<br>若 $z_k-c_k \le 0$，停止计算，当前基本可行解就是最优解。否则进行步骤(3)。<br>（3） 解 $By_k=p_k$，得到 $y_k=B^{-1}p_k$，若 $y_k \le 0$，则停止计算，问题不存在有限最优解。否则进行步骤(4)。<br>（4） 确定下标 $r$，使得：<br>$$\frac{\overline{b}_r}{y_{rk}} = \min\Big\{\frac{\overline{b}_i}{y_{ik}}\Big | y_ik &gt; 0\Big\}$$<br>其中，$x_{B_r}$ 为离基变量，$x_k$ 为进基变量。用 $p_k$ 替换 $p_{B_r}$，得到新的基矩阵，转(1)继续计算。</p>
 </blockquote>
 </span>
       
@@ -459,9 +318,9 @@ $$\frac{\overline{b}_r}{y_{rk}} = \min\Big\{\frac{\overline{b}_i}{y_{ik}}\Big |\
       
         <div class="post-tags">
           
-            <a href="/tags/单纯形方法/" rel="tag">#单纯形方法</a>
+            <a href="/index.html/tags/单纯形方法/" rel="tag">#单纯形方法</a>
           
-            <a href="/tags/线性规划/" rel="tag">#线性规划</a>
+            <a href="/index.html/tags/线性规划/" rel="tag">#线性规划</a>
           
         </div>
       
@@ -470,13 +329,17 @@ $$\frac{\overline{b}_r}{y_{rk}} = \min\Big\{\frac{\overline{b}_i}{y_{ik}}\Big |\
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/01/12/凸优化/" rel="next" title="凸优化">
+              <a href="/index.html/2016/01/12/凸优化/" rel="next" title="凸优化">
                 <i class="fa fa-chevron-left"></i> 凸优化
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/index.html/2016/01/12/整数规划/" rel="prev" title="整数规划">
+                整数规划 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -548,7 +411,7 @@ $$\frac{\overline{b}_r}{y_{rk}} = \min\Big\{\frac{\overline{b}_i}{y_{ik}}\Big |\
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -562,7 +425,7 @@ $$\frac{\overline{b}_r}{y_{rk}} = \min\Big\{\frac{\overline{b}_i}{y_{ik}}\Big |\
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -706,7 +569,7 @@ $$\frac{\overline{b}_r}{y_{rk}} = \min\Big\{\frac{\overline{b}_i}{y_{ik}}\Big |\
     <div class="back-to-top"></div>
   </div>
 
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+  <script type="text/javascript" src="/index.html/vendors/jquery/index.js?v=2.1.3"></script>
 
   
   
@@ -738,23 +601,23 @@ $$\frac{\overline{b}_r}{y_{rk}} = \min\Big\{\frac{\overline{b}_i}{y_{ik}}\Big |\
   
 
   
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/index.html/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/index.html/js/fancy-box.js?v=0.4.5.2"></script>
 
 
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+  <script type="text/javascript" src="/index.html/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/index.html/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/index.html/vendors/velocity/velocity.ui.min.js"></script>
 
-<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+<script type="text/javascript" src="/index.html/js/motion.js?v=0.4.5.2" id="motion.global"></script>
 
 
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  <script type="text/javascript" src="/index.html/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/index.html/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
   
   
-<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+<script type="text/javascript" src="/index.html/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
 
 
 <script type="text/javascript" id="sidebar.toc.highlight">
@@ -915,7 +778,7 @@ $$\frac{\overline{b}_r}{y_{rk}} = \min\Big\{\frac{\overline{b}_i}{y_{ik}}\Big |\
 
 
 
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/index.html/js/bootstrap.js"></script>
 
   
   

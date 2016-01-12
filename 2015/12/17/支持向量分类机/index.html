@@ -21,7 +21,7 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+  <link href="/index.html/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
@@ -30,9 +30,9 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/index.html/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+<link href="/index.html/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="凸优化,分类,拉格朗日对偶性,支持向量机," />
@@ -44,7 +44,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.jpg?v=0.4.5.2" />
 
 
 
@@ -113,7 +113,7 @@
   
 
   <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
+    <a href="/index.html/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">witness</span>
       <span class="logo-line-after"><i></i></span>
@@ -243,7 +243,7 @@
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                  <a href="/index.html/categories/机器学习/" itemprop="url" rel="index">
                     <span itemprop="name">机器学习</span>
                   </a>
                 </span>
@@ -259,7 +259,7 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/17/支持向量分类机/#comments" itemprop="discussionUrl">
+                <a href="/index.html/2015/12/17/支持向量分类机/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/17/支持向量分类机/" itemprop="commentsCount"></span>
                 </a>
               </span>
@@ -283,38 +283,38 @@
 <h2 id="u7EBF_u6027_u53EF_u5206_u652F_u6301_u5411_u91CF_u673A_u548C_u786C_u95F4_u9694_u6700_u5927_u5316"><a href="#u7EBF_u6027_u53EF_u5206_u652F_u6301_u5411_u91CF_u673A_u548C_u786C_u95F4_u9694_u6700_u5927_u5316" class="headerlink" title="线性可分支持向量机和硬间隔最大化"></a>线性可分支持向量机和硬间隔最大化</h2><h3 id="u7EBF_u6027_u53EF_u5206_u652F_u6301_u5411_u91CF_u673A"><a href="#u7EBF_u6027_u53EF_u5206_u652F_u6301_u5411_u91CF_u673A" class="headerlink" title="线性可分支持向量机"></a>线性可分支持向量机</h3><p>&emsp;&emsp;给定线性可分的训练数据集，通过间隔最大化或等价地求解相应地凸二次规划问题学习得到的分离超平面为：<br>$$w^*\cdot x+b^* = 0$$</p>
 <p>&emsp;&emsp;以及相应地分类决策函数为：<br>$$f(x)=sign(w^*\cdot x+b^*)$$</p>
 <p>&emsp;&emsp;称为线性可分支持向量机。例如下图：<br><img src="/images/支持向量机-1.png" width="256" height="256" title="示例"></p>
-<h3 id="u51FD_u6570_u95F4_u9694_u548C_u51E0_u4F55_u95F4_u9694"><a href="#u51FD_u6570_u95F4_u9694_u548C_u51E0_u4F55_u95F4_u9694" class="headerlink" title="函数间隔和几何间隔"></a>函数间隔和几何间隔</h3><p>&emsp;&emsp;对于给定的训练集$\ T\ $和超平面$(w,b)$，定义超平面和样本的<strong>函数间隔</strong>为：<br>$$\hat{\gamma}_i=y_i(w\cdot x_i + b)$$</p>
-<p>&emsp;&emsp;定义超平面$(w,b)$关于训练数据集$\ T\ $的函数间隔为超平面$(w,b)$关于$\ T\ $中所有样本点$(x_i,y_i)$的函数间隔的最小值，即：<br>$$\hat{\gamma}=\min_{i=1,\cdots,N}\hat{\gamma}_i$$</p>
-<p>&emsp;&emsp;由于函数间隔会随$\ w\ $和$\ b\ $成比例的改变，因此可以对分离超平面的法向量$\ w\ $进行规范化，$||w||=1$，使得函数间隔是确定的，这时函数间隔就变成了几何间隔。<br>&emsp;&emsp;对于给定的训练集$\ T\ $ 和超平面$(w,b)$，定义超平面$(w,b)$和样本的<strong>几何间隔</strong>为：<br>$$\gamma_i=y_i\Big(\frac{w}{||w||}\cdot x_i + \frac{d}{||w||}\Big)$$</p>
-<p>&emsp;&emsp;定义超平面$(w,b)$关于训练数据集$\ T\ $的几何间隔为超平面$(w,b)$关于$\ T\ $中所有样本点$(x_i,y_i)$的几何间隔的最小值，即：<br>$$\gamma=\min_{i=1,\cdots,N}\gamma_i$$</p>
-<p>&emsp;&emsp;因此函数间隔与几何间隔之间的关系为：<br>$$<br>\gamma_i=\frac{\hat{\gamma_i}}{||w||} \\<br>\gamma=\frac{\hat{\gamma}}{||w||}<br>$$</p>
-<h3 id="u95F4_u9694_u6700_u5927_u5316"><a href="#u95F4_u9694_u6700_u5927_u5316" class="headerlink" title="间隔最大化"></a>间隔最大化</h3><p>&emsp;&emsp;间隔最大化的直观解释就是：不仅将正负实例点分开，而且对最难分的实例点也有足够大的确信度将它们分开。这样的超平面应该对未知的新实例有很好地分类预测能力。<br><strong>最大间隔分离超平面</strong><br>&emsp;&emsp;最大化几何间隔的分类超平面问题可以表示为下面的约束最优化问题：<br>$$ \begin{align}<br>\max_{w,b} \quad &amp; \gamma \\<br>s.t. \quad &amp; y_i\Big(\frac{w}{||w||}\cdot x_i + \frac{d}{||w||}\Big) \ge \gamma, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
-<p>&emsp;&emsp;考虑几何间隔与函数间隔的关系，上述问题可以改写为：<br>$$ \begin{align}<br>\max_{w,b} \quad &amp; \frac{\hat{\gamma}}{||w||} \\<br>s.t. \quad &amp; y_i(w\cdot x_i + b) \ge \hat{\gamma}, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
-<p>&emsp;&emsp;不失一般性，我们令$\ \hat{\gamma}=1$，并作一些转化，我们可以得到：<br>$$ \begin{align}<br>\min_{w,b} \quad &amp; \frac{1}{2}{||w||}^2 \\<br>s.t. \quad &amp; y_i(w\cdot x_i + b) - 1 \ge 0, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
+<h3 id="u51FD_u6570_u95F4_u9694_u548C_u51E0_u4F55_u95F4_u9694"><a href="#u51FD_u6570_u95F4_u9694_u548C_u51E0_u4F55_u95F4_u9694" class="headerlink" title="函数间隔和几何间隔"></a>函数间隔和几何间隔</h3><p>&emsp;&emsp;对于给定的训练集$ T $和超平面$(w,b)$，定义超平面和样本的<strong>函数间隔</strong>为：<br>$$\hat{\gamma}_i=y_i(w\cdot x_i + b)$$</p>
+<p>&emsp;&emsp;定义超平面$(w,b)$关于训练数据集$ T $的函数间隔为超平面$(w,b)$关于$ T $中所有样本点$(x_i,y_i)$的函数间隔的最小值，即：<br>$$\hat{\gamma}=\min_{i=1,\cdots,N}\hat{\gamma}_i$$</p>
+<p>&emsp;&emsp;由于函数间隔会随$ w $和$ b $成比例的改变，因此可以对分离超平面的法向量$ w $进行规范化，$||w||=1$，使得函数间隔是确定的，这时函数间隔就变成了几何间隔。<br>&emsp;&emsp;对于给定的训练集$ T $ 和超平面$(w,b)$，定义超平面$(w,b)$和样本的<strong>几何间隔</strong>为：<br>$$\gamma_i=y_i\Big(\frac{w}{||w||}\cdot x_i + \frac{d}{||w||}\Big)$$</p>
+<p>&emsp;&emsp;定义超平面$(w,b)$关于训练数据集$ T $的几何间隔为超平面$(w,b)$关于$ T $中所有样本点$(x_i,y_i)$的几何间隔的最小值，即：<br>$$\gamma=\min_{i=1,\cdots,N}\gamma_i$$</p>
+<p>&emsp;&emsp;因此函数间隔与几何间隔之间的关系为：<br>$$<br>\gamma_i=\frac{\hat{\gamma_i}}{||w||} \\\<br>\gamma=\frac{\hat{\gamma}}{||w||}<br>$$</p>
+<h3 id="u95F4_u9694_u6700_u5927_u5316"><a href="#u95F4_u9694_u6700_u5927_u5316" class="headerlink" title="间隔最大化"></a>间隔最大化</h3><p>&emsp;&emsp;间隔最大化的直观解释就是：不仅将正负实例点分开，而且对最难分的实例点也有足够大的确信度将它们分开。这样的超平面应该对未知的新实例有很好地分类预测能力。<br><strong>最大间隔分离超平面</strong><br>&emsp;&emsp;最大化几何间隔的分类超平面问题可以表示为下面的约束最优化问题：<br>$$ \begin{align}<br>\max_{w,b} \quad &amp; \gamma \\\<br>s.t. \quad &amp; y_i\Big(\frac{w}{||w||}\cdot x_i + \frac{d}{||w||}\Big) \ge \gamma, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
+<p>&emsp;&emsp;考虑几何间隔与函数间隔的关系，上述问题可以改写为：<br>$$ \begin{align}<br>\max_{w,b} \quad &amp; \frac{\hat{\gamma}}{||w||} \\\<br>s.t. \quad &amp; y_i(w\cdot x_i + b) \ge \hat{\gamma}, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
+<p>&emsp;&emsp;不失一般性，我们令$ \hat{\gamma}=1$，并作一些转化，我们可以得到：<br>$$ \begin{align}<br>\min_{w,b} \quad &amp; \frac{1}{2}{||w||}^2 \\\<br>s.t. \quad &amp; y_i(w\cdot x_i + b) - 1 \ge 0, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
 <p><strong>学习的对偶算法</strong><br>&emsp;&emsp;显然上面是一个凸二次规划（convex quadratic programming）问题。通过<a href="/2015/11/27/Lagrange duality/">拉格朗日对偶性</a>这篇博客的启发，我们首先构造拉格朗日函数,引入拉格朗日乘子$\alpha_i \ge 0,\quad i=1,2,\cdots,N$，则有：<br>$$L(w,b,\alpha)=\frac{1}{2}||w||^2-\sum^{N}_{i=1}\alpha_iy_i(w\cdot x_i+b)+\sum^{N}_{i=1}\alpha_i<br>$$</p>
-<p>&emsp;&emsp;根据拉格朗日对偶性，原始问题的对偶问题是极大极小问题：<br>$$\max_\alpha\ \min_{w,b}\ L(w,b,\alpha)$$</p>
-<p>&emsp;&emsp;因此，为了得到对偶问题的解，需要先求$\ L(w,b,\alpha)\ $对$\ w,b\ $的极小，再求对$\ \alpha\ $的极大。我们可以得到下面的对偶最优化问题：<br>$$ \begin{align}<br>\min_\alpha \quad &amp; \frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i\alpha_jy_iy_j(x_i\cdot x_j)-\sum_{i=1}^{N}\alpha_i \\<br>s.t. \quad &amp; \sum_{i=1}^{N}\alpha_iy_i=0 \\<br>&amp; \alpha_i \ge 0, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
-<p>&emsp;&emsp;若对偶最优化的解为$\   \alpha^*=(\alpha_1^*,\alpha_2^*,\cdots,\alpha_l^*)^T\ $，原始问题的最优解为$\ (w^*,b^*)\ $，有KKT条件可知：<br>$$<br>w^* = \sum_{i=1}^{N}\alpha_i^*y_ix_i \\<br>b^* =y_i-\sum_{i=1}^{N}\alpha_i^*y_i(x_i\cdot x_j)<br>$$</p>
-<p><strong>支持向量</strong><br>&emsp;&emsp;将训练数据集中对应于$\ \alpha_i^* &gt; 0\ $的样本点$\ (x_i,y_i)\ $的实例$\ x_i\in R^n\ $称为<strong>支持向量</strong>。有KKT互补条件可知：<br>$$\alpha_i^*(y_i(w^*\cdot x_i+b^*)-1) = 0, \quad i=1,2,\cdots,N$$</p>
-<p>&emsp;&emsp;中对应于$\ \alpha_i^* &gt; 0\ $的实例$\ x_i\ $，有：<br>$$w^*\cdot x_i+b^* = \pm 1$$</p>
-<p>&emsp;&emsp;即$\ x_i\ $一定在间隔边界上。<br><img src="/images/支持向量机-2.png" width="256" height="256" title="示例"></p>
-<p>&emsp;&emsp;综上所述，对于给定的线性可分的训练数据集，可以首先求对偶问题的解$\ \alpha^*\ $；在求出原始问题的解$\ (w^*,b^*)\ $；从而得到分离超平面及分类决策函数。这种算法称为线性可分的对偶学习算法。</p>
-<h2 id="u7EBF_u6027_u652F_u6301_u5411_u91CF_u673A_u4E0E_u8F6F_u95F4_u9694_u6700_u5927_u5316"><a href="#u7EBF_u6027_u652F_u6301_u5411_u91CF_u673A_u4E0E_u8F6F_u95F4_u9694_u6700_u5927_u5316" class="headerlink" title="线性支持向量机与软间隔最大化"></a>线性支持向量机与软间隔最大化</h2><h3 id="u7EBF_u6027_u652F_u6301_u5411_u91CF_u673A"><a href="#u7EBF_u6027_u652F_u6301_u5411_u91CF_u673A" class="headerlink" title="线性支持向量机"></a>线性支持向量机</h3><p>&emsp;&emsp;在线性不可分训练数据集中，上述的线性可分支持向量机的学习算法是不适用的，下面就需要修改硬间隔最大化为软间隔最大，即引入<strong>松弛变量</strong>$\ \xi \ge 0\ $，使函数间隔加上松弛变量大于1，即可得到线性不可分的线性支持向量机的学习问题变成下面的凸二次规划问题（原始问题）：<br>$$ \begin{align}<br>\max_{w,b,\xi} \quad &amp; \frac{1}{2}{||w||}^2 + C\sum_{i=1}^{N}\xi_i \\<br>s.t. \quad &amp; y_i(w\cdot x_i + b) \ge 1 - \xi_i, \quad i=1,2,\cdots,N \\<br>&amp; \xi_i \ge 0, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
-<p>&emsp;&emsp;由拉格朗日对偶性可得出原始问题的对偶问题是：<br>$$ \begin{align}<br>\min_\alpha \quad &amp; \frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i\alpha_jy_iy_j(x_i\cdot x_j)-\sum_{i=1}^{N}\alpha_i \\<br>s.t. \quad &amp; \sum_{i=1}^{N}\alpha_iy_i=0 \\<br>&amp; 0 \le \alpha_i \le C, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
-<p>&emsp;&emsp;同样的，若对偶问题的解为$\   \alpha^*=(\alpha_1^*,\alpha_2^*,\cdots,\alpha_N^*)^T\ $，原始问题的最优解为$\ (w^*,b^*)\ $，必须满足KKT条件（这里特别的列出了线性支持向量机的KKT条件，这对后面的学习算法（SMO算法）十分重要）：<br>$$ \begin{align}<br>\nabla_wL(w^*,b^*,\xi^*,\alpha^*,\mu^*) &amp; = w^*-\sum_{i=1}^{N}\alpha_i^*y_ix_i=0 \\<br>\nabla_wL(w^*,b^*,\xi^*,\alpha^*,\mu^*) &amp; = -\sum_{i=1}^{N}\alpha_i^*y_i=0 \\<br>\nabla_wL(w^*,b^*,\xi^*,\alpha^*,\mu^*) &amp; = C-\alpha^*-\mu^*=0 \\<br>\alpha_i^*(y_i(w^*\cdot x_i+b^*)-1+\xi_i^*) &amp; = 0\\<br>\mu_i^*\xi_i^* &amp; = 0 \\<br>y_i(w^*\cdot x_i+b^*)-1+\xi_i^* &amp; \ge 0 \\<br>\xi_i^* &amp; \ge 0 \\<br>\alpha_i^* &amp; \ge 0 \\<br>\mu_i^* &amp; \ge 0, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
-<p>&emsp;&emsp;并可推导出对于一个分量$\ \alpha_j^*\ ,\ 0 &lt; \alpha_j^* &lt; C$，则原始问题的解$\ w^*,b^*\ $可按下式求得：<br>$$ \begin{align}<br>w^* &amp; = \sum_{i=1}^{N}\alpha_i^*y_ix_i \\<br>b^* &amp; = y_j - \sum_{i=1}^{N}\alpha_i^*y_i(x_i\cdot x_j)<br>\end{align} $$</p>
-<p><strong>支持向量</strong><br>&emsp;&emsp;在线性不可分的情况下，将对偶问题的解$\   \alpha^*=(\alpha_1^*,\alpha_2^*,\cdots,\alpha_N^*)^T\ $中对应于$\ \alpha_i^* &gt; 0\ $的样本点$\ (x_i,y_i)\ $的实例$\ x_i\ $称为支持向量（软间隔的支持向量）。这时的支持向量$\ x_i\ $或者在间隔边界上，或者在间隔边界与分离超平面之间，或者在分离超平面误分类一侧。<br>&emsp;&emsp;- $\ \alpha_i^* &lt; C\ $，则$\ \xi_i^* = 0\ $，支持变量$\ x_i^*\ $恰好落在间隔边界上；<br>&emsp;&emsp;- $\ \alpha_i^* = C\ $，则$\ 0 &lt; \xi_i^* &lt; 1\ $，则分类正确，支持变量$\ x_i^*\ $恰好落在间隔边界与分离超平面之间；<br>&emsp;&emsp;- $\ \alpha_i^* = C\ $，则$\ \xi_i^* = 1\ $，支持变量$\ x_i^*\ $在分离超平面上；<br>&emsp;&emsp;- $\ \alpha_i^* = C\ $，则$\ \xi_i^* &gt; 1\ $，支持变量$\ x_i^*\ $位于分离超平面误分类一侧；</p>
+<p>&emsp;&emsp;根据拉格朗日对偶性，原始问题的对偶问题是极大极小问题：<br>$$\max_\alpha \min_{w,b} L(w,b,\alpha)$$</p>
+<p>&emsp;&emsp;因此，为了得到对偶问题的解，需要先求$ L(w,b,\alpha) $对$ w,b $的极小，再求对$ \alpha $的极大。我们可以得到下面的对偶最优化问题：<br>$$ \begin{align}<br>\min_\alpha \quad &amp; \frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i\alpha_jy_iy_j(x_i\cdot x_j)-\sum_{i=1}^{N}\alpha_i \\\<br>s.t. \quad &amp; \sum_{i=1}^{N}\alpha_iy_i=0 \\\<br>&amp; \alpha_i \ge 0, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
+<p>&emsp;&emsp;若对偶最优化的解为$   \alpha^*=(\alpha_1^*,\alpha_2^*,\cdots,\alpha_l^*)^T $，原始问题的最优解为$ (w^*,b^*) $，有KKT条件可知：<br>$$<br>w^* = \sum_{i=1}^{N}\alpha_i^*y_ix_i \\\<br>b^* =y_i-\sum_{i=1}^{N}\alpha_i^*y_i(x_i\cdot x_j)<br>$$</p>
+<p><strong>支持向量</strong><br>&emsp;&emsp;将训练数据集中对应于$ \alpha_i^* &gt; 0 $的样本点$ (x_i,y_i) $的实例$ x_i\in R^n $称为<strong>支持向量</strong>。有KKT互补条件可知：<br>$$\alpha_i^*(y_i(w^*\cdot x_i+b^*)-1) = 0, \quad i=1,2,\cdots,N$$</p>
+<p>&emsp;&emsp;中对应于$ \alpha_i^* &gt; 0 $的实例$ x_i $，有：<br>$$w^*\cdot x_i+b^* = \pm 1$$</p>
+<p>&emsp;&emsp;即$ x_i $一定在间隔边界上。<br><img src="/images/支持向量机-2.png" width="256" height="256" title="示例"></p>
+<p>&emsp;&emsp;综上所述，对于给定的线性可分的训练数据集，可以首先求对偶问题的解$ \alpha^* $；在求出原始问题的解$ (w^*,b^*) $；从而得到分离超平面及分类决策函数。这种算法称为线性可分的对偶学习算法。</p>
+<h2 id="u7EBF_u6027_u652F_u6301_u5411_u91CF_u673A_u4E0E_u8F6F_u95F4_u9694_u6700_u5927_u5316"><a href="#u7EBF_u6027_u652F_u6301_u5411_u91CF_u673A_u4E0E_u8F6F_u95F4_u9694_u6700_u5927_u5316" class="headerlink" title="线性支持向量机与软间隔最大化"></a>线性支持向量机与软间隔最大化</h2><h3 id="u7EBF_u6027_u652F_u6301_u5411_u91CF_u673A"><a href="#u7EBF_u6027_u652F_u6301_u5411_u91CF_u673A" class="headerlink" title="线性支持向量机"></a>线性支持向量机</h3><p>&emsp;&emsp;在线性不可分训练数据集中，上述的线性可分支持向量机的学习算法是不适用的，下面就需要修改硬间隔最大化为软间隔最大，即引入<strong>松弛变量</strong>$ \xi \ge 0 $，使函数间隔加上松弛变量大于1，即可得到线性不可分的线性支持向量机的学习问题变成下面的凸二次规划问题（原始问题）：<br>$$ \begin{align}<br>\max_{w,b,\xi} \quad &amp; \frac{1}{2}{||w||}^2 + C\sum_{i=1}^{N}\xi_i \\\<br>s.t. \quad &amp; y_i(w\cdot x_i + b) \ge 1 - \xi_i, \quad i=1,2,\cdots,N \\\<br>&amp; \xi_i \ge 0, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
+<p>&emsp;&emsp;由拉格朗日对偶性可得出原始问题的对偶问题是：<br>$$ \begin{align}<br>\min_\alpha \quad &amp; \frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i\alpha_jy_iy_j(x_i\cdot x_j)-\sum_{i=1}^{N}\alpha_i \\\<br>s.t. \quad &amp; \sum_{i=1}^{N}\alpha_iy_i=0 \\\<br>&amp; 0 \le \alpha_i \le C, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
+<p>&emsp;&emsp;同样的，若对偶问题的解为$   \alpha^*=(\alpha_1^*,\alpha_2^*,\cdots,\alpha_N^*)^T $，原始问题的最优解为$ (w^*,b^*) $，必须满足KKT条件（这里特别的列出了线性支持向量机的KKT条件，这对后面的学习算法（SMO算法）十分重要）：<br>$$ \begin{align}<br>\nabla_wL(w^*,b^*,\xi^*,\alpha^*,\mu^*) &amp; = w^*-\sum_{i=1}^{N}\alpha_i^*y_ix_i=0 \\\<br>\nabla_wL(w^*,b^*,\xi^*,\alpha^*,\mu^*) &amp; = -\sum_{i=1}^{N}\alpha_i^*y_i=0 \\\<br>\nabla_wL(w^*,b^*,\xi^*,\alpha^*,\mu^*) &amp; = C-\alpha^*-\mu^*=0 \\\<br>\alpha_i^*(y_i(w^*\cdot x_i+b^*)-1+\xi_i^*) &amp; = 0\\\<br>\mu_i^*\xi_i^* &amp; = 0 \\\<br>y_i(w^*\cdot x_i+b^*)-1+\xi_i^* &amp; \ge 0 \\\<br>\xi_i^* &amp; \ge 0 \\\<br>\alpha_i^* &amp; \ge 0 \\\<br>\mu_i^* &amp; \ge 0, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
+<p>&emsp;&emsp;并可推导出对于一个分量$ \alpha_j^* , 0 &lt; \alpha_j^* &lt; C$，则原始问题的解$ w^*,b^* $可按下式求得：<br>$$ \begin{align}<br>w^* &amp; = \sum_{i=1}^{N}\alpha_i^*y_ix_i \\\<br>b^* &amp; = y_j - \sum_{i=1}^{N}\alpha_i^*y_i(x_i\cdot x_j)<br>\end{align} $$</p>
+<p><strong>支持向量</strong><br>&emsp;&emsp;在线性不可分的情况下，将对偶问题的解$   \alpha^*=(\alpha_1^*,\alpha_2^*,\cdots,\alpha_N^*)^T $中对应于$ \alpha_i^* &gt; 0 $的样本点$ (x_i,y_i) $的实例$ x_i $称为支持向量（软间隔的支持向量）。这时的支持向量$ x_i $或者在间隔边界上，或者在间隔边界与分离超平面之间，或者在分离超平面误分类一侧。<br>&emsp;&emsp;- $ \alpha_i^* &lt; C $，则$ \xi_i^* = 0 $，支持变量$ x_i^* $恰好落在间隔边界上；<br>&emsp;&emsp;- $ \alpha_i^* = C $，则$ 0 &lt; \xi_i^* &lt; 1 $，则分类正确，支持变量$ x_i^* $恰好落在间隔边界与分离超平面之间；<br>&emsp;&emsp;- $ \alpha_i^* = C $，则$ \xi_i^* = 1 $，支持变量$ x_i^* $在分离超平面上；<br>&emsp;&emsp;- $ \alpha_i^* = C $，则$ \xi_i^* &gt; 1 $，支持变量$ x_i^* $位于分离超平面误分类一侧；</p>
 <h2 id="u652F_u6301_u5411_u91CF_u5206_u7C7B_u673A_28SVC_29"><a href="#u652F_u6301_u5411_u91CF_u5206_u7C7B_u673A_28SVC_29" class="headerlink" title="支持向量分类机(SVC)"></a>支持向量分类机(SVC)</h2><p>&emsp;&emsp;前面介绍了两种处理线性不可分问题，即线性软间隔分类机（线性支持向量分类机）和非线性硬间隔分类机（可分支持向量分类机）。综合这两种方法，得到更常用的非线性软间隔分类机，主要有以下两种形式：</p>
-<h3 id="24C_24-_u652F_u6301_u5411_u91CF_u673A_28_24C_24-SVC_29"><a href="#24C_24-_u652F_u6301_u5411_u91CF_u673A_28_24C_24-SVC_29" class="headerlink" title="$C$-支持向量机($C$-SVC)"></a>$C$-支持向量机($C$-SVC)</h3><p>&emsp;&emsp;原始问题：<br>$$ \begin{align}<br>\min_{w,b,\xi} \quad &amp; \frac{1}{2}{||w||}^2 + C\sum_{i=1}^{N}\xi_i \\<br>s.t. \quad &amp; y_i(w\cdot x_i + b) \ge 1 - \xi_i, \quad i=1,2,\cdots,N \\<br>&amp; \xi_i \ge 0, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
-<p>&emsp;&emsp;对偶问题：<br>$$ \begin{align}<br>\min_\alpha \quad &amp; \frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i\alpha_jy_iy_jK(x_i,x_j)-\sum_{i=1}^{N}\alpha_i \\<br>s.t. \quad &amp; \sum_{i=1}^{N}\alpha_iy_i=0 \\<br>&amp; 0 \le \alpha_i \le C, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
-<p>&emsp;&emsp;<strong>算法：</strong><br>&emsp;&emsp;（1）已知训练数据集$\ T=\{(x_1,y_1),(x_2,y_2),\cdots,(x_N,y_N)\}$，其中，$x_i\in\mathcal{X}= R^n,y\in\mathcal{Y}=\{-1,1\},\ i=1,2,\cdots,N $<br>&emsp;&emsp;（2）选取适当地核函数$\ K(x,x^{‘})\ $和适当的参数$\ C\ $，构造并求解优化问题：<br>$$\begin{align}<br>\min_\alpha \quad &amp; \frac{1}{2}\sum^N_{i=1}\sum^N_{j=1}y_iy_j\alpha_i\alpha_jK(x_i,x_j)-\sum^N_{j=1}\alpha_j \\<br>s.t. \quad &amp; \sum^N_{i=1}y_i\alpha_i=0 \\<br>&amp; 0 \le \alpha_i \le C, \quad i=1,2,\cdots,N<br>\end{align}$$</p>
-<p>&emsp;&emsp;的最优解$\ \alpha^*=(\alpha_1^*,\cdots,\alpha_n^*)$；<br>&emsp;&emsp;（3）选取$\ \alpha^*\ $的一个分量$\ 0&lt;\alpha_j^* &lt; C$，并据此计算阀值$\ b^*=y_j-\sum^N_{i=1}y_i\alpha_i^*K(x_i,x_j)$<br>&emsp;&emsp;（4）构造决策函数$\displaystyle\ f(x)=sgn\Big(\sum^N_{i=1}\alpha_i^*y_iK(x,x_i)+b^*\Big)。$</p>
-<h3 id="24v_24-_u652F_u6301_u5411_u91CF_u5206_u7C7B_u673A_28_24v_24-SVC_29"><a href="#24v_24-_u652F_u6301_u5411_u91CF_u5206_u7C7B_u673A_28_24v_24-SVC_29" class="headerlink" title="$v$-支持向量分类机($v$-SVC)"></a>$v$-支持向量分类机($v$-SVC)</h3><p>&emsp;&emsp;原始问题：<br>$$ \begin{align}<br>\min_{w,b,\xi,\rho} \quad &amp; \frac{1}{2}{||w||}^2 - v\rho + \frac{1}{N}\sum_{i=1}^{N}\xi_i \\<br>s.t. \quad &amp; y_i(w\cdot x_i + b) \ge \rho - \xi_i, \quad i=1,2,\cdots,N \\<br>&amp; \xi_i \ge 0, \quad i=1,2,\cdots,N \\<br>&amp; \rho \ge 0<br>\end{align} $$</p>
-<p>&emsp;&emsp;对偶问题：<br>$$ \begin{align}<br>\min_\alpha \quad &amp; \frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i\alpha_jy_iy_jK(x_i,x_j)-\sum_{i=1}^{N}\alpha_i \\<br>s.t. \quad &amp; \sum_{i=1}^{N}\alpha_iy_i=0 \\<br>&amp; 0 \le \alpha_i \le \frac{1}{N}, \quad i=1,2,\cdots,N \\<br>&amp; \sum^N_{i=1}\alpha_i \ge v<br>\end{align} $$</p>
-<p>&emsp;&emsp;<strong>算法：</strong><br>&emsp;&emsp;（1）已知训练数据集$\ T=\{(x_1,y_1),(x_2,y_2),\cdots,(x_N,y_N)\}$，其中，$x_i\in\mathcal{X}= R^n,y\in\mathcal{Y}=\{-1,1\},\ i=1,2,\cdots,N $<br>&emsp;&emsp;（2）选取适当地核函数$\ K(x,x^{‘})\ $和适当的参数$\ v\ $，构造并求解优化问题：<br>$$ \begin{align}<br>\min_\alpha \quad &amp; \frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i\alpha_jy_iy_jK(x_i,x_j)-\sum_{i=1}^{N}\alpha_i \\<br>s.t. \quad &amp; \sum_{i=1}^{N}\alpha_iy_i=0 \\<br>&amp; 0 \le \alpha_i \le \frac{1}{N}, \quad i=1,2,\cdots,N \\<br>&amp; \sum^N_{i=1}\alpha_i \ge v<br>\end{align} $$</p>
-<p>&emsp;&emsp;的最优解$\ \alpha^*=(\alpha_1^*,\cdots,\alpha_n^*)$；<br>&emsp;&emsp;（3）选取$\ j\in S_+=\{i\ |\ \alpha_i^*\in(0,1/N),y_i=1\},k\in S_-=\{i\ |\ \alpha_i^*\in(0,1/N),y_i=1\},\ $的一个分量$\ 0&lt;\alpha_j^* &lt; C$，并据此计算阀值:<br>$$\ b^*=-\frac{1}{2}\sum^N_{i=1}y_i\alpha_i^*(K(x_i,x_j)+K(x_i,x_k))$$<br>&emsp;&emsp;（4）构造决策函数$\displaystyle\ f(x)=sgn\Big(\sum^N_{i=1}\alpha_i^*y_iK(x,x_i)+b^*\Big)。$</p>
-<p>&emsp;&emsp;<strong>参数$\ v\ $的意义：</strong><br>&emsp;&emsp;间隔错误样本点的定义为：如果$\ \xi_i^*&gt;0$，则对应的样本点$\ (x_i,y_i)\ $为间隔错误样本点。由KKT条件可知间隔错误样本点$\ (x_i,y_i)\ $满足$\ y_i(w^*\cdot x_i+b)=\rho^* - \xi_i^*$，也即$\ y_i(w^*\cdot x_i+b)&lt;\rho^*\ $，相应地两个间隔超平面为：<br>$$(w^*\cdot x)+b^*=\pm\rho^*$$</p>
-<p>&emsp;&emsp;若记间隔错误样本点的个数为$\ p$，支持向量的个数为$\ q$，则有：$p/N \le v \le q/N$。<br>&emsp;&emsp;另外，在一定条件下，当样本点个数 $N\rightarrow\infty$ 时，$v$ 以1的概率渐近于支持向量个数和样本点个数之比。为 $v$ 值的选取提供了一个依据。</p>
+<h3 id="24C_24-_u652F_u6301_u5411_u91CF_u673A_28_24C_24-SVC_29"><a href="#24C_24-_u652F_u6301_u5411_u91CF_u673A_28_24C_24-SVC_29" class="headerlink" title="$C$-支持向量机($C$-SVC)"></a>$C$-支持向量机($C$-SVC)</h3><p>&emsp;&emsp;原始问题：<br>$$ \begin{align}<br>\min_{w,b,\xi} \quad &amp; \frac{1}{2}{||w||}^2 + C\sum_{i=1}^{N}\xi_i \\\<br>s.t. \quad &amp; y_i(w\cdot x_i + b) \ge 1 - \xi_i, \quad i=1,2,\cdots,N \\\<br>&amp; \xi_i \ge 0, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
+<p>&emsp;&emsp;对偶问题：<br>$$ \begin{align}<br>\min_\alpha \quad &amp; \frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i\alpha_jy_iy_jK(x_i,x_j)-\sum_{i=1}^{N}\alpha_i \\\<br>s.t. \quad &amp; \sum_{i=1}^{N}\alpha_iy_i=0 \\\<br>&amp; 0 \le \alpha_i \le C, \quad i=1,2,\cdots,N<br>\end{align} $$</p>
+<p>&emsp;&emsp;<strong>算法：</strong><br>&emsp;&emsp;（1）已知训练数据集$ T=\\{(x_1,y_1),(x_2,y_2),\cdots,(x_N,y_N)\\}$，其中，$x_i\in\mathcal{X}= R^n,y\in\mathcal{Y}=\\{-1,1\\}, i=1,2,\cdots,N $<br>&emsp;&emsp;（2）选取适当地核函数$ K(x,x^{‘}) $和适当的参数$ C $，构造并求解优化问题：<br>$$\begin{align}<br>\min_\alpha \quad &amp; \frac{1}{2}\sum^N_{i=1}\sum^N_{j=1}y_iy_j\alpha_i\alpha_jK(x_i,x_j)-\sum^N_{j=1}\alpha_j \\\<br>s.t. \quad &amp; \sum^N_{i=1}y_i\alpha_i=0 \\\<br>&amp; 0 \le \alpha_i \le C, \quad i=1,2,\cdots,N<br>\end{align}$$</p>
+<p>&emsp;&emsp;的最优解$ \alpha^*=(\alpha_1^*,\cdots,\alpha_n^*)$；<br>&emsp;&emsp;（3）选取$ \alpha^* $的一个分量$ 0&lt;\alpha_j^* &lt; C$，并据此计算阀值$ b^*=y_j-\sum^N_{i=1}y_i\alpha_i^*K(x_i,x_j)$<br>&emsp;&emsp;（4）构造决策函数$\displaystyle f(x)=sgn\Big(\sum^N_{i=1}\alpha_i^*y_iK(x,x_i)+b^*\Big)。$</p>
+<h3 id="24v_24-_u652F_u6301_u5411_u91CF_u5206_u7C7B_u673A_28_24v_24-SVC_29"><a href="#24v_24-_u652F_u6301_u5411_u91CF_u5206_u7C7B_u673A_28_24v_24-SVC_29" class="headerlink" title="$v$-支持向量分类机($v$-SVC)"></a>$v$-支持向量分类机($v$-SVC)</h3><p>&emsp;&emsp;原始问题：<br>$$ \begin{align}<br>\min_{w,b,\xi,\rho} \quad &amp; \frac{1}{2}{||w||}^2 - v\rho + \frac{1}{N}\sum_{i=1}^{N}\xi_i \\\<br>s.t. \quad &amp; y_i(w\cdot x_i + b) \ge \rho - \xi_i, \quad i=1,2,\cdots,N \\\<br>&amp; \xi_i \ge 0, \quad i=1,2,\cdots,N \\\<br>&amp; \rho \ge 0<br>\end{align} $$</p>
+<p>&emsp;&emsp;对偶问题：<br>$$ \begin{align}<br>\min_\alpha \quad &amp; \frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i\alpha_jy_iy_jK(x_i,x_j)-\sum_{i=1}^{N}\alpha_i \\\<br>s.t. \quad &amp; \sum_{i=1}^{N}\alpha_iy_i=0 \\\<br>&amp; 0 \le \alpha_i \le \frac{1}{N}, \quad i=1,2,\cdots,N \\\<br>&amp; \sum^N_{i=1}\alpha_i \ge v<br>\end{align} $$</p>
+<p>&emsp;&emsp;<strong>算法：</strong><br>&emsp;&emsp;（1）已知训练数据集$ T=\\{(x_1,y_1),(x_2,y_2),\cdots,(x_N,y_N)\\}$，其中，$x_i\in\mathcal{X}= R^n,y\in\mathcal{Y}=\\{-1,1\\}, i=1,2,\cdots,N $<br>&emsp;&emsp;（2）选取适当地核函数$ K(x,x^{‘}) $和适当的参数$ v $，构造并求解优化问题：<br>$$ \begin{align}<br>\min_\alpha \quad &amp; \frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i\alpha_jy_iy_jK(x_i,x_j)-\sum_{i=1}^{N}\alpha_i \\\<br>s.t. \quad &amp; \sum_{i=1}^{N}\alpha_iy_i=0 \\\<br>&amp; 0 \le \alpha_i \le \frac{1}{N}, \quad i=1,2,\cdots,N \\\<br>&amp; \sum^N_{i=1}\alpha_i \ge v<br>\end{align} $$</p>
+<p>&emsp;&emsp;的最优解$ \alpha^*=(\alpha_1^*,\cdots,\alpha_n^*)$；<br>&emsp;&emsp;（3）选取$ j\in S_+=\\{i | \alpha_i^*\in(0,1/N),y_i=1\\},k\in S_-=\\{i | \alpha_i^*\in(0,1/N),y_i=1\\}, $的一个分量$ 0&lt;\alpha_j^* &lt; C$，并据此计算阀值:<br>$$ b^*=-\frac{1}{2}\sum^N_{i=1}y_i\alpha_i^*(K(x_i,x_j)+K(x_i,x_k))$$<br>&emsp;&emsp;（4）构造决策函数$\displaystyle f(x)=sgn\Big(\sum^N_{i=1}\alpha_i^*y_iK(x,x_i)+b^*\Big)。$</p>
+<p>&emsp;&emsp;<strong>参数$ v $的意义：</strong><br>&emsp;&emsp;间隔错误样本点的定义为：如果$ \xi_i^*&gt;0$，则对应的样本点$ (x_i,y_i) $为间隔错误样本点。由KKT条件可知间隔错误样本点$ (x_i,y_i) $满足$ y_i(w^*\cdot x_i+b)=\rho^* - \xi_i^*$，也即$ y_i(w^*\cdot x_i+b)&lt;\rho^* $，相应地两个间隔超平面为：<br>$$(w^*\cdot x)+b^*=\pm\rho^*$$</p>
+<p>&emsp;&emsp;若记间隔错误样本点的个数为$ p$，支持向量的个数为$ q$，则有：$p/N \le v \le q/N$。<br>&emsp;&emsp;另外，在一定条件下，当样本点个数 $N\rightarrow\infty$ 时，$v$ 以1的概率渐近于支持向量个数和样本点个数之比。为 $v$ 值的选取提供了一个依据。</p>
 </span>
       
     </div>
@@ -323,13 +323,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/凸优化/" rel="tag">#凸优化</a>
+            <a href="/index.html/tags/凸优化/" rel="tag">#凸优化</a>
           
-            <a href="/tags/分类/" rel="tag">#分类</a>
+            <a href="/index.html/tags/分类/" rel="tag">#分类</a>
           
-            <a href="/tags/拉格朗日对偶性/" rel="tag">#拉格朗日对偶性</a>
+            <a href="/index.html/tags/拉格朗日对偶性/" rel="tag">#拉格朗日对偶性</a>
           
-            <a href="/tags/支持向量机/" rel="tag">#支持向量机</a>
+            <a href="/index.html/tags/支持向量机/" rel="tag">#支持向量机</a>
           
         </div>
       
@@ -338,7 +338,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/17/拉格朗日对偶性/" rel="next" title="拉格朗日对偶性">
+              <a href="/index.html/2015/12/17/拉格朗日对偶性/" rel="next" title="拉格朗日对偶性">
                 <i class="fa fa-chevron-left"></i> 拉格朗日对偶性
               </a>
             
@@ -346,7 +346,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/17/支持向量回归机/" rel="prev" title="支持向量回归机">
+              <a href="/index.html/2015/12/17/支持向量回归机/" rel="prev" title="支持向量回归机">
                 支持向量回归机 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -420,7 +420,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -434,7 +434,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -578,7 +578,7 @@
     <div class="back-to-top"></div>
   </div>
 
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+  <script type="text/javascript" src="/index.html/vendors/jquery/index.js?v=2.1.3"></script>
 
   
   
@@ -610,23 +610,23 @@
   
 
   
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/index.html/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/index.html/js/fancy-box.js?v=0.4.5.2"></script>
 
 
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+  <script type="text/javascript" src="/index.html/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/index.html/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/index.html/vendors/velocity/velocity.ui.min.js"></script>
 
-<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+<script type="text/javascript" src="/index.html/js/motion.js?v=0.4.5.2" id="motion.global"></script>
 
 
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  <script type="text/javascript" src="/index.html/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/index.html/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
   
   
-<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+<script type="text/javascript" src="/index.html/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
 
 
 <script type="text/javascript" id="sidebar.toc.highlight">
@@ -787,7 +787,7 @@
 
 
 
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/index.html/js/bootstrap.js"></script>
 
   
   

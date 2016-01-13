@@ -65,7 +65,7 @@ $$\begin{aligned}
 \min \quad &amp; cx \\
 s.t. \quad &amp; Ax=b \\
 &amp; x \ge">
-<meta property="og:updated_time" content="2016-01-12T11:48:01.000Z">
+<meta property="og:updated_time" content="2016-01-13T05:42:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="整数规划">
 <meta name="twitter:description" content="整数规划如果除了目标函数和约束函数是线性函数以外，还要求决策变量取整数值，那么这类问题就是线性整数规划，简称为整数规划。其中，如果要求所有变量都要取整数值，则称纯整数规划；如果部分变量取整数值，则称混合整数规划；如果要求变量取 0 或 1，则称0-1规划。一般表示为：
@@ -299,7 +299,7 @@ s.t. \quad & Ax=b \\
 其中，$IN$ 是取整数变量的下标集。
 </p>
 <h2 id="u5272_u5E73_u9762_u6CD5"><a href="#u5272_u5E73_u9762_u6CD5" class="headerlink" title="割平面法"></a>割平面法</h2><p>1958年，R.E.gomory 创立了解整数规划的割平面法。这种方法的思想是<strong>首先求解整数规划的线性松弛问题，如果得到的最优解满足整数的要求，则为整数规划的最优解；否则选择一个不满足整数要求的基变量，定义一个新约束，添加到原来的约束集中。这个约束的作用是：切掉一切不满足整数要求的可行解，缩小可行域，而保留所有整数可行解。然后，解新的松弛线性规划。重复以上过程，直至求出最优解。</strong>这个方法中，关键是如果定义切割约束，下面给予简要介绍。<br>
-考略整数规划问题：
+考虑整数规划问题：
 $$\begin{aligned}
 \min \quad & cx \\
 s.t. \quad & Ax=b \\
@@ -310,6 +310,45 @@ s.t. \quad & Ax=b \\
 $$\begin{aligned}
 \min \quad & cx \\
 s.t. \quad & Ax=b \\
+& x \ge 0
+\end{aligned}$$
+
+</p>
+<p>其中，$A=(p_1,p_2,\cdots,p_n)$ 为 $m\times n$ 矩阵，设该问题的最优基为 $B$，则最优解为：<br>
+$$x^*=\left[\begin{array}{ccc}
+x_B \\
+x_N
+\end{array}\right]=\left[\begin{array}{ccc}
+B^{-1}b \\
+0
+\end{array}\right]=\left[\begin{array}{ccc}
+\overline{b} \\
+0
+\end{array}\right] \ge 0$$
+
+若 $x^*$ 的分量都为整数，则 $x^*$ 是整数规划的最优解；否则选择其中一个非整数基变量，比如 $x_{B_i}$，用包含这个基变量的约束定义切割约束，方法如下：
+
+假设含有 $x_B$ 的约束为：
+$$x_{B_i}+\sum_{j\in R}y_{ij}x_j = \overline{b}_i$$
+
+其中 $R$ 是非基变量的下标集，$y_{ij}$ 是 $B^{-1}p_j$ 的第 $i$ 个分量。记做：
+$$y_{ij} = [y_{ij}] + f_{ij},\quad j\in R \\
+\overline{b}_i = [\overline{b}_i] + f_i$$
+
+式中 $[y_{ij}]$ 和 $[\overline{b}_i]$ 表示不大于其数值的最大整数，$f_{ij}$ 和 $f_i$ 分别表示其相应的小数部分。则约束方程可以写为：
+$$x_{B_i}+\sum_{j\in R}[y_{ij}]x_j-[\overline{b}_i]=f_i - \sum_{j\in R}f_{ij}x_j$$
+
+由于 $0 < f_i < 1,0\le f_{ij} < 1,x_j \ge 0$，则有：
+$$f_i - \sum_{j\in R}f_{ij}x_j < 1$$
+
+对于任意整数可行解，上式左端为整数，右端为小于 1 的整数，则得到整数解得必要条件是：
+$$f_i - \sum_{j\in R}f_{ij}x_j \le 0$$
+
+将上式作为切割条件，添加到约束条件中，得到线性规划：
+$$\begin{aligned}
+\min \quad & cx \\
+s.t. \quad & Ax=b \\
+& f_i - \sum_{j\in R}f_{ij}x_j \le 0 \\
 & x \ge 0
 \end{aligned}$$
 

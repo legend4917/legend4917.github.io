@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="凸优化," />
+  <meta name="keywords" content="梯度下降,正则方程," />
 
 
 
@@ -51,16 +51,16 @@
 
 
 
-<meta name="description" content="&amp;emsp;&amp;emsp;研究凸优化问题是因为其有一套非常完备的求解算法，如果将某个优化问题确认或者转化为凸优化问题，那么能够快速给出最优解。在MATLAB软件里面有相应的软件包，可以用来学习。也可以利用其他的开源的计算软件，利用现成的软件包来解决凸优化问题。">
+<meta name="description" content="在进行线性回归时，代价函数往往是残差平方和，通过使得残差平方和最小从而取得最优解。在最小化残差平方和过程中，最常用的是梯度下降算法(Gradient Descent)和正则方程(Normal Equation)，但各有优缺点，下面进行简单讨论。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="凸优化">
-<meta property="og:url" content="http://yoursite.com/2016/01/12/凸优化/index.html">
+<meta property="og:title" content="吴恩达视频学习笔记(一)：Gradient Descent & Normal Equation">
+<meta property="og:url" content="http://yoursite.com/2016/03/26/吴恩达视频学习笔记(一)：Gradient Descent & Normal Equation/index.html">
 <meta property="og:site_name" content="witness">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;研究凸优化问题是因为其有一套非常完备的求解算法，如果将某个优化问题确认或者转化为凸优化问题，那么能够快速给出最优解。在MATLAB软件里面有相应的软件包，可以用来学习。也可以利用其他的开源的计算软件，利用现成的软件包来解决凸优化问题。">
-<meta property="og:updated_time" content="2016-01-12T05:27:23.000Z">
+<meta property="og:description" content="在进行线性回归时，代价函数往往是残差平方和，通过使得残差平方和最小从而取得最优解。在最小化残差平方和过程中，最常用的是梯度下降算法(Gradient Descent)和正则方程(Normal Equation)，但各有优缺点，下面进行简单讨论。">
+<meta property="og:updated_time" content="2016-03-26T09:46:05.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="凸优化">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;研究凸优化问题是因为其有一套非常完备的求解算法，如果将某个优化问题确认或者转化为凸优化问题，那么能够快速给出最优解。在MATLAB软件里面有相应的软件包，可以用来学习。也可以利用其他的开源的计算软件，利用现成的软件包来解决凸优化问题。">
+<meta name="twitter:title" content="吴恩达视频学习笔记(一)：Gradient Descent & Normal Equation">
+<meta name="twitter:description" content="在进行线性回归时，代价函数往往是残差平方和，通过使得残差平方和最小从而取得最优解。在最小化残差平方和过程中，最常用的是梯度下降算法(Gradient Descent)和正则方程(Normal Equation)，但各有优缺点，下面进行简单讨论。">
 
 
 
@@ -72,7 +72,7 @@
   };
 </script>
 
-  <title> 凸优化 | witness </title>
+  <title> 吴恩达视频学习笔记(一)：Gradient Descent & Normal Equation | witness </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -222,7 +222,7 @@
             
             
               
-                凸优化
+                吴恩达视频学习笔记(一)：Gradient Descent & Normal Equation
               
             
           </h1>
@@ -231,8 +231,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-01-12T13:27:23+08:00" content="2016-01-12">
-              2016-01-12
+            <time itemprop="dateCreated" datetime="2016-03-26T16:51:03+08:00" content="2016-03-26">
+              2016-03-26
             </time>
           </span>
 
@@ -241,8 +241,8 @@
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/数学/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
                   </a>
                 </span>
 
@@ -257,8 +257,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/01/12/凸优化/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/12/凸优化/" itemprop="commentsCount"></span>
+                <a href="/2016/03/26/吴恩达视频学习笔记(一)：Gradient Descent & Normal Equation/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/26/吴恩达视频学习笔记(一)：Gradient Descent & Normal Equation/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -277,12 +277,18 @@
       
 
       
-        <span itemprop="articleBody"><p>&emsp;&emsp;研究凸优化问题是因为其有一套非常完备的求解算法，如果将某个优化问题确认或者转化为凸优化问题，那么能够快速给出最优解。在MATLAB软件里面有相应的软件包，可以用来学习。也可以利用其他的开源的计算软件，利用现成的软件包来解决凸优化问题。<br><a id="more"></a></p>
-<h2 id="u51F8_u4F18_u5316_u95EE_u9898"><a href="#u51F8_u4F18_u5316_u95EE_u9898" class="headerlink" title="凸优化问题"></a>凸优化问题</h2><p>&emsp;&emsp;凸优化问题的标准形式为：<br>$$\begin{align}<br>minimize \quad &amp; f_0(x) \\\<br>subject to \quad &amp; f_i(x)\le 0, \quad i=1,2,\cdots,m \\\<br>&amp; a_i^Tx=b_i, \quad i=1,2,\cdots, p<br>\end{align}$$<br>&emsp;&emsp;其中，<strong>目标函数必须是凸函数，不等式约束函数必须是凸函数，等式约束函数必须是仿射函数</strong>。由约束条件得到的定义域为凸集，即凸优化问题是在凸集上最小化目标凸函数。<br>&emsp;&emsp;凸优化问题的一个十分重要的性质是：<strong>凸优化问题的任何局部最优解也是全局最优解</strong>。</p>
-<h2 id="u7EBF_u6027_u4F18_u5316_u95EE_u9898_28LP_29"><a href="#u7EBF_u6027_u4F18_u5316_u95EE_u9898_28LP_29" class="headerlink" title="线性优化问题(LP)"></a>线性优化问题(LP)</h2><p>&emsp;&emsp;线性优化的一般形式为：<br>$$\begin{align}<br>minimize \quad &amp; c^Tx+d \\\<br>subject to \quad &amp; Gx\le h,  \\\<br>&amp; Ax=b,<br>\end{align}$$<br>&emsp;&emsp;其目标函数和约束函数都是仿射函数。可行集是一个超平面，也即LP问题是在约束超平面上最小化目标函数。<br>&emsp;&emsp;<strong>标准形式的线性规划问题(standard form LP)</strong><br>$$\begin{align}<br>minimize \quad &amp; c^Tx \\\<br>subject to \quad &amp; Ax=b,  \\\<br>&amp; x\ge 0<br>\end{align}$$<br>&emsp;&emsp;<strong>不等式形式的线性规划问题(inequality form LP)</strong><br>$$\begin{align}<br>minimize \quad &amp; c^Tx \\\<br>subject to \quad &amp; Ax\le b,<br>\end{align}$$</p>
-<h2 id="u4E8C_u6B21_u4F18_u5316_u95EE_u9898"><a href="#u4E8C_u6B21_u4F18_u5316_u95EE_u9898" class="headerlink" title="二次优化问题"></a>二次优化问题</h2><h3 id="u51F8_u4E8C_u6B21_u89C4_u5212_u95EE_u9898_28QP_29"><a href="#u51F8_u4E8C_u6B21_u89C4_u5212_u95EE_u9898_28QP_29" class="headerlink" title="凸二次规划问题(QP)"></a>凸二次规划问题(QP)</h3><p>&emsp;&emsp;凸二次规划的形式为：<br>$$\begin{align}<br>minimize \quad &amp; 1/2x^TPx+q^Tx+r \\\<br>subject to \quad &amp; Gx\le h, \\\<br>&amp; Ax=b,<br>\end{align}$$<br>&emsp;&emsp;其中 $P$ 是半正定矩阵，目标函数是凸二次函数，约束函数都是仿射函数。凸二次规划是在超平面上最小化目标函数。</p>
-<h3 id="u4E8C_u6B21_u7EA6_u675F_u51F8_u4E8C_u6B21_u89C4_u5212_u95EE_u9898_28QCQP_29"><a href="#u4E8C_u6B21_u7EA6_u675F_u51F8_u4E8C_u6B21_u89C4_u5212_u95EE_u9898_28QCQP_29" class="headerlink" title="二次约束凸二次规划问题(QCQP)"></a>二次约束凸二次规划问题(QCQP)</h3><p>&emsp;&emsp;QCQP的形式为：<br>$$\begin{align}<br>minimize \quad &amp; (1/2)x^TP_0x+q_0^Tx+r_0 \\\<br>subject to \quad &amp; (1/2)x^TP_ix+q_i^Tx+r_i \le 0, \quad i=1,2,\cdots,m \\\<br>&amp; Ax=b,<br>\end{align}$$</p>
-<h2 id="u4E8C_u9636_u9525_u89C4_u5212_28SOCP_29"><a href="#u4E8C_u9636_u9525_u89C4_u5212_28SOCP_29" class="headerlink" title="二阶锥规划(SOCP)"></a>二阶锥规划(SOCP)</h2><p>&emsp;&emsp;二阶锥规划(SOCP)的形式如下：<br>$$\begin{align}<br>minimize \quad &amp; f^Tx\\\<br>subject to \quad &amp; |A_ix+b_i|_2\le c_i^Tx+d_i, \quad i=1,2,\cdots,m \\\<br>&amp; Fx=g,<br>\end{align}$$<br>&emsp;&emsp;其中约束形式：$|Ax+b|_2\le c^Tx+d$ 称为二阶锥约束。如果 $c_i=0,i=1,2,\cdots,m$ ，那么SOCP问题与QCQP问题等价；如果 $A_i=0,i=1,2,\cdots,m$ ，那么SOCP问题与LP问题等价。</p>
+        <span itemprop="articleBody"><p>在进行线性回归时，代价函数往往是残差平方和，通过使得残差平方和最小从而取得最优解。在最小化残差平方和过程中，最常用的是梯度下降算法(Gradient Descent)和正则方程(Normal Equation)，但各有优缺点，下面进行简单讨论。<br><a id="more"></a></p>
+<h2 id="u6B63_u5219_u65B9_u7A0B_28Normal_Equation_29"><a href="#u6B63_u5219_u65B9_u7A0B_28Normal_Equation_29" class="headerlink" title="正则方程(Normal Equation)"></a>正则方程(Normal Equation)</h2><p>很多书籍都介绍了梯度下降算法，这里就不介绍梯度下降算法的原理的，下面简单的介绍一下正则方程(Normal Equation)的原理。</p>
+<p>给定数据$x_{i}\in\{x^{(1)},x^{(2)},\cdots,x^{(m)}\}$，即：<br>$$<br>X = \left [ \begin{matrix}<br>1 &amp; x_{11} &amp; x_{12} &amp; \cdots &amp; x_{1n} \\<br>\vdots &amp; \vdots &amp; \vdots &amp;   &amp; \vdots \\<br>x_{m1} &amp; x_{m2} &amp; \cdots &amp; x_{mn} \\<br>\end{matrix}\right ]<br>$$</p>
+<p>对应标签$y_i\in\{y^{(1)},y^{(2)},\cdots,y^{(m)}\}$，线性回归是求解一组参数$\theta_0,\theta_1,\cdots,\theta_n$，使得残差平方和$\sum_{i=1}^{n}(h_{\theta}(x_i)-y_i)^2$最小。也即求解$X\Theta = Y$的最小二乘解。</p>
+<p>一般来说，<br>$$\delta_i=\sum_{j=1}^{n}x_{ij}\theta_j-y_i\quad (i=1,2,\cdots,m)$$</p>
+<p>不会全为0，因此我们的目标是求解一组$\Theta^* = \{ \theta^*_{1},\theta^*_{2},\cdots,\theta^*_{n}\}$，使得<br>$$\phi(\theta_{1},\theta_{2},\cdots,\theta_{n})=\sum_{i=1}^{m}\delta^2=\sum_{i=1}^{m}(\sum_{j=1}^{n}x_{ij}\theta_j-y_i)^2$$</p>
+<p>取最小值。对其求偏导得：<br>$$\frac{\partial\phi}{\partial\theta_k}=2\sum_{i=1}^{m}(\sum_{j=1}^{n}\theta_jx_{ij}-y_i)x_{ik}=0\quad (k=1,2,\cdots,n)$$</p>
+<p>即：<br>$$\sum_{j=1}^{n}\sum_{i=1}^{m}x_{ij}x_{ik}\theta_j=\sum_{i=1}^{m}x_{ik}y_i$$</p>
+<p>用矩阵表示即：<br>$$X^TX\Theta=X^TY$$</p>
+<p>所以$\Theta=(X^TX)^{-1}X^TY$，即得线性回归模型残差平方和最小的解。若加入正则化项，代价函数为：<br>$$cost(h_\theta(x))=\frac{1}{2m}(\sum^m_{i=1}(h_\theta(x_i)-y_i)^2+\lambda\sum^n_{i=1}\theta^2)$$</p>
+<p>则其最优解为：<br>$$\Theta=(X^TX+\lambda\left [ \begin{matrix}<br>0 &amp; 0 &amp; 0 &amp; \cdots &amp; 0 \\<br>0 &amp; 1 &amp; 0 &amp; \cdots &amp; 0 \\<br>0 &amp; 0 &amp; 1 &amp; \cdots &amp; 0 \\<br>\vdots &amp; \vdots &amp; \vdots &amp;   &amp; \vdots \\<br>0 &amp; 0 &amp; 0 &amp; \cdots &amp; 1 \\<br>\end{matrix}\right ])^{-1}X^TY$$</p>
+<h2 id="Gradient_Descent_u4E0ENormal_Equation_u6BD4_u8F83"><a href="#Gradient_Descent_u4E0ENormal_Equation_u6BD4_u8F83" class="headerlink" title="Gradient Descent与Normal Equation比较"></a>Gradient Descent与Normal Equation比较</h2><p>Gradient Descent的方法进行线性回归有如下特点：<br>(1)需要预先选定Learning rate；<br>(2)需要多次iteration；<br>(3)需要Feature Scaling；<br>而Normal Equation的特点：简单、方便、不需要Feature Scaling。但在使用时收数据特征规模的影响：<br><strong>当Feature数量小于100000时使用Normal Equation；<br>当Feature数量大于100000时使用Gradient Descent；</strong></p>
 </span>
       
     </div>
@@ -291,7 +297,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/凸优化/" rel="tag">#凸优化</a>
+            <a href="/tags/梯度下降/" rel="tag">#梯度下降</a>
+          
+            <a href="/tags/正则方程/" rel="tag">#正则方程</a>
           
         </div>
       
@@ -300,17 +308,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/17/K-均值聚类算法/" rel="next" title="K-均值聚类算法">
-                <i class="fa fa-chevron-left"></i> K-均值聚类算法
+              <a href="/2016/01/12/整数规划/" rel="next" title="整数规划">
+                <i class="fa fa-chevron-left"></i> 整数规划
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/01/12/单纯形方法/" rel="prev" title="单纯形方法">
-                单纯形方法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -337,8 +341,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/01/12/凸优化/"
-           data-title="凸优化" data-url="http://yoursite.com/2016/01/12/凸优化/">
+      <div class="ds-thread" data-thread-key="2016/03/26/吴恩达视频学习笔记(一)：Gradient Descent & Normal Equation/"
+           data-title="吴恩达视频学习笔记(一)：Gradient Descent & Normal Equation" data-url="http://yoursite.com/2016/03/26/吴恩达视频学习笔记(一)：Gradient Descent & Normal Equation/">
       </div>
     
   </div>
@@ -493,7 +497,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u51F8_u4F18_u5316_u95EE_u9898"><span class="nav-number">1.</span> <span class="nav-text">凸优化问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7EBF_u6027_u4F18_u5316_u95EE_u9898_28LP_29"><span class="nav-number">2.</span> <span class="nav-text">线性优化问题(LP)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4E8C_u6B21_u4F18_u5316_u95EE_u9898"><span class="nav-number">3.</span> <span class="nav-text">二次优化问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u51F8_u4E8C_u6B21_u89C4_u5212_u95EE_u9898_28QP_29"><span class="nav-number">3.1.</span> <span class="nav-text">凸二次规划问题(QP)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u4E8C_u6B21_u7EA6_u675F_u51F8_u4E8C_u6B21_u89C4_u5212_u95EE_u9898_28QCQP_29"><span class="nav-number">3.2.</span> <span class="nav-text">二次约束凸二次规划问题(QCQP)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4E8C_u9636_u9525_u89C4_u5212_28SOCP_29"><span class="nav-number">4.</span> <span class="nav-text">二阶锥规划(SOCP)</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u6B63_u5219_u65B9_u7A0B_28Normal_Equation_29"><span class="nav-number">1.</span> <span class="nav-text">正则方程(Normal Equation)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradient_Descent_u4E0ENormal_Equation_u6BD4_u8F83"><span class="nav-number">2.</span> <span class="nav-text">Gradient Descent与Normal Equation比较</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

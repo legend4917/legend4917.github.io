@@ -57,7 +57,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/03/26/吴恩达视频学习笔记(一)：Gradient Descent & Normal Equation/index.html">
 <meta property="og:site_name" content="witness">
 <meta property="og:description" content="在进行线性回归时，代价函数往往是残差平方和，通过使得残差平方和最小从而取得最优解。在最小化残差平方和过程中，最常用的是梯度下降算法(Gradient Descent)和正则方程(Normal Equation)，但各有优缺点，下面进行简单讨论。">
-<meta property="og:updated_time" content="2016-03-26T09:46:05.000Z">
+<meta property="og:updated_time" content="2016-03-26T09:49:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="吴恩达视频学习笔记(一)：Gradient Descent & Normal Equation">
 <meta name="twitter:description" content="在进行线性回归时，代价函数往往是残差平方和，通过使得残差平方和最小从而取得最优解。在最小化残差平方和过程中，最常用的是梯度下降算法(Gradient Descent)和正则方程(Normal Equation)，但各有优缺点，下面进行简单讨论。">
@@ -279,7 +279,7 @@
       
         <span itemprop="articleBody"><p>在进行线性回归时，代价函数往往是残差平方和，通过使得残差平方和最小从而取得最优解。在最小化残差平方和过程中，最常用的是梯度下降算法(Gradient Descent)和正则方程(Normal Equation)，但各有优缺点，下面进行简单讨论。<br><a id="more"></a></p>
 <h2 id="u6B63_u5219_u65B9_u7A0B_28Normal_Equation_29"><a href="#u6B63_u5219_u65B9_u7A0B_28Normal_Equation_29" class="headerlink" title="正则方程(Normal Equation)"></a>正则方程(Normal Equation)</h2><p>很多书籍都介绍了梯度下降算法，这里就不介绍梯度下降算法的原理的，下面简单的介绍一下正则方程(Normal Equation)的原理。</p>
-<p>给定数据$x_{i}\in\{x^{(1)},x^{(2)},\cdots,x^{(m)}\}$，即：<br>$$<br>X = \left [ \begin{matrix}<br>1 &amp; x_{11} &amp; x_{12} &amp; \cdots &amp; x_{1n} \\<br>\vdots &amp; \vdots &amp; \vdots &amp;   &amp; \vdots \\<br>x_{m1} &amp; x_{m2} &amp; \cdots &amp; x_{mn} \\<br>\end{matrix}\right ]<br>$$</p>
+<p>给定数据$x_{i}\in\{x^{(1)},x^{(2)},\cdots,x^{(m)}\}$，即：<br>$$<br>X = \left [ \begin{matrix}<br>1 &amp; x_{11} &amp; x_{12} &amp; \cdots &amp; x_{1n} \\<br>\vdots &amp; \vdots &amp; \vdots &amp;   &amp; \vdots \\<br>1 &amp; x_{m1} &amp; x_{m2} &amp; \cdots &amp; x_{mn} \\<br>\end{matrix}\right ]<br>$$</p>
 <p>对应标签$y_i\in\{y^{(1)},y^{(2)},\cdots,y^{(m)}\}$，线性回归是求解一组参数$\theta_0,\theta_1,\cdots,\theta_n$，使得残差平方和$\sum_{i=1}^{n}(h_{\theta}(x_i)-y_i)^2$最小。也即求解$X\Theta = Y$的最小二乘解。</p>
 <p>一般来说，<br>$$\delta_i=\sum_{j=1}^{n}x_{ij}\theta_j-y_i\quad (i=1,2,\cdots,m)$$</p>
 <p>不会全为0，因此我们的目标是求解一组$\Theta^* = \{ \theta^*_{1},\theta^*_{2},\cdots,\theta^*_{n}\}$，使得<br>$$\phi(\theta_{1},\theta_{2},\cdots,\theta_{n})=\sum_{i=1}^{m}\delta^2=\sum_{i=1}^{m}(\sum_{j=1}^{n}x_{ij}\theta_j-y_i)^2$$</p>

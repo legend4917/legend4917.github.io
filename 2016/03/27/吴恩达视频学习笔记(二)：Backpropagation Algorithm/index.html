@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="凸优化," />
+  <meta name="keywords" content="BP算法,神经网络," />
 
 
 
@@ -51,16 +51,18 @@
 
 
 
-<meta name="description" content="&amp;emsp;&amp;emsp;研究凸优化问题是因为其有一套非常完备的求解算法，如果将某个优化问题确认或者转化为凸优化问题，那么能够快速给出最优解。在MATLAB软件里面有相应的软件包，可以用来学习。也可以利用其他的开源的计算软件，利用现成的软件包来解决凸优化问题。">
+<meta name="description" content="BP算法(逆向传播算法)一种训练神经网络的算法，通过误差逆向传播和梯度下降算法，训练网络中的参数。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="凸优化">
-<meta property="og:url" content="http://yoursite.com/2016/01/12/凸优化/index.html">
+<meta property="og:title" content="吴恩达视频学习笔记(二)：Backpropagation Algorithm">
+<meta property="og:url" content="http://yoursite.com/2016/03/27/吴恩达视频学习笔记(二)：Backpropagation Algorithm/index.html">
 <meta property="og:site_name" content="witness">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;研究凸优化问题是因为其有一套非常完备的求解算法，如果将某个优化问题确认或者转化为凸优化问题，那么能够快速给出最优解。在MATLAB软件里面有相应的软件包，可以用来学习。也可以利用其他的开源的计算软件，利用现成的软件包来解决凸优化问题。">
-<meta property="og:updated_time" content="2016-01-12T05:27:23.000Z">
+<meta property="og:description" content="BP算法(逆向传播算法)一种训练神经网络的算法，通过误差逆向传播和梯度下降算法，训练网络中的参数。">
+<meta property="og:image" content="http://yoursite.com/images/吴恩达视频学习笔记(二)-1.png">
+<meta property="og:image" content="http://yoursite.com/images/吴恩达视频学习笔记(二)-2.png">
+<meta property="og:updated_time" content="2016-03-27T13:54:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="凸优化">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;研究凸优化问题是因为其有一套非常完备的求解算法，如果将某个优化问题确认或者转化为凸优化问题，那么能够快速给出最优解。在MATLAB软件里面有相应的软件包，可以用来学习。也可以利用其他的开源的计算软件，利用现成的软件包来解决凸优化问题。">
+<meta name="twitter:title" content="吴恩达视频学习笔记(二)：Backpropagation Algorithm">
+<meta name="twitter:description" content="BP算法(逆向传播算法)一种训练神经网络的算法，通过误差逆向传播和梯度下降算法，训练网络中的参数。">
 
 
 
@@ -72,7 +74,7 @@
   };
 </script>
 
-  <title> 凸优化 | witness </title>
+  <title> 吴恩达视频学习笔记(二)：Backpropagation Algorithm | witness </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -222,7 +224,7 @@
             
             
               
-                凸优化
+                吴恩达视频学习笔记(二)：Backpropagation Algorithm
               
             
           </h1>
@@ -231,8 +233,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-01-12T13:27:23+08:00" content="2016-01-12">
-              2016-01-12
+            <time itemprop="dateCreated" datetime="2016-03-27T16:58:07+08:00" content="2016-03-27">
+              2016-03-27
             </time>
           </span>
 
@@ -241,8 +243,8 @@
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/数学/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
                   </a>
                 </span>
 
@@ -257,8 +259,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/01/12/凸优化/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/12/凸优化/" itemprop="commentsCount"></span>
+                <a href="/2016/03/27/吴恩达视频学习笔记(二)：Backpropagation Algorithm/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/27/吴恩达视频学习笔记(二)：Backpropagation Algorithm/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -277,12 +279,36 @@
       
 
       
-        <span itemprop="articleBody"><p>&emsp;&emsp;研究凸优化问题是因为其有一套非常完备的求解算法，如果将某个优化问题确认或者转化为凸优化问题，那么能够快速给出最优解。在MATLAB软件里面有相应的软件包，可以用来学习。也可以利用其他的开源的计算软件，利用现成的软件包来解决凸优化问题。<br><a id="more"></a></p>
-<h2 id="u51F8_u4F18_u5316_u95EE_u9898"><a href="#u51F8_u4F18_u5316_u95EE_u9898" class="headerlink" title="凸优化问题"></a>凸优化问题</h2><p>&emsp;&emsp;凸优化问题的标准形式为：<br>$$\begin{align}<br>minimize \quad &amp; f_0(x) \\\<br>subject to \quad &amp; f_i(x)\le 0, \quad i=1,2,\cdots,m \\\<br>&amp; a_i^Tx=b_i, \quad i=1,2,\cdots, p<br>\end{align}$$<br>&emsp;&emsp;其中，<strong>目标函数必须是凸函数，不等式约束函数必须是凸函数，等式约束函数必须是仿射函数</strong>。由约束条件得到的定义域为凸集，即凸优化问题是在凸集上最小化目标凸函数。<br>&emsp;&emsp;凸优化问题的一个十分重要的性质是：<strong>凸优化问题的任何局部最优解也是全局最优解</strong>。</p>
-<h2 id="u7EBF_u6027_u4F18_u5316_u95EE_u9898_28LP_29"><a href="#u7EBF_u6027_u4F18_u5316_u95EE_u9898_28LP_29" class="headerlink" title="线性优化问题(LP)"></a>线性优化问题(LP)</h2><p>&emsp;&emsp;线性优化的一般形式为：<br>$$\begin{align}<br>minimize \quad &amp; c^Tx+d \\\<br>subject to \quad &amp; Gx\le h,  \\\<br>&amp; Ax=b,<br>\end{align}$$<br>&emsp;&emsp;其目标函数和约束函数都是仿射函数。可行集是一个超平面，也即LP问题是在约束超平面上最小化目标函数。<br>&emsp;&emsp;<strong>标准形式的线性规划问题(standard form LP)</strong><br>$$\begin{align}<br>minimize \quad &amp; c^Tx \\\<br>subject to \quad &amp; Ax=b,  \\\<br>&amp; x\ge 0<br>\end{align}$$<br>&emsp;&emsp;<strong>不等式形式的线性规划问题(inequality form LP)</strong><br>$$\begin{align}<br>minimize \quad &amp; c^Tx \\\<br>subject to \quad &amp; Ax\le b,<br>\end{align}$$</p>
-<h2 id="u4E8C_u6B21_u4F18_u5316_u95EE_u9898"><a href="#u4E8C_u6B21_u4F18_u5316_u95EE_u9898" class="headerlink" title="二次优化问题"></a>二次优化问题</h2><h3 id="u51F8_u4E8C_u6B21_u89C4_u5212_u95EE_u9898_28QP_29"><a href="#u51F8_u4E8C_u6B21_u89C4_u5212_u95EE_u9898_28QP_29" class="headerlink" title="凸二次规划问题(QP)"></a>凸二次规划问题(QP)</h3><p>&emsp;&emsp;凸二次规划的形式为：<br>$$\begin{align}<br>minimize \quad &amp; 1/2x^TPx+q^Tx+r \\\<br>subject to \quad &amp; Gx\le h, \\\<br>&amp; Ax=b,<br>\end{align}$$<br>&emsp;&emsp;其中 $P$ 是半正定矩阵，目标函数是凸二次函数，约束函数都是仿射函数。凸二次规划是在超平面上最小化目标函数。</p>
-<h3 id="u4E8C_u6B21_u7EA6_u675F_u51F8_u4E8C_u6B21_u89C4_u5212_u95EE_u9898_28QCQP_29"><a href="#u4E8C_u6B21_u7EA6_u675F_u51F8_u4E8C_u6B21_u89C4_u5212_u95EE_u9898_28QCQP_29" class="headerlink" title="二次约束凸二次规划问题(QCQP)"></a>二次约束凸二次规划问题(QCQP)</h3><p>&emsp;&emsp;QCQP的形式为：<br>$$\begin{align}<br>minimize \quad &amp; (1/2)x^TP_0x+q_0^Tx+r_0 \\\<br>subject to \quad &amp; (1/2)x^TP_ix+q_i^Tx+r_i \le 0, \quad i=1,2,\cdots,m \\\<br>&amp; Ax=b,<br>\end{align}$$</p>
-<h2 id="u4E8C_u9636_u9525_u89C4_u5212_28SOCP_29"><a href="#u4E8C_u9636_u9525_u89C4_u5212_28SOCP_29" class="headerlink" title="二阶锥规划(SOCP)"></a>二阶锥规划(SOCP)</h2><p>&emsp;&emsp;二阶锥规划(SOCP)的形式如下：<br>$$\begin{align}<br>minimize \quad &amp; f^Tx\\\<br>subject to \quad &amp; |A_ix+b_i|_2\le c_i^Tx+d_i, \quad i=1,2,\cdots,m \\\<br>&amp; Fx=g,<br>\end{align}$$<br>&emsp;&emsp;其中约束形式：$|Ax+b|_2\le c^Tx+d$ 称为二阶锥约束。如果 $c_i=0,i=1,2,\cdots,m$ ，那么SOCP问题与QCQP问题等价；如果 $A_i=0,i=1,2,\cdots,m$ ，那么SOCP问题与LP问题等价。</p>
+        <span itemprop="articleBody"><p>BP算法(逆向传播算法)一种训练神经网络的算法，通过误差逆向传播和梯度下降算法，训练网络中的参数。<br><a id="more"></a></p>
+<h2 id="u7F51_u7EDC_u6A21_u578B"><a href="#u7F51_u7EDC_u6A21_u578B" class="headerlink" title="网络模型"></a>网络模型</h2><p>给定训练数据$\{(x^{(1)},y^{(1)}),(x^{(2)},y^{(2)}),\cdots,(x^{(m)},y^{(m)})\}$，在多类分类(这里假设$K$类)情况下，数据标签$y\in\mathbb{R}^{K}$，例如：<br>$$y\in\left\{ \left [ \begin{matrix}<br>1 \\<br>0 \\<br>0 \\<br>0 \end{matrix}\right ],\left [ \begin{matrix}<br>0 \\<br>1 \\<br>0 \\<br>0 \end{matrix}\right ],\left [ \begin{matrix}<br>0 \\<br>0 \\<br>1 \\<br>0 \end{matrix}\right ],\left [ \begin{matrix}<br>0 \\<br>0 \\<br>0 \\<br>1 \end{matrix}\right ],\right \}<br>$$</p>
+<p>神经网络模型如下：<br><img src="/images/吴恩达视频学习笔记(二)-1.png" width="400" title="示例"></p>
+<h2 id="u7B97_u6CD5_u63CF_u8FF0"><a href="#u7B97_u6CD5_u63CF_u8FF0" class="headerlink" title="算法描述"></a>算法描述</h2><h3 id="u4EE3_u4EF7_u51FD_u6570_28Cost_function_29"><a href="#u4EE3_u4EF7_u51FD_u6570_28Cost_function_29" class="headerlink" title="代价函数(Cost function)"></a>代价函数(Cost function)</h3><p>机器学习中的模型训练算法基本上都是最小化代价函数，比如logistic regression的代价函数如下：<br>$$J(\theta)=-\frac{1}{m}\left [ \sum_{i=1}^{m}y^{(i)}\log h_{\theta}(x^{(i)})+(1-y^{(i)})\log(1-h_{\theta}(x^{(i)}))\right ] +\frac{\lambda}{2m}\sum_{j=1}^{m}\theta_j^2$$</p>
+<p>logistic regression的训练过程就是最小化上面代价函数。在神经网络中，每个神经元使用的是sigmoid函数，其代价函数如下：<br>$$h_{\Theta}(x)\in \mathbb{R}^{K} \quad (h_{\Theta}(x))_i = i^{th}output \\<br>J(\Theta)=-\frac{1}{m}\left [ \sum_{i=1}^{m}\sum_{k=1}^{K}y^{(i)}_k\log (h_{\Theta}(x^{(i)}))_k+(1-y^{(i)}_k)\log(1-(h_{\Theta}(x^{(i)}))_k)\right ]+\frac{\lambda}{2m}\sum_{l=1}^{L-1}\sum_{i=1}^{s_l}\sum_{j=1}^{s_l+1}(\Theta^{(l)}_{ji})^2$$</p>
+<p>其中，$L$表示神经网络的层数，$s_l$表示第$l$层的神经元的个数。训练神经网络的目的就是最小化上面的代价函数，而BP算法正是为最小化该代价函数而设计的。</p>
+<h3 id="u524D_u5411_u4F20_u64AD_28Forward_propagation_29"><a href="#u524D_u5411_u4F20_u64AD_28Forward_propagation_29" class="headerlink" title="前向传播(Forward propagation)"></a>前向传播(Forward propagation)</h3><p>记$a^{(i)}$表示第$i$层神经元的输出，则前向传播的计算过程如下：<br><img src="/images/吴恩达视频学习笔记(二)-2.png" width="500" title="前向传播计算过程"></p>
+<h3 id="u9006_u5411_u4F20_u64AD_28Back_propagation_29"><a href="#u9006_u5411_u4F20_u64AD_28Back_propagation_29" class="headerlink" title="逆向传播(Back propagation)"></a>逆向传播(Back propagation)</h3><p>记$\delta^{(l)}_j$表示第$l$层的第$j$个神经元出的误差，就本文中的神经网络模型而言，逆向传播的计算过程如下：</p>
+<p>对于第四层的每个神经元，其输出结果的误差为<br>$$\delta^{(4)}_j=a^{(4)}_j-y_j$$</p>
+<p>前面几层的神经元的输出结果误差为：<br>$$\delta^{(3)}=(\Theta^{(3)})^T\delta^{(4)}.*g’(z^{(3)}) \quad g’(z^{(3)})=a^{(3)}*(1-a^{(3)}) \\<br>\delta^{(2)}=(\Theta^{(2)})^T\delta^{(3)}.*g’(z^{(2)}) \quad g’(z^{(2)})=a^{(2)}*(1-a^{(2)}) $$</p>
+<p>其中函数$g$为sigmoid函数。</p>
+<h3 id="u68AF_u5EA6_u4E0B_u964D_28Gradient_descent_29"><a href="#u68AF_u5EA6_u4E0B_u964D_28Gradient_descent_29" class="headerlink" title="梯度下降(Gradient descent)"></a>梯度下降(Gradient descent)</h3><p>有了上面的误差逆向传播过程，现在隐藏层所有神经元处的输出结果的误差都已经得到，接下来对代价函数求偏导得到(求偏导的过程十分复杂，但可以证明其正确性)：<br>$$\frac{\partial J(\Theta)}{\partial \Theta_{ij}^{l}}=a_j^{(l)}\delta_i^{(l+1)}$$<br>有了偏导数，我们就可以使用梯度下降算法优化参数$\Theta$了。</p>
+<h2 id="u7B97_u6CD5_u8FC7_u7A0B"><a href="#u7B97_u6CD5_u8FC7_u7A0B" class="headerlink" title="算法过程"></a>算法过程</h2><p>BP算法过程如下：</p>
+<blockquote>
+<p>给定训练集$\{(x^{(1)},y^{(1)}),(x^{(2)},y^{(2)}),\cdots,(x^{(m)},y^{(m)})\}$<br>设置$\displaystyle\vartriangle ^{(l)}_{ij}=0($for all  $l,i,j)$<br>for i = 1 to m<br>$\quad$设置$\displaystyle a^{(1)}=x^{(i)}$<br>$\quad$进行前向传播计算$\displaystyle a^{(l)}\quad for\quad l=2,3,\cdots,L$<br>$\quad$使用$y^{(i)}$，计算$\displaystyle \delta^{(L)}=a^{(L)}-y^{(i)}$<br>$\quad$进行误差逆向传播计算$\displaystyle\delta^{(L-1)},\delta^{(L-2)},\cdots,\delta^{(2)}$<br>$\displaystyle\quad \vartriangle^{(l)}_{ij}:=\vartriangle^{(l)}_{ij}+a^{(l)}_j\delta_i^{(l+1)}$<br>$\displaystyle D^{(l)}_{ij}:=\frac{1}{m}\vartriangle^{(l)}_{ij}+\lambda\Theta^{(l)}_{ij} \quad $if$\quad j\neq 0$<br>$\displaystyle D^{(l)}_{ij}:=\frac{1}{m}\vartriangle^{(l)}_{ij}\quad $if$\quad j= 0$<br>$\displaystyle\frac{\partial J(\Theta)}{\partial \Theta_{ij}^{l}}=D^{(l)}_{ij}$，再进行梯度下降。</p>
+</blockquote>
+<h2 id="u7B97_u6CD5_u987B_u77E5"><a href="#u7B97_u6CD5_u987B_u77E5" class="headerlink" title="算法须知"></a>算法须知</h2><h3 id="u68AF_u5EA6_u68C0_u6D4B"><a href="#u68AF_u5EA6_u68C0_u6D4B" class="headerlink" title="梯度检测"></a>梯度检测</h3><p>对于一个函数来说，通常有两种计算梯度的方式：数值梯度（numerical gradient）和解析梯度（analytic gradient）。数值梯度的优点是容易编程实现，不要求函数可微，然而，数值梯度缺点很明显，通常是近似解，同时求解速度很慢，因此在设计机器学习目标函数时，通常设计成可微的函数，可以快速地求解其解析梯度，同时这个梯度是确切解。</p>
+<p>神经网络算法使用反向传播计算目标函数关于每个参数的梯度，可以看做解析梯度。由于计算过程中涉及到的参数很多，反向传播计算的梯度很容易出现误差，导致最后迭代得到效果很差的参数值。</p>
+<p>为了确认代码中反向传播计算的梯度是否正确，可以采用梯度检验（gradient check）的方法。通过计算数值梯度，得到梯度的近似值（数值梯度），然后和反向传播得到的梯度（解析梯度）进行比较，若两者相差很小的话则证明反向传播的代码是正确无误的。</p>
+<p>函数$J(\theta)$在$\theta$处的梯度值数学定义为：<br>$$\frac{\mathrm{d}J(\theta)}{\mathrm{d}\theta}=\lim_{\epsilon\rightarrow 0}\frac{J(\theta+\epsilon)-j(\theta-\epsilon)}{2\epsilon}$$</p>
+<p>其近似梯度值（数值梯度）为：<br>$$\frac{\mathrm{d}J(\theta)}{\mathrm{d}\theta}=\frac{J(\theta+\epsilon)-j(\theta-\epsilon)}{2\epsilon}$$</p>
+<p>其中$\epsilon$通常被设置为很小的值，一般为$10^{-4}$。</p>
+<h3 id="u521D_u59CB_u5316_24_5CTheta_24"><a href="#u521D_u59CB_u5316_24_5CTheta_24" class="headerlink" title="初始化$\Theta$"></a>初始化$\Theta$</h3><p>初始化网络中的权值参数$\Theta$时，不可将其设为相同的值，否则前向传播会得到相等的输出。一般初始化$\Theta$满足$\Theta^{(l)}_{ij}\in [-\epsilon,\epsilon]$，比如：</p>
+<blockquote>
+<p>$\Theta^{1}=$ rand(10,11)*(2*INIT_EPSILON)-INIT_EPSILON;</p>
+</blockquote>
+<h2 id="u8BAD_u7EC3_u8FC7_u7A0B"><a href="#u8BAD_u7EC3_u8FC7_u7A0B" class="headerlink" title="训练过程"></a>训练过程</h2><p>将上面介绍的过程和注意点总结起来，首先需要设计合理神经网络结构，默认1层隐藏层，每个隐藏层神经元的数量通常越多越好。神经网络训练过程如下：</p>
+<blockquote>
+<p>1.随机初始化权值<br>2.进行前向算法计算所有$\displaystyle x^{(i)}$的$\displaystyle h_{\Theta}(x^{(i)})$。<br>3.编写代码计算代价函数$\displaystyle J(\Theta)$<br>4.进行逆向传播计算偏导数$\displaystyle\frac{\partial J(\Theta)}{\partial \Theta_{ij}^{l}}$<br>5.使用梯度检验来比较使用逆向传播的梯度$\displaystyle\frac{\partial J(\Theta)}{\partial \Theta_{ij}^{l}}$和$\displaystyle J(\Theta)$数值估计的梯度，然后禁用梯度检验代码（否则会严重降低运行速度）<br>6.使用梯度下降或者其它的高级优化方法，最小化函数$\displaystyle J(\Theta)$，求得最优的权值$\Theta$。</p>
+</blockquote>
 </span>
       
     </div>
@@ -291,7 +317,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/凸优化/" rel="tag">#凸优化</a>
+            <a href="/tags/BP算法/" rel="tag">#BP算法</a>
+          
+            <a href="/tags/神经网络/" rel="tag">#神经网络</a>
           
         </div>
       
@@ -300,17 +328,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/17/检索模型与搜索排序/" rel="next" title="检索模型与搜索排序">
-                <i class="fa fa-chevron-left"></i> 检索模型与搜索排序
+              <a href="/2016/03/26/regularization(规则化)/" rel="next" title="regularization(规则化)">
+                <i class="fa fa-chevron-left"></i> regularization(规则化)
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/01/12/单纯形方法/" rel="prev" title="单纯形方法">
-                单纯形方法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -337,8 +361,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/01/12/凸优化/"
-           data-title="凸优化" data-url="http://yoursite.com/2016/01/12/凸优化/">
+      <div class="ds-thread" data-thread-key="2016/03/27/吴恩达视频学习笔记(二)：Backpropagation Algorithm/"
+           data-title="吴恩达视频学习笔记(二)：Backpropagation Algorithm" data-url="http://yoursite.com/2016/03/27/吴恩达视频学习笔记(二)：Backpropagation Algorithm/">
       </div>
     
   </div>
@@ -493,7 +517,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u51F8_u4F18_u5316_u95EE_u9898"><span class="nav-number">1.</span> <span class="nav-text">凸优化问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7EBF_u6027_u4F18_u5316_u95EE_u9898_28LP_29"><span class="nav-number">2.</span> <span class="nav-text">线性优化问题(LP)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4E8C_u6B21_u4F18_u5316_u95EE_u9898"><span class="nav-number">3.</span> <span class="nav-text">二次优化问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u51F8_u4E8C_u6B21_u89C4_u5212_u95EE_u9898_28QP_29"><span class="nav-number">3.1.</span> <span class="nav-text">凸二次规划问题(QP)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u4E8C_u6B21_u7EA6_u675F_u51F8_u4E8C_u6B21_u89C4_u5212_u95EE_u9898_28QCQP_29"><span class="nav-number">3.2.</span> <span class="nav-text">二次约束凸二次规划问题(QCQP)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4E8C_u9636_u9525_u89C4_u5212_28SOCP_29"><span class="nav-number">4.</span> <span class="nav-text">二阶锥规划(SOCP)</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u7F51_u7EDC_u6A21_u578B"><span class="nav-number">1.</span> <span class="nav-text">网络模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7B97_u6CD5_u63CF_u8FF0"><span class="nav-number">2.</span> <span class="nav-text">算法描述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u4EE3_u4EF7_u51FD_u6570_28Cost_function_29"><span class="nav-number">2.1.</span> <span class="nav-text">代价函数(Cost function)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u524D_u5411_u4F20_u64AD_28Forward_propagation_29"><span class="nav-number">2.2.</span> <span class="nav-text">前向传播(Forward propagation)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u9006_u5411_u4F20_u64AD_28Back_propagation_29"><span class="nav-number">2.3.</span> <span class="nav-text">逆向传播(Back propagation)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u68AF_u5EA6_u4E0B_u964D_28Gradient_descent_29"><span class="nav-number">2.4.</span> <span class="nav-text">梯度下降(Gradient descent)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7B97_u6CD5_u8FC7_u7A0B"><span class="nav-number">3.</span> <span class="nav-text">算法过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7B97_u6CD5_u987B_u77E5"><span class="nav-number">4.</span> <span class="nav-text">算法须知</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u68AF_u5EA6_u68C0_u6D4B"><span class="nav-number">4.1.</span> <span class="nav-text">梯度检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u521D_u59CB_u5316_24_5CTheta_24"><span class="nav-number">4.2.</span> <span class="nav-text">初始化$\Theta$</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u8BAD_u7EC3_u8FC7_u7A0B"><span class="nav-number">5.</span> <span class="nav-text">训练过程</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

@@ -51,18 +51,18 @@
 
 
 
-<meta name="description" content="BP算法(逆向传播算法)一种训练神经网络的算法，通过误差逆向传播和梯度下降算法，训练网络中的参数。">
+<meta name="description" content="BP算法(逆向传播算法)一种训练神经网络的算法，通过误差逆向传播和梯度下降算法，训练网络中的参数。具体内容可以参考吴恩达coursera课程的课件http://pan.baidu.com/s/1qYxLdpE。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="吴恩达视频学习笔记(二)：Backpropagation Algorithm">
 <meta property="og:url" content="http://yoursite.com/2016/03/27/吴恩达视频学习笔记(二)：Backpropagation Algorithm/index.html">
 <meta property="og:site_name" content="witness">
-<meta property="og:description" content="BP算法(逆向传播算法)一种训练神经网络的算法，通过误差逆向传播和梯度下降算法，训练网络中的参数。">
+<meta property="og:description" content="BP算法(逆向传播算法)一种训练神经网络的算法，通过误差逆向传播和梯度下降算法，训练网络中的参数。具体内容可以参考吴恩达coursera课程的课件http://pan.baidu.com/s/1qYxLdpE。">
 <meta property="og:image" content="http://yoursite.com/images/吴恩达视频学习笔记(二)-1.png">
 <meta property="og:image" content="http://yoursite.com/images/吴恩达视频学习笔记(二)-2.png">
-<meta property="og:updated_time" content="2016-03-27T13:54:28.000Z">
+<meta property="og:updated_time" content="2016-03-27T14:03:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="吴恩达视频学习笔记(二)：Backpropagation Algorithm">
-<meta name="twitter:description" content="BP算法(逆向传播算法)一种训练神经网络的算法，通过误差逆向传播和梯度下降算法，训练网络中的参数。">
+<meta name="twitter:description" content="BP算法(逆向传播算法)一种训练神经网络的算法，通过误差逆向传播和梯度下降算法，训练网络中的参数。具体内容可以参考吴恩达coursera课程的课件http://pan.baidu.com/s/1qYxLdpE。">
 
 
 
@@ -279,7 +279,7 @@
       
 
       
-        <span itemprop="articleBody"><p>BP算法(逆向传播算法)一种训练神经网络的算法，通过误差逆向传播和梯度下降算法，训练网络中的参数。<br><a id="more"></a></p>
+        <span itemprop="articleBody"><p>BP算法(逆向传播算法)一种训练神经网络的算法，通过误差逆向传播和梯度下降算法，训练网络中的参数。具体内容可以参考吴恩达coursera课程的课件<a href="http://pan.baidu.com/s/1qYxLdpE" target="_blank" rel="external">http://pan.baidu.com/s/1qYxLdpE</a>。<br><a id="more"></a></p>
 <h2 id="u7F51_u7EDC_u6A21_u578B"><a href="#u7F51_u7EDC_u6A21_u578B" class="headerlink" title="网络模型"></a>网络模型</h2><p>给定训练数据$\{(x^{(1)},y^{(1)}),(x^{(2)},y^{(2)}),\cdots,(x^{(m)},y^{(m)})\}$，在多类分类(这里假设$K$类)情况下，数据标签$y\in\mathbb{R}^{K}$，例如：<br>$$y\in\left\{ \left [ \begin{matrix}<br>1 \\<br>0 \\<br>0 \\<br>0 \end{matrix}\right ],\left [ \begin{matrix}<br>0 \\<br>1 \\<br>0 \\<br>0 \end{matrix}\right ],\left [ \begin{matrix}<br>0 \\<br>0 \\<br>1 \\<br>0 \end{matrix}\right ],\left [ \begin{matrix}<br>0 \\<br>0 \\<br>0 \\<br>1 \end{matrix}\right ],\right \}<br>$$</p>
 <p>神经网络模型如下：<br><img src="/images/吴恩达视频学习笔记(二)-1.png" width="400" title="示例"></p>
 <h2 id="u7B97_u6CD5_u63CF_u8FF0"><a href="#u7B97_u6CD5_u63CF_u8FF0" class="headerlink" title="算法描述"></a>算法描述</h2><h3 id="u4EE3_u4EF7_u51FD_u6570_28Cost_function_29"><a href="#u4EE3_u4EF7_u51FD_u6570_28Cost_function_29" class="headerlink" title="代价函数(Cost function)"></a>代价函数(Cost function)</h3><p>机器学习中的模型训练算法基本上都是最小化代价函数，比如logistic regression的代价函数如下：<br>$$J(\theta)=-\frac{1}{m}\left [ \sum_{i=1}^{m}y^{(i)}\log h_{\theta}(x^{(i)})+(1-y^{(i)})\log(1-h_{\theta}(x^{(i)}))\right ] +\frac{\lambda}{2m}\sum_{j=1}^{m}\theta_j^2$$</p>

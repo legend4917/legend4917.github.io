@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="凸优化,回归,拉格朗日对偶性,支持向量机," />
+  <meta name="keywords" content="Boosting,ensemble learning,决策树,数据挖掘,机器学习," />
 
 
 
@@ -51,16 +51,16 @@
 
 
 
-<meta name="description" content="&amp;emsp;&amp;emsp;回归问题与分类问题相似，它也是一个已知的训练集，设此训练集可表示为：$$T=\\{(x_1,y_1,\cdots,(x_n,y_n)\\}\in (\mathcal{X\times Y})^n$$&amp;emsp;&amp;emsp;其中 $x_i\in\mathcal{X}=R^n$ 是输入指标向量，或称输入或模式，$y_i\in\mathcal{Y}=R$ 是输出指标，或称输出。与分">
+<meta name="description" content="梯度提升（Gradient boosting）是机器学习中用于分类（classification）和回归（regression）问题的技术，是由多个弱学习器集成得到的预测模型，一种典型的弱学习器就是决策树（尤其是CART），由决策树集成得到的模型就是GBDT（Gradient Boosting Decision Tree）。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="支持向量回归机">
-<meta property="og:url" content="http://yoursite.com/2015/12/17/支持向量回归机/index.html">
+<meta property="og:title" content="GB、GBM、GBDT，一种梯度提升算法">
+<meta property="og:url" content="http://yoursite.com/2016/11/08/GB、GBM、GBDT，一种梯度提升算法/index.html">
 <meta property="og:site_name" content="witness">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;回归问题与分类问题相似，它也是一个已知的训练集，设此训练集可表示为：$$T=\\{(x_1,y_1,\cdots,(x_n,y_n)\\}\in (\mathcal{X\times Y})^n$$&amp;emsp;&amp;emsp;其中 $x_i\in\mathcal{X}=R^n$ 是输入指标向量，或称输入或模式，$y_i\in\mathcal{Y}=R$ 是输出指标，或称输出。与分">
-<meta property="og:updated_time" content="2015-12-15T12:02:12.000Z">
+<meta property="og:description" content="梯度提升（Gradient boosting）是机器学习中用于分类（classification）和回归（regression）问题的技术，是由多个弱学习器集成得到的预测模型，一种典型的弱学习器就是决策树（尤其是CART），由决策树集成得到的模型就是GBDT（Gradient Boosting Decision Tree）。">
+<meta property="og:updated_time" content="2016-11-08T13:40:11.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="支持向量回归机">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;回归问题与分类问题相似，它也是一个已知的训练集，设此训练集可表示为：$$T=\\{(x_1,y_1,\cdots,(x_n,y_n)\\}\in (\mathcal{X\times Y})^n$$&amp;emsp;&amp;emsp;其中 $x_i\in\mathcal{X}=R^n$ 是输入指标向量，或称输入或模式，$y_i\in\mathcal{Y}=R$ 是输出指标，或称输出。与分">
+<meta name="twitter:title" content="GB、GBM、GBDT，一种梯度提升算法">
+<meta name="twitter:description" content="梯度提升（Gradient boosting）是机器学习中用于分类（classification）和回归（regression）问题的技术，是由多个弱学习器集成得到的预测模型，一种典型的弱学习器就是决策树（尤其是CART），由决策树集成得到的模型就是GBDT（Gradient Boosting Decision Tree）。">
 
 
 
@@ -72,7 +72,7 @@
   };
 </script>
 
-  <title> 支持向量回归机 | witness </title>
+  <title> GB、GBM、GBDT，一种梯度提升算法 | witness </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -222,7 +222,7 @@
             
             
               
-                支持向量回归机
+                GB、GBM、GBDT，一种梯度提升算法
               
             
           </h1>
@@ -231,8 +231,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-12-17T17:51:23+08:00" content="2015-12-17">
-              2015-12-17
+            <time itemprop="dateCreated" datetime="2016-11-08T19:40:13+08:00" content="2016-11-08">
+              2016-11-08
             </time>
           </span>
 
@@ -248,6 +248,18 @@
 
                 
                 
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/机器学习/数据挖掘/" itemprop="url" rel="index">
+                    <span itemprop="name">数据挖掘</span>
+                  </a>
+                </span>
+
+                
+                
 
               
             </span>
@@ -257,8 +269,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/17/支持向量回归机/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/17/支持向量回归机/" itemprop="commentsCount"></span>
+                <a href="/2016/11/08/GB、GBM、GBDT，一种梯度提升算法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/08/GB、GBM、GBDT，一种梯度提升算法/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -277,18 +289,22 @@
       
 
       
-        <span itemprop="articleBody"><p>&emsp;&emsp;回归问题与分类问题相似，它也是一个已知的训练集，设此训练集可表示为：<br>$$T=\\{(x_1,y_1,\cdots,(x_n,y_n)\\}\in (\mathcal{X\times Y})^n$$<br>&emsp;&emsp;其中 $x_i\in\mathcal{X}=R^n$ 是输入指标向量，或称输入或模式，$y_i\in\mathcal{Y}=R$ 是输出指标，或称输出。与分类问题不同的是，这里的 $y_i$ 并不限定取 -1 或1，而是可取任意实数。回归学习需要解决的是，给定一个新的输入模式，根据训练集 $T$ 推断它所对应的输出 $y$ 是多少。<br><a id="more"></a></p>
-<h2 id="u7EBF_u6027_u56DE_u5F52_u95EE_u9898_u4E0E_u786C__24_5Cvarepsilon_24-_u5E26_u8D85_u5E73_u9762"><a href="#u7EBF_u6027_u56DE_u5F52_u95EE_u9898_u4E0E_u786C__24_5Cvarepsilon_24-_u5E26_u8D85_u5E73_u9762" class="headerlink" title="线性回归问题与硬 $\varepsilon$-带超平面"></a>线性回归问题与硬 $\varepsilon$-带超平面</h2><h3 id="u7EBF_u6027_u56DE_u5F52_u95EE_u9898"><a href="#u7EBF_u6027_u56DE_u5F52_u95EE_u9898" class="headerlink" title="线性回归问题"></a>线性回归问题</h3><p>&emsp;&emsp;线性回归问题就是寻找函数 $f(x)$ 为线性函数：<br>$$y=f(x)=w\cdot x+b$$</p>
-<p>&emsp;&emsp;这个线性函数对应与空间 $R^n\times R$ 上的一个超平面。所以从几何上看，线性回归问题就是在给定训练集的条件下，寻找一个 $n+1$ 维空间 $R^{n+1}$ 上的超平面。<br>&emsp;&emsp;<strong>超平面的 $\varepsilon$-带</strong>：设 $\varepsilon&gt;0$，一个超平面$ y=w\cdot x+b $   的 $\varepsilon$-带是指该超平面沿 $y$ 轴依次上下平移扫过的区域。<br>&emsp;&emsp;<strong>硬 $\varepsilon$-带超平面</strong>：对于训练集 $T$，如果超平面 $y=w\cdot x+b$ 满足：<br>$$-\varepsilon\le y_i-(w\cdot x_i+b)\le \varepsilon$$</p>
-<p>&emsp;&emsp;则称该超平面为硬 $\varepsilon$-带超平面。<br>&emsp;&emsp;从给定的训练集 $T$ 出发构造出两类点，具体做法是将训练集 $T$ 中每个训练点的 $y$ 值分别增加 $\varepsilon$ 和减少 $\varepsilon$，得到正类点和负类点两个集合，分别记它们为 $D^+$ 和 $D^-$，即：<br>$$D^+=\\{(x^T_i,y_i+\varepsilon), i=1,2,\cdots,N\\} \\\<br>D^-=\\{(x^T_i,y_i-\varepsilon), i=1,2,\cdots,N\\}$$</p>
-<p>&emsp;&emsp;对于给定的训练集 $T$ 和 $\varepsilon&gt;0$，则一个超平面 $y=w\cdot x+b$ 是硬 $\varepsilon$-硬带超平面的充要条件是 $D^+$ 凸壳和 $D^-$ 凸壳分别位于该超平面的两侧。当 $\varepsilon\ge \varepsilon_{min}$ 时，硬 $\varepsilon$-硬带超平面等价于分离集合 $D^+$ 和$D^-$。这样就将回归问题转化为集合 $D^+\cup D^-$ 的分类问题。</p>
-<h3 id="u786C__24_5Cvarepsilon_24-_u5E26_u8D85_u5E73_u9762_u7684_u6784_u9020"><a href="#u786C__24_5Cvarepsilon_24-_u5E26_u8D85_u5E73_u9762_u7684_u6784_u9020" class="headerlink" title="硬 $\varepsilon$-带超平面的构造"></a>硬 $\varepsilon$-带超平面的构造</h3><p>&emsp;&emsp;首先将训练集变形。令 $(x^T_{N+i},y_{N+i}-\varepsilon)^T=(x^T_i,y_i-\varepsilon)$，则训练集可表示为：<br>$$\\{((x^T_1,y_1+\varepsilon);1),\cdots,((x^T_N,y_N+\varepsilon);1),((x^T_{N+1},y_{N+1}-\varepsilon);-1),\cdots,((x^T_{2N},y_{2N}-\varepsilon);-1)\\}$$</p>
-<p>&emsp;&emsp;这里的 $w$ 比分类问题中的 $w$ 多了一个对应于 $y$ 的分量，即回归问题的权分类应为 $(w^T,\eta)^T$。于是得到下面的最优化问题：<br>$$\begin{align}<br>\min_{w,b,\eta} \quad &amp; \frac{1}{2}||w||^2+\frac{1}{2}\eta^2 \\\<br>s.t. \quad &amp; w\cdot x_i+\eta(y_i+\varepsilon)+b\ge 1,\quad i=1,2,\cdots,N \\\<br>&amp; w\cdot x_j + \eta(y_j-\varepsilon)+b\le -1,\quad j=N+1,N+2,\cdots,2N<br>\end{align}$$</p>
-<p>&emsp;&emsp;若令：<br>$$z_i=\left\\{<br>\begin{array}<br>&amp; 1, \qquad &amp; i=1,2,\cdots,N \\\<br>-1, \qquad &amp; i=N+1,N+2,\cdots,2N<br>\end{array}<br>\right.$$</p>
-<p>&emsp;&emsp;则上述问题可以表述为：<br>$$\begin{align}<br>\min_{w,b,\eta} \quad &amp; \frac{1}{2}||w||^2+\frac{1}{2}\eta^2 \\\<br>s.t. \quad &amp; z_i(w\cdot x_i+\eta(y_i+z_i\varepsilon)+b)\ge 1,\quad i=1,2,\cdots,2N<br>\end{align}$$</p>
-<p>&emsp;&emsp;求得该问题的最优解 $(w^*,\eta^*,b^*)$ 后，便可构造分化超平面 $w^*\cdot x+\eta^* y+b^*=0$，整理后便可得到 $y=w\cdot x+b$，其中 $\displaystyle w=-\frac{w^*}{\eta^*},b=-\frac{b^*}{\eta^*}$。</p>
-<p>&emsp;&emsp;该最优化问题的对偶问题为：<br>$$\begin{align}<br>\min_{\alpha} \quad &amp; \frac{1}{2}\sum^{2N}_{i=1}\sum^{2N}_{j=1}z_iz_j\alpha_i\alpha_j\big((x^T_i,y_i+z_i\varepsilon)^T\cdot(x^T_j,y_j+z_j\varepsilon)^T\big)-\sum^{2N}_{j=1}\alpha_j \\\<br>s.t. \quad &amp; \sum^{2N}_{i=1}z_i\alpha_i=0, \\\<br>&amp; \alpha_i \ge 0, \quad i=1,2,\cdots,2N<br>\end{align}$$</p>
-<h3 id="u63A8_u5E7F_u7684_u6700_u5927_u95F4_u9694_u56DE_u5F52_u6CD5"><a href="#u63A8_u5E7F_u7684_u6700_u5927_u95F4_u9694_u56DE_u5F52_u6CD5" class="headerlink" title="推广的最大间隔回归法"></a>推广的最大间隔回归法</h3><p>&emsp;&emsp;最优化问题为：<br>$$\begin{align}<br>\min_{w,b,\eta} \quad &amp; \frac{1}{2}||w||^2+\frac{1}{2}\eta^2+C\sum^{2N}_{i=1}\xi_i \\\<br>s.t. \quad &amp; z_i(w\cdot x_i+\eta(y_i+z_i\varepsilon)+b)\ge 1-\xi_i,\quad i=1,2,\cdots,2N \\\<br>&amp; \xi_i \ge 0, \quad i=1,2,\cdots,2N<br>\end{align}$$</p>
+        <span itemprop="articleBody"><p>梯度提升（Gradient boosting）是机器学习中用于分类（classification）和回归（regression）问题的技术，是由多个弱学习器集成得到的预测模型，一种典型的弱学习器就是决策树（尤其是CART），由决策树集成得到的模型就是GBDT（Gradient Boosting Decision Tree）。<br><a id="more"></a></p>
+<h2 id="u68AF_u5EA6_u63D0_u5347_uFF08Gradient_Boosting_uFF09"><a href="#u68AF_u5EA6_u63D0_u5347_uFF08Gradient_Boosting_uFF09" class="headerlink" title="梯度提升（Gradient Boosting）"></a>梯度提升（Gradient Boosting）</h2><h3 id="u539F_u7406"><a href="#u539F_u7406" class="headerlink" title="原理"></a>原理</h3><p>与其它的Boosting方法一样，GB将多个弱学习器结合起来提升为一个强学习器。下面通过平方误差损失来解释GB的原理。假设我们的目标是寻找一个模型$F$，使得该模型的预测值$\hat{y}=F(x)$与真实值$y$之间的平方误差$(\hat{y}-y)^2$最小。</p>
+<p>在梯度提升的每一步m（$1\le m \le M$）中，假设已经有一个不太完美的模型$F_m$，梯度提升并不会改变该模型，而是重新构造一个估计器（estimator）$h$从而得到一个更好的模型$F_{m+1}(x)=F_m(x)+h(x)$。那么现在面临的问题就是，如何选择估计器$h$？梯度提升算法观察到一个完美的估计器$h$肯定满足：<br>$$F_{m+1}(x)=F_m(x)+h(x)=y$$</p>
+<p>也就是说：<br>$$h(x)=y-F_m(x)$$</p>
+<p>因此，梯度提升会选择估计器$h$去拟合残差$y-F_m(x)$。与其它集成方法的变体一样，每一个$F_{m+1}$的学习都是为了去纠正$F_m(x)$。另外，我们很容易看到，残差$y-F_m(x)$是平方误差损失函数$\frac{1}{2}(y-F_m(x))^2$的负梯度，因此，Gradient Boosting也是一种Gradient descent的Boosting算法。</p>
+<h3 id="u7B97_u6CD5"><a href="#u7B97_u6CD5" class="headerlink" title="算法"></a>算法</h3><p>在一些有监督的学习中，输入变量$x$与输出变量$y$之间是通过联合概率分布$P(x,y)$联系在一起的，假设训练集为$\{(x_1,y_1),\cdots,(x_n,y_n)\}$，我们的目标是寻找一个近似于最优函数$F^*(x)$的$\hat{F}(x)$，使得损失函数$L(y,F(x))$的值最小：<br>$$\hat{F}(x)=arg\min_F E_{x,y}[L(y,F(x))]$$</p>
+<p>梯度提升算法寻找一个由多个函数$h$（弱学习器）的加权的和得到的近似函数$\hat{F}(x)$（强学习器），即：<br>$$F(x)=\sum^M_{i=1}\gamma_ih_i(x)+const$$</p>
+<p>根据经验风险最小化准则，假设模型开始时一个常数函数$F_0(x)$，通过贪心算法不断的替身，也即：<br>$$F_0(x)=arg\min_\gamma\sum_{i=1}^nL(y_i,\gamma) \\<br>F_m(x)=F_{m-1}+arg\min_{f}\sum_{i=1}^{n}L(y_i,F_{m-1}(x_i)+f(x_i))$$</p>
+<p>那么现在的问题是，如何寻找最优的$f$呢？这里最简单的方法就是最速下降法，我们并不将$L(y,f)$看作是关于$f$的函数，而是可以被当做向量$f(x_1),\cdots,f(x_n)$的值：<br>$$F_m(x)=F_{m-1}(x)-\gamma_m\sum_{i=1}^{n}\nabla_{F_{m-1}}L(y_i,F_{m-1}(x_i)) \\<br>\gamma_m=arg\min_\gamma\sum^n_{i=1}L(y_i,F_{m-1}(x_i)+\gamma\frac{\partial L(y_i,F_{m-1}(x_i))}{\partial F_{m-1}(x_i)})$$</p>
+<blockquote>
+<p>输入：训练集$\{(x_i,y_i)\}_{i=1}^n$，一个可微的损失函数$L(y,F(x))$，迭代次数$M$<br>1.使用常数初始化模型：<br>$$F_0(x)=arg\min_\gamma\sum_{i=1}^nL(y_i,\gamma$$<br>2.for m = 1 to M:<br>$\qquad$计算伪残差：<br>        $$r_{im}=-\left [ \frac{\partial L(y_i,F(x_i))}{\partial F(x_i)} \right ]_{F(x)=F_{m-1}(x)} for\quad i=1,\cdots,n.$$<br>$\qquad$训练学习器$h_m(x)$拟合残差，也就是说，使用训练集$\{(x_i,r_{im})\}$训练学习器$h_m(x)$<br>$\qquad$计算乘子$\gamma_m$:<br>$$\gamma_m=arg\min_\gamma\sum^n_{i=1}L(y_i,F_{m-1}(x_i)+\gamma h_m(x_i))$$<br>$\qquad$更新模型：<br>$$F_m(x)=F_{m-1}(x)+\gamma_m h_m(x)$$<br>3.输出$F_M(x)$</p>
+</blockquote>
+<h2 id="u68AF_u5EA6_u63D0_u5347_u51B3_u7B56_u6811_uFF08GBDT_uFF09"><a href="#u68AF_u5EA6_u63D0_u5347_u51B3_u7B56_u6811_uFF08GBDT_uFF09" class="headerlink" title="梯度提升决策树（GBDT）"></a>梯度提升决策树（GBDT）</h2><h3 id="u539F_u7406-1"><a href="#u539F_u7406-1" class="headerlink" title="原理"></a>原理</h3><p>梯度提升（Gradient Boosting）的一种典型的应用就是使用决策树作为其弱学习器，尤其是CART数。一般的梯度提升在第m步会训练学习器去拟合残差，让$J$表示叶子的个数，这样树就会被划分为$J$个不相交的空间$R_{1m},\cdots,R_{Jm}$，然后在每个空间上预测一个常数值，也即：<br>$$h_m(x)=\sum_{j=1}^{J}b_{jm}I(x\in R_{jm})$$</p>
+<p>然后让系数$b_{jm}$乘上$\gamma_m$，并使用线性搜索最小化损失函数，这样模型就按下面的方式更新：<br>$$F_m(x)=F_{m-1}(x)+\gamma_m h_m(x) \\<br>\gamma_m = arg\min_\gamma\sum^n_{i=1}L(y_i,F_{m-1}(x_i)+\gamma_m h_m(x))$$</p>
+<h3 id="u7F29_u51CF_uFF08Shrinkage_uFF09"><a href="#u7F29_u51CF_uFF08Shrinkage_uFF09" class="headerlink" title="缩减（Shrinkage）"></a>缩减（Shrinkage）</h3><p>梯度提升算法的一个重要组成部分就是在模型更新的过程中加入缩减，即：<br>$$F_m(x)=F_{m-1}(x)+\eta\gamma_m h_m(x), \qquad 0&lt;\eta\le 1$$</p>
+<p>这里的参数$\eta$是学习速率，能很好的避免过拟合。</p>
 </span>
       
     </div>
@@ -297,13 +313,15 @@
       
         <div class="post-tags">
           
-            <a href="/tags/凸优化/" rel="tag">#凸优化</a>
+            <a href="/tags/Boosting/" rel="tag">#Boosting</a>
           
-            <a href="/tags/回归/" rel="tag">#回归</a>
+            <a href="/tags/ensemble-learning/" rel="tag">#ensemble learning</a>
           
-            <a href="/tags/拉格朗日对偶性/" rel="tag">#拉格朗日对偶性</a>
+            <a href="/tags/决策树/" rel="tag">#决策树</a>
           
-            <a href="/tags/支持向量机/" rel="tag">#支持向量机</a>
+            <a href="/tags/数据挖掘/" rel="tag">#数据挖掘</a>
+          
+            <a href="/tags/机器学习/" rel="tag">#机器学习</a>
           
         </div>
       
@@ -312,17 +330,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/17/支持向量分类机/" rel="next" title="支持向量分类机">
-                <i class="fa fa-chevron-left"></i> 支持向量分类机
+              <a href="/2016/03/27/吴恩达视频学习笔记(二)：Backpropagation Algorithm/" rel="next" title="吴恩达视频学习笔记(二)：Backpropagation Algorithm">
+                <i class="fa fa-chevron-left"></i> 吴恩达视频学习笔记(二)：Backpropagation Algorithm
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/12/17/K-均值聚类算法/" rel="prev" title="K-均值聚类算法">
-                K-均值聚类算法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -349,8 +363,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/12/17/支持向量回归机/"
-           data-title="支持向量回归机" data-url="http://yoursite.com/2015/12/17/支持向量回归机/">
+      <div class="ds-thread" data-thread-key="2016/11/08/GB、GBM、GBDT，一种梯度提升算法/"
+           data-title="GB、GBM、GBDT，一种梯度提升算法" data-url="http://yoursite.com/2016/11/08/GB、GBM、GBDT，一种梯度提升算法/">
       </div>
     
   </div>
@@ -505,7 +519,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u7EBF_u6027_u56DE_u5F52_u95EE_u9898_u4E0E_u786C__24_5Cvarepsilon_24-_u5E26_u8D85_u5E73_u9762"><span class="nav-number">1.</span> <span class="nav-text">线性回归问题与硬 $\varepsilon$-带超平面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u7EBF_u6027_u56DE_u5F52_u95EE_u9898"><span class="nav-number">1.1.</span> <span class="nav-text">线性回归问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u786C__24_5Cvarepsilon_24-_u5E26_u8D85_u5E73_u9762_u7684_u6784_u9020"><span class="nav-number">1.2.</span> <span class="nav-text">硬 $\varepsilon$-带超平面的构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u63A8_u5E7F_u7684_u6700_u5927_u95F4_u9694_u56DE_u5F52_u6CD5"><span class="nav-number">1.3.</span> <span class="nav-text">推广的最大间隔回归法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u68AF_u5EA6_u63D0_u5347_uFF08Gradient_Boosting_uFF09"><span class="nav-number">1.</span> <span class="nav-text">梯度提升（Gradient Boosting）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u539F_u7406"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u7B97_u6CD5"><span class="nav-number">1.2.</span> <span class="nav-text">算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u68AF_u5EA6_u63D0_u5347_u51B3_u7B56_u6811_uFF08GBDT_uFF09"><span class="nav-number">2.</span> <span class="nav-text">梯度提升决策树（GBDT）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u539F_u7406-1"><span class="nav-number">2.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u7F29_u51CF_uFF08Shrinkage_uFF09"><span class="nav-number">2.2.</span> <span class="nav-text">缩减（Shrinkage）</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
